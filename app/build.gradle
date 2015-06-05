@@ -10,6 +10,7 @@ android {
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"
+        testApplicationId "sweng500team2summer15.hov_helper.tests"
     }
     buildTypes {
         release {
