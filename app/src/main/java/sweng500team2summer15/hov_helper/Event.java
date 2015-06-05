@@ -11,18 +11,26 @@ public class Event {
     int eventId;
     int numberSeats;
 
-    Date startTime;
+    //Date startTime;
 
     String frequency;
     String eventType;
-    String startLocation;
-    String endLocation;
 
+    /*Location Object needs to be defined*/
+    //String startLocation;
+    //String endLocation;
     //SimpleDateFormat format = new SimpleDateFormat("");
 
     public int create(int loginId) {
+        //This would add the event to the mySQL database.
+        //Test Value
+        int eventId = 0;
+        // Test Code
+        if(loginId == 1234)
+            {eventId = 7777;}
+        else eventId = 8888;
 
-        return 0;
+          return eventId;
     }
 
 
