@@ -11,4 +11,3 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         super(Application.class);
     }
 }
-//test comment to test commit EJC 5/25/15
