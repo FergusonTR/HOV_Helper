@@ -1,6 +1,7 @@
 package sweng500team2summer15.hov_helper;
 
 import android.test.suitebuilder.annotation.SmallTest;
+import sweng500team2summer15.hov_helper.Map;
 
 import junit.framework.TestCase;
 
@@ -9,18 +10,52 @@ import junit.framework.TestCase;
  */
 public class MapTest extends TestCase {
 
+    Map myMap;
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+        //Creates the map handle
+        myMap = new Map();
     }
 
     @SmallTest
     public void testCurrentLocation() {
-        //Creates the map handle
-        Map myMap = new Map();
-
         //Verify a currentLocation String is returned
         String currentLocation = myMap.getCurrentLocation();
-        assertNotNull(currentLocation);
+        assertEquals(false, currentLocation.isEmpty());
+    }
+
+    @SmallTest
+    public void testCurrentLocationStreetAddress() {
+        //Verify a currentLocation String is returned
+        String currentLocation = myMap.getCurrentLocationStreetAddress();
+        assertEquals(false, currentLocation.isEmpty());
+    }
+
+    @SmallTest
+    public void testCurrentLocationCity() {
+        //Verify a currentLocation String is returned
+        String currentLocation = myMap.getCurrentLocationCity();
+        assertEquals(false, currentLocation.isEmpty());
+    }
+
+    @SmallTest
+    public void testCurrentLocationState() {
+        //Verify a currentLocation String is returned
+        String currentLocation = myMap.getCurrentLocationState();
+        assertEquals(false, currentLocation.isEmpty());
+    }
+
+    @SmallTest
+    public void testCurrentLocationZipCode() {
+        //Verify a currentLocation String is returned
+        String currentLocation = myMap.getCurrentLocationZipCode();
+        assertEquals(false, currentLocation.isEmpty());
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
     }
 }
