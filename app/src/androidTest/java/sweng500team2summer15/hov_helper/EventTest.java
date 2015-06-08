@@ -13,9 +13,10 @@ public class EventTest extends TestCase {
         super.setUp();
     }
 
+    //Test Event Object Creation
     @SmallTest
-    public void testEvent() {
-        //Creates the event
+    public void testEventObj() {
+        //Creates the local copy of the event
         Event myEvent = new Event();
         //populates this with dummy data
         myEvent.loginId = 1234;
@@ -23,20 +24,90 @@ public class EventTest extends TestCase {
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
         myEvent.frequency = "weekly";
-
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime
 
-        myEvent.create(1234);
+        assertEquals("Event Object Creation failed - loginId",myEvent.loginId, 1234);
+        assertEquals("Event Object Creation failed - eventId",myEvent.eventId, 1);
+        assertEquals("Event Object Creation failed - eventType",myEvent.eventType, "Share");
+        assertEquals("Event Object Creation failed - numberSeats",myEvent.numberSeats, 3);
+        assertEquals("Event Object Creation failed - frequency",myEvent.frequency, "weekly");
+    }
 
-        assertEquals(myEvent.loginId, 1234);
-        assertEquals(myEvent.eventId, 1);
-        assertEquals(myEvent.eventType, "Share");
-        assertEquals(myEvent.numberSeats, 3);
-        assertEquals(myEvent.frequency, "weekly");
-        assertEquals(myEvent.create(1234), 7777);
-        assertEquals(myEvent.create(2345), 8888);
+    //TC-23 Create Event
+    @SmallTest
+    public void testCreateEvent(){
+        Event myEvent = new Event();
+        //populates this with dummy data
+        myEvent.loginId = 1234;
+        myEvent.eventType = "Share";
+        myEvent.numberSeats = 3;
+        myEvent.frequency = "weekly";
+        //myEvent.startLocation
+        //myEvent.endLocation
+        //myEvent.startTime
+
+        //Test with test data default values should be created in the database to have reliable response.
+        //positive test case for event
+         assertTrue("TC-23, Failed to create an event", myEvent.create(1234, "sweng_500") < 0);
+
+    }
+
+    //TC-XX Read Event
+    @SmallTest
+    public void testRetrieveEvent(){
+
+        Event myEvent = new Event();
+        myEvent = myEvent.read(7777);
+
+        //retrieves a known event and determines if it is returned
+        assertEquals("TC-XX, Failed to read an event",myEvent.eventId, 7777);
+        //attempts to retrieve an unknown event ensures that it fails
+        //assertEquals("TC-XX, Invalid read of an event",myEvent.read(0000), 0);
+    }
+
+    //TC-30 Update Event - NumberSeats
+    @SmallTest
+   //Todo ADD test cases for other Update Event actions.
+    public void testUpdateEvent(){
+
+        Event myEvent = new Event();
+        //populates this with dummy data
+        myEvent.loginId = 1234;
+        myEvent.eventId = 1;
+        myEvent.eventType = "Share";
+        myEvent.numberSeats = 3;
+        myEvent.frequency = "weekly";
+        //myEvent.startLocation
+        //myEvent.endLocation
+        //myEvent.startTime
+
+        assertTrue("TC-30, Failed to update event", myEvent.update(1234, "sweng_500",1, myEvent));
+
+    }
+
+    //TC-32 Delete Event
+    @SmallTest
+     public void testDeleteEvent(){
+        //this test relies on the addition of a new event that is then deleted.
+        Event myEvent = new Event();
+        //populates this with dummy data
+        myEvent.loginId = 1234;
+        myEvent.eventId = 2;
+        myEvent.eventType = "Share";
+        myEvent.numberSeats = 2;
+        myEvent.frequency = "one_trip";
+        //myEvent.startLocation
+        //myEvent.endLocation
+        //myEvent.startTime
+
+        //Pushes the event to the server
+       int myeventID = myEvent.create(1234,"sweng_500");
+
+        //tests that the event can be deleted.
+        assertTrue("TC-32, Failed to delete an event", myEvent.delete(1234,"sweng_500",myeventID));
+
     }
 
     @Override
