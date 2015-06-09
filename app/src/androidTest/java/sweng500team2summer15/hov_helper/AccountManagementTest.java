@@ -19,7 +19,7 @@ public class AccountManagementTest extends TestCase {
 
     // TC-03
     @SmallTest
-    public void Test_SignIn_Success() {
+    public void test_SignIn_Success() {
         AccountManagement am = new AccountManagement();
         String username = "team_2";
         String password = "Sweng_500";
@@ -28,7 +28,7 @@ public class AccountManagementTest extends TestCase {
     }
 
     @SmallTest
-    public void Test_SignIn_UserDoesNotExist() {
+    public void test_SignIn_UserDoesNotExist() {
         AccountManagement am = new AccountManagement();
         String username = "team2";
         String password = "Sweng_500";
@@ -37,7 +37,7 @@ public class AccountManagementTest extends TestCase {
     }
 
     @SmallTest
-    public void Test_SignIn_BadPassword() {
+    public void test_SignIn_BadPassword() {
         AccountManagement am = new AccountManagement();
         String username = "team_2";
         String password = "sweng50";
@@ -53,7 +53,7 @@ public class AccountManagementTest extends TestCase {
 
     // TC-04
     @SmallTest
-    public void Test_SignUp_Success() {
+    public void test_SignUp_Success() {
         AccountManagement am = new AccountManagement();
         String username = "team2";
         String password = "Sweng_500";
@@ -63,7 +63,7 @@ public class AccountManagementTest extends TestCase {
     }
 
     @SmallTest
-    public void Test_SignUp_UserExists() {
+    public void test_SignUp_UserExists() {
         AccountManagement am = new AccountManagement();
         String username = "team_2";
         String password = "Sweng_500";
@@ -73,7 +73,7 @@ public class AccountManagementTest extends TestCase {
     }
 
     @SmallTest
-    public void Test_SignUp_EmailExists() {
+    public void test_SignUp_EmailExists() {
         AccountManagement am = new AccountManagement();
         String username = "team2";
         String password = "Sweng_500";
