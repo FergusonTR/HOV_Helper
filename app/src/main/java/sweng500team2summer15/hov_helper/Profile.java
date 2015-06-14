@@ -15,9 +15,11 @@ public class Profile {
     PreferredContactMethod UserPreferredContactMethod = PreferredContactMethod.CALL;
     SmokingPreference UserSmokingPreference = SmokingPreference.NONSMOKE;
 
-    enum Sex {MALE, FEMALE};
-    enum PreferredContactMethod {TEXT, CALL};
-    enum SmokingPreference {SMOKE, NONSMOKE, NOPREF};
+    enum Sex {MALE, FEMALE}
+
+    enum PreferredContactMethod {TEXT, CALL}
+
+    enum SmokingPreference {SMOKE, NONSMOKE, NOPREF}
 
     public Profile(int loginID, String firstName, String lastName, Sex sex, int phoneNumber, PreferredContactMethod preferredContactMethod,
                    String email, EmergencyContactInfo emergencyContactInfo, SmokingPreference smokingPreference)

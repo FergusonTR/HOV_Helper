@@ -16,7 +16,7 @@ public class ProfileTest extends TestCase {
 
     // TC 11 - Create Profile
     @SmallTest
-    public void Test_CreateProfile()
+    public void test_CreateProfile()
     {
         // Setup Profile object
         EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
@@ -32,23 +32,23 @@ public class ProfileTest extends TestCase {
 
     // TC 12 - Profile - required fields are blank
     @SmallTest
-    public void Test_CreateProfile_Blank()
+    public void test_CreateProfile_Blank()
     {
         EmergencyContactInfo testEmergency = new EmergencyContactInfo("", 0);
         Profile testProf = new Profile(0, "","", Profile.Sex.MALE, 0, Profile.PreferredContactMethod.CALL, "", testEmergency, Profile.SmokingPreference.NONSMOKE);
 
         // Assert that the following values are not the default (empty) values
-        assertTrue(testProf.UserFirstName != "");
-        assertTrue(testProf.UserLastName != "");
-        assertTrue(testProf.EmailAddress != "");
-        assertTrue(testProf.EmergencyContactInfo.ContactName != "");
+        assertTrue(!testProf.UserFirstName.equals(""));
+        assertTrue(!testProf.UserLastName.equals(""));
+        assertTrue(!testProf.EmailAddress.equals(""));
+        assertTrue(!testProf.EmergencyContactInfo.ContactName.equals(""));
         assertTrue(testProf.EmergencyContactInfo.ContactNumber != 0);
         assertTrue(testProf.PhoneNumber != 0);
     }
 
     // TC 13 - Update Profile - First Name
     @SmallTest
-    public void Test_UpdateProfile_FirstName()
+    public void test_UpdateProfile_FirstName()
     {
         // Setup Profile object
         EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
@@ -57,12 +57,12 @@ public class ProfileTest extends TestCase {
         // Update the First Name property
         testProf.UserFirstName = "UpdatedName";
 
-        assertTrue(testProf.UserFirstName == "UpdateName");
+        assertTrue(testProf.UserFirstName.equals("UpdateName"));
     }
 
     // TC 14 - Update Profile - Last Name
     @SmallTest
-    public void Test_UpdateProfile_LastName()
+    public void test_UpdateProfile_LastName()
     {
         // Setup Profile object
         EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
@@ -71,54 +71,54 @@ public class ProfileTest extends TestCase {
         // Update the First Name property
         testProf.UserLastName = "UpdatedName";
 
-        assertTrue(testProf.UserLastName == "UpdateName");
+        assertTrue(testProf.UserLastName.equals("UpdateName"));
     }
 
     // TC 15 - Update Profile - Home Location
     @SmallTest
-    public void Test_UpdateProfile_HomeLocation()
+    public void test_UpdateProfile_HomeLocation()
     {
         assertTrue(false);
     }
 
     // TC 16 - Update Profile - Work Location
     @SmallTest
-    public void Test_UpdateProfile_WorkLocation()
+    public void test_UpdateProfile_WorkLocation()
     {
         assertTrue(false);
     }
 
     // TC 17 - Update Profile - Carpool Preferences
     @SmallTest
-    public void Test_UpdateProfile_CarpoolPreference()
+    public void test_UpdateProfile_CarpoolPreference()
     {
         assertTrue(false);
     }
 
     // TC 18 - Update Profile - Frequency Preferences
     @SmallTest
-    public void Test_UpdateProfile_Frequency()
+    public void test_UpdateProfile_Frequency()
     {
         assertTrue(false);
     }
 
     // TC 19 - Update Profile - Pickup to work time
     @SmallTest
-    public void Test_UpdateProfile_PickupTime_ToWork()
+    public void test_UpdateProfile_PickupTime_ToWork()
     {
         assertTrue(false);
     }
 
     // TC 20 - Update Profile - pickup from work
     @SmallTest
-    public void Test_UpdateProfile_PickupTime_FromWork()
+    public void test_UpdateProfile_PickupTime_FromWork()
     {
         assertTrue(false);
     }
 
     // TC 21 - Update Profile - Other Preferences
     @SmallTest
-    public void Test_UpdateProfile_OtherPreferences()
+    public void test_UpdateProfile_OtherPreferences()
     {
         // Setup Profile object
         EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
@@ -137,12 +137,12 @@ public class ProfileTest extends TestCase {
         assertTrue(testProf.UserPreferredContactMethod == Profile.PreferredContactMethod.TEXT);
         assertTrue(testProf.UserSex == Profile.Sex.FEMALE);
         assertTrue(testProf.EmergencyContactInfo.ContactNumber == 9999999);
-        assertTrue(testProf.EmergencyContactInfo.ContactName == "UpdatedContact");
+        assertTrue(testProf.EmergencyContactInfo.ContactName.equals("UpdatedContact"));
     }
 
     // TC 22 - Update Profile - Cancel Update
     @SmallTest
-    public void Test_UpdateProfile_CancelUpdate()
+    public void test_UpdateProfile_CancelUpdate()
     {
         assertTrue(false);
     }
