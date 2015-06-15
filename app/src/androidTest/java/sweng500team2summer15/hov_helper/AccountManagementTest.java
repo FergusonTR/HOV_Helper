@@ -17,7 +17,7 @@ public class AccountManagementTest extends TestCase {
     // good username: "team_2"
     // good password: "Sweng_500"
 
-    // TC-03
+    // TC-03.1
     @SmallTest
     public void test_SignIn_Success() {
         AccountManagement am = new AccountManagement();
@@ -26,7 +26,7 @@ public class AccountManagementTest extends TestCase {
 
         assertEquals(am.SignIn(username, password), 0);
     }
-
+    // TC-03.2
     @SmallTest
     public void test_SignIn_UserDoesNotExist() {
         AccountManagement am = new AccountManagement();
@@ -35,7 +35,7 @@ public class AccountManagementTest extends TestCase {
 
         assertEquals(am.SignIn(username, password), 1);
     }
-
+    // TC-04
     @SmallTest
     public void test_SignIn_BadPassword() {
         AccountManagement am = new AccountManagement();
@@ -51,7 +51,8 @@ public class AccountManagementTest extends TestCase {
     // existing user: "team_2"
     // existing email: "team2_sweng500@psu.edu"
 
-    // TC-04
+
+    // TC-05.1 - success
     @SmallTest
     public void test_SignUp_Success() {
         AccountManagement am = new AccountManagement();
@@ -61,7 +62,7 @@ public class AccountManagementTest extends TestCase {
 
         assertEquals(am.SignUp(username, password, email), 0);
     }
-
+    // TC-05.2 - User exists
     @SmallTest
     public void test_SignUp_UserExists() {
         AccountManagement am = new AccountManagement();
