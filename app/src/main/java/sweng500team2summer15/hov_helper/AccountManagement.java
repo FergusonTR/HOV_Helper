@@ -1,5 +1,8 @@
 package sweng500team2summer15.hov_helper;
 
+import android.test.suitebuilder.annotation.SmallTest;
+import junit.framework.TestCase;
+
 /**
  * Created by Edward J. Crishock on 6/6/2015.
  */
