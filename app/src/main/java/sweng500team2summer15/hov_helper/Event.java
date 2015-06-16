@@ -5,7 +5,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.ArrayList;
 import java.util.List;
-//import java.util.TimeZone;
+import java.util.TimeZone;
 import java.text.SimpleDateFormat;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -45,8 +45,8 @@ public class Event {
    public int create(int loginId, String password) {
         //This would add the event to the mySQL database.
         //Test Value
-        int eventId = 0;
-        int ownerId = loginId;
+       this.eventId = 0;
+
 
        //ToDo obtaining the eventID assigned after SQL Update.
        //ToDo develop a way of performing the create over an SSL.
@@ -63,11 +63,12 @@ public class Event {
 
         // JSON Node names
         String TAG_SUCCESS = "success";
+        String TAG_EVENT_ID = "eventId";
 
        // Building Parameters
       //ToDo remove deprecated approach and use URLBuilder instead
        List<NameValuePair> params = new ArrayList<NameValuePair>();
-       params.add(new BasicNameValuePair("ownerId", Integer.toString(ownerId)));
+       params.add(new BasicNameValuePair("loginId", Integer.toString(this.loginId)));
        params.add(new BasicNameValuePair("numberSeats", Integer.toString(this.numberSeats)));
        params.add(new BasicNameValuePair("locationId", Integer.toString(this.locationId)));
        params.add(new BasicNameValuePair("frequencyId", Integer.toString(this.frequencyId)));
@@ -77,7 +78,7 @@ public class Event {
        params.add(new BasicNameValuePair("occurrence", this.occurrence));
 
        // getting JSON Object
-       // Note that create product url accepts POST method
+       // Note that create event url accepts POST method
        JSONObject json = jsonParser.makeHttpRequest(url_create_event,"POST", params);
 
        // check log cat for response
@@ -88,20 +89,21 @@ public class Event {
            int success = json.getInt(TAG_SUCCESS);
 
            if (success == 1) {
-               // successfully created product
+               // successfully created event
                //Intent i = new Intent(getApplicationContext(), AllProductsActivity.class);
                //startActivity(i);
+               this.eventId = json.getInt(TAG_EVENT_ID);
 
                // closing this screen
                //finish();
            } else {
-               // failed to create product
+               // failed to create event
            }
        } catch (JSONException e) {
            e.printStackTrace();
        }
 
-        return eventId;
+        return this.eventId;
     }
 
    public Event read(int eventID){
