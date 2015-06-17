@@ -19,7 +19,7 @@ public class EventTest extends TestCase {
         //Creates the local copy of the event
         Event myEvent = new Event();
         //populates this with dummy data
-        myEvent.loginId = 1234;
+        myEvent.loginId = "1234";
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
@@ -28,7 +28,7 @@ public class EventTest extends TestCase {
         //myEvent.endLocation
         //myEvent.startTime
 
-        assertEquals("Event Object Creation failed - loginId",myEvent.loginId, 1234);
+        assertEquals("Event Object Creation failed - loginId",myEvent.loginId, "1234");
         assertEquals("Event Object Creation failed - eventId",myEvent.eventId, 1);
         assertEquals("Event Object Creation failed - eventType",myEvent.eventType, "Share");
         assertEquals("Event Object Creation failed - numberSeats",myEvent.numberSeats, 3);
@@ -40,7 +40,7 @@ public class EventTest extends TestCase {
     public void testCreateEvent(){
         Event myEvent = new Event();
         //populates this with dummy data
-        myEvent.loginId = 1234;
+        myEvent.loginId = "1234";
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
         myEvent.frequencyId = 7;
@@ -53,7 +53,7 @@ public class EventTest extends TestCase {
 
         //Test with test data default values should be created in the database to have reliable response.
         //positive test case for event
-        assertTrue("TC-23, Failed to create an event", myEvent.create(myEvent.loginId, password) < 0);
+        assertTrue("TC-23, Failed to create an event", myEvent.create(myEvent.loginId, password) > 0);
 
     }
 
@@ -77,7 +77,7 @@ public class EventTest extends TestCase {
 
         Event myEvent = new Event();
         //populates this with dummy data
-        myEvent.loginId = 1234;
+        myEvent.loginId = "1234";
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
@@ -86,7 +86,7 @@ public class EventTest extends TestCase {
         //myEvent.endLocation
         //myEvent.startTime
 
-        assertTrue("TC-30, Failed to update event", myEvent.update(1234, "sweng_500",1, myEvent));
+        assertTrue("TC-30, Failed to update event", myEvent.update("1234","Sweng_500",1, myEvent));
 
     }
 
@@ -96,20 +96,20 @@ public class EventTest extends TestCase {
         //this test relies on the addition of a new event that is then deleted.
         Event myEvent = new Event();
         //populates this with dummy data
-        myEvent.loginId = 1234;
+        myEvent.loginId = "1234";
         myEvent.eventId = 2;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 2;
-        myEvent.frequencyId = 1;
+        //myEvent.frequencyId = 1;
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime
 
         //Pushes the event to the server
-       int myeventID = myEvent.create(1234,"sweng_500");
+       int myeventID = myEvent.create("1234","sweng_500");
 
         //tests that the event can be deleted.
-        assertTrue("TC-32, Failed to delete an event", myEvent.delete(1234,"sweng_500",myeventID));
+        assertTrue("TC-32, Failed to delete an event", myEvent.delete("1234","sweng_500",myeventID));
 
     }
 

@@ -12,43 +12,41 @@
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:weightSum="1">
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/editText.numberSeats" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Number of Seats (Available or Required)"
-            android:id="@+id/textView" />
+            android:id="@+id/editText_numberSeats"
+            android:hint="Number of Seats (Avaiable or Required)"
+            android:inputType="number"
+            android:gravity="left"
+            android:selectAllOnFocus="false" />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="32dp"
-            android:id="@+id/editText.eventType" />
-
-        <TextView
-            android:layout_width="306dp"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Event Type (Ride or Share)"
-            android:id="@+id/textView2" />
+            android:id="@+id/editText_eventType"
+            android:hint="Event Type (Ride or Share)"
+            android:inputType="text"
+            android:gravity="left" />
 
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="29dp"
-            android:id="@+id/editText.loginId" />
+            android:layout_height="wrap_content"
+            android:id="@+id/editText_loginId"
+            android:hint="Login ID"
+            android:inputType="textNoSuggestions"
+            android:gravity="left" />
 
-        <TextView
+        <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Login Id"
-            android:id="@+id/textView3" />
+            android:id="@+id/editText_password"
+            android:hint="Password"
+            android:gravity="left"
+            android:password="true" />
 
     </LinearLayout>
 
