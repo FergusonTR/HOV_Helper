@@ -32,10 +32,26 @@ public class SignUp extends ActionBarActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.bSignUp:
+                String login = etLogin.getText().toString();
+                String password = etPassword.getText().toString();
+
+                Login log = new Login(login, password);
+                registerLogin(log);
                 break;
             case R.id.tvCancel:
                 startActivity(new Intent(this, Start.class));
                 break;
         }
+    }
+
+    private void registerLogin(Login login)
+    {
+        ServerRequests serverRequests = new ServerRequests(this);
+        serverRequests.storeLoginDataInBackground(login, new GetUserCallback() {
+            @Override
+            public void done(Login returnedLogin) {
+                startActivity(new Intent(SignUp.this, SignIn.class));
+            }
+        });
     }
 }

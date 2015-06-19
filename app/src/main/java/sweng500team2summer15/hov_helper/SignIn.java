@@ -1,5 +1,6 @@
 package sweng500team2summer15.hov_helper;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -34,7 +35,11 @@ public class SignIn extends ActionBarActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.bSignIn:
+                String login = etLogin.getText().toString();
+                String password = etPassword.getText().toString();
 
+                Login log = new Login(login, password);
+                authenticate(log);
                 break;
             case R.id.tvCancel:
                 startActivity(new Intent(this, Start.class));
@@ -43,5 +48,34 @@ public class SignIn extends ActionBarActivity implements View.OnClickListener {
 
                 break;
         }
+    }
+
+    private void authenticate(Login login)
+    {
+        ServerRequests serverRequests = new ServerRequests(this);
+        serverRequests.fetchLoginDataInBackground(login, new GetUserCallback() {
+            @Override
+            public void done(Login returnedLogin) {
+                if (returnedLogin == null)
+                {
+                    showErrorMessage();
+                }
+                else{
+                    loginToApp(returnedLogin);
+                }
+            }
+        });
+    }
+
+    private void showErrorMessage(){
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SignIn.this);
+        alertBuilder.setMessage("Username or Password was incorrect");
+        alertBuilder.setPositiveButton("OK", null);
+        alertBuilder.show();
+    }
+
+    private void loginToApp(Login returnedLogin)
+    {
+        //startActivity(new Intent(this, Profile.class));
     }
 }
