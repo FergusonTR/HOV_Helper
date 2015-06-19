@@ -23,7 +23,7 @@ public class EventTest extends TestCase {
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        myEvent.frequency = "weekly";
+        myEvent.frequencyId = 7;
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime
@@ -32,7 +32,7 @@ public class EventTest extends TestCase {
         assertEquals("Event Object Creation failed - eventId",myEvent.eventId, 1);
         assertEquals("Event Object Creation failed - eventType",myEvent.eventType, "Share");
         assertEquals("Event Object Creation failed - numberSeats",myEvent.numberSeats, 3);
-        assertEquals("Event Object Creation failed - frequency",myEvent.frequency, "weekly");
+        assertEquals("Event Object Creation failed - frequency",myEvent.frequencyId, 7);
     }
 
     //TC-23 Create Event
@@ -43,14 +43,17 @@ public class EventTest extends TestCase {
         myEvent.loginId = 1234;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        myEvent.frequency = "weekly";
-        //myEvent.startLocation
-        //myEvent.endLocation
-        //myEvent.startTime
+        myEvent.frequencyId = 7;
+        myEvent.locationId = 400;
+
+        //Fake user password
+        String password = "Sweng_500";
+
+
 
         //Test with test data default values should be created in the database to have reliable response.
         //positive test case for event
-         assertTrue("TC-23, Failed to create an event", myEvent.create(1234, "sweng_500") < 0);
+        assertTrue("TC-23, Failed to create an event", myEvent.create(myEvent.loginId, password) < 0);
 
     }
 
@@ -78,7 +81,7 @@ public class EventTest extends TestCase {
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        myEvent.frequency = "weekly";
+        myEvent.frequencyId = 7;
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime
@@ -97,7 +100,7 @@ public class EventTest extends TestCase {
         myEvent.eventId = 2;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 2;
-        myEvent.frequency = "one_trip";
+        myEvent.frequencyId = 1;
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime

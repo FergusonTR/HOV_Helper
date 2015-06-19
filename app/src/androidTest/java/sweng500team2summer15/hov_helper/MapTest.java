@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 /**
  * Created by Steve Lanehome on 6/7/2015.
  */
+//TC-02 - Retrieve Current Location
 public class MapTest extends TestCase {
 
     Map myMap;
