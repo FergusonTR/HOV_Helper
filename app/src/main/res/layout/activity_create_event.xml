@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/editText_numberSeats"
-            android:hint="Number of Seats (Avaiable or Required)"
+            android:hint="Number of Seats (Available or Required)"
             android:inputType="number"
             android:gravity="left"
             android:selectAllOnFocus="false" />

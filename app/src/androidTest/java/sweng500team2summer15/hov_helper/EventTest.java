@@ -3,6 +3,7 @@ package sweng500team2summer15.hov_helper;
 import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
+import android.content.Intent;
 /**
  * Created by Terry on 6/5/2015.
  */
@@ -17,13 +18,14 @@ public class EventTest extends TestCase {
     @SmallTest
     public void testEventObj() {
         //Creates the local copy of the event
+
         Event myEvent = new Event();
         //populates this with dummy data
         myEvent.loginId = "1234";
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        myEvent.frequencyId = 7;
+        //myEvent.frequencyId = 7;
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime
@@ -32,7 +34,7 @@ public class EventTest extends TestCase {
         assertEquals("Event Object Creation failed - eventId",myEvent.eventId, 1);
         assertEquals("Event Object Creation failed - eventType",myEvent.eventType, "Share");
         assertEquals("Event Object Creation failed - numberSeats",myEvent.numberSeats, 3);
-        assertEquals("Event Object Creation failed - frequency",myEvent.frequencyId, 7);
+        //assertEquals("Event Object Creation failed - frequency",myEvent.frequencyId, 7);
     }
 
     //TC-23 Create Event
@@ -43,8 +45,8 @@ public class EventTest extends TestCase {
         myEvent.loginId = "1234";
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        myEvent.frequencyId = 7;
-        myEvent.locationId = 400;
+        //myEvent.frequencyId = 7;
+        //myEvent.locationId = 400;
 
         //Fake user password
         String password = "Sweng_500";
@@ -81,7 +83,7 @@ public class EventTest extends TestCase {
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        myEvent.frequencyId = 7;
+        //myEvent.frequencyId = 7;
         //myEvent.startLocation
         //myEvent.endLocation
         //myEvent.startTime
