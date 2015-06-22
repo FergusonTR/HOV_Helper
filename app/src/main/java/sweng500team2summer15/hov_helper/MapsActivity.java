@@ -1,28 +1,67 @@
 package sweng500team2summer15.hov_helper;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
-public class MapsActivity extends FragmentActivity {
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * Created by Steve on 6/6/2015.
+ */
+public class MapsActivity extends FragmentActivity implements MapController.MapControllerCallback {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private MapController mapController;
+
+    public static final String TAG = MapsActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.i(TAG, "CREATE!.");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
+        mapController = new MapController(this, this);
+
+        double pickupLat = this.getIntent().getDoubleExtra("pickupLat", 0.0);
+        double pickupLon = this.getIntent().getDoubleExtra("pickupLon", 0.0);
+        double dropOffLat = this.getIntent().getDoubleExtra("dropOffLat", 0.0);
+        double dropOffLon = this.getIntent().getDoubleExtra("dropOffLon", 0.0);
+        displayRoute(pickupLat, pickupLon, dropOffLat, dropOffLon);
     }
 
     @Override
     protected void onResume() {
+        Log.i(TAG, "RESUME!!.");
         super.onResume();
         setUpMapIfNeeded();
+        mapController.connect();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mapController.disconnect();
     }
 
     /**
@@ -61,5 +100,71 @@ public class MapsActivity extends FragmentActivity {
      */
     private void setUpMap() {
         mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker"));
+        mMap.getUiSettings().setZoomControlsEnabled(true);
+        mMap.setMyLocationEnabled(true);
+    }
+
+    public void displayRoute(double startLat, double startLon, double endLat, double endLon)
+    {
+        //Draw marker on start location
+        MarkerOptions options = new MarkerOptions()
+                .position(new LatLng(startLat, startLon))
+                .title("START LOCATION");
+        mMap.addMarker(options);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(startLat, startLon), 15));
+
+        // Draw marker on end location
+        MarkerOptions options2 = new MarkerOptions()
+                .position(new LatLng(endLat, endLon))
+                .title("END LOCATION");
+        mMap.addMarker(options2);
+
+
+        findDirections(startLat, startLon,
+                endLat, endLon, "driving");
+    }
+
+    @Override
+    public void handleNewLocation(Location location) {
+        Log.d(TAG, location.toString());
+
+        double currentLatitude = location.getLatitude();
+        double currentLongitude = location.getLongitude();
+        LatLng latLng = new LatLng(currentLatitude, currentLongitude);
+
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(currentLatitude, currentLongitude)).title("Current Location"));
+        MarkerOptions options = new MarkerOptions()
+                .position(latLng)
+                .title("I am here!");
+        mMap.addMarker(options);
+        //mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+    }
+
+    public void findDirections(double fromPositionDoubleLat, double fromPositionDoubleLong, double toPositionDoubleLat, double toPositionDoubleLong, String mode)
+    {
+        Log.d(TAG, "find directions");
+        Map<String, String> map = new HashMap<String, String>();
+        map.put(MapDirection.GetDirectionAsyncTask.USER_CURRENT_LAT, String.valueOf(fromPositionDoubleLat));
+        map.put(MapDirection.GetDirectionAsyncTask.USER_CURRENT_LONG, String.valueOf(fromPositionDoubleLong));
+        map.put(MapDirection.GetDirectionAsyncTask.DESTINATION_LAT, String.valueOf(toPositionDoubleLat));
+        map.put(MapDirection.GetDirectionAsyncTask.DESTINATION_LONG, String.valueOf(toPositionDoubleLong));
+        map.put(MapDirection.GetDirectionAsyncTask.DIRECTIONS_MODE, mode);
+
+        MapDirection.GetDirectionAsyncTask asyncTask = new MapDirection.GetDirectionAsyncTask(this);
+        asyncTask.execute(map);
+    }
+
+    public void handleGetDirectionsResult(ArrayList directionPoints)
+    {
+        Log.d(TAG, "Handle Get Directions! Number of points found: " + directionPoints.size());
+
+        Polyline newPolyline;
+        GoogleMap mMap = ((SupportMapFragment)getSupportFragmentManager().findFragmentById(R.id.map)).getMap();
+        PolylineOptions rectLine = new PolylineOptions().width(12).color(Color.GREEN);
+        for(int i = 0 ; i < directionPoints.size() ; i++)
+        {
+            rectLine.add((LatLng)directionPoints.get(i));
+        }
+        newPolyline = mMap.addPolyline(rectLine);
     }
 }
