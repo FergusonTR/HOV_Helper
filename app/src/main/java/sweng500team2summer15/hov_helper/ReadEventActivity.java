@@ -72,12 +72,13 @@ public class ReadEventActivity extends Activity{
             outputNumberSeats = (TextView)findViewById(R.id.editText_numberSeats);
 
             int eventId = Integer.parseInt(inputEventId.getText().toString());
+
             Event newEvent = new Event();
 
             newEvent.read(eventId);
 
             outputLoginId.setText(newEvent.loginId);
-            outputNumberSeats.setText(newEvent.numberSeats);
+            outputNumberSeats.setText(Integer.toString(newEvent.numberSeats));
 
 
             // Context context = getApplicationContext();
@@ -100,8 +101,8 @@ public class ReadEventActivity extends Activity{
             // dismiss the dialog once done
             pDialog.dismiss();
             //ToDo Open a new screen showing the Event Data with a button to view the event
-            Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
-            startActivity(i);
+            //Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
+            //startActivity(i);
 
         }
     }}

@@ -50,6 +50,8 @@ public class Event {
     Date end_today = Calendar.getInstance().getTime();
     String end_Time = dateformat.format(end_today);
 
+    String createTimeStamp ="";
+
 
    public int create(String loginId, String password) {
         //This would add the event to the mySQL database.
@@ -72,7 +74,7 @@ public class Event {
        params.add(new BasicNameValuePair("loginId", loginId));
        params.add(new BasicNameValuePair("password", password));
        params.add(new BasicNameValuePair("numberSeats", Integer.toString(this.numberSeats)));
-       params.add(new BasicNameValuePair("numberAvailable", Integer.toString(this.numberAvailable)));
+       params.add(new BasicNameValuePair("numberAvailable", Integer.toString(this.numberSeats)));
        params.add(new BasicNameValuePair("startTime", this.start_Time));
        params.add(new BasicNameValuePair("endTime", this.end_Time));
        params.add(new BasicNameValuePair("eventType", this.eventType));
@@ -107,7 +109,7 @@ public class Event {
    public Event read(int eventId){
        //This would retrieve  the event from the mySQL database.
 
-        Event retrieveEvent = new Event();
+        //Event retrieveEvent = new Event();
 
        // url to create new product
        //ToDo Change this to point to the Hovhelper website
@@ -116,9 +118,20 @@ public class Event {
        // JSON Node names
        String TAG_SUCCESS = "success";
        String TAG_EVENT = "event";
-       String TAG_LOGINID = "loginId";
        String TAG_EVENTID = "eventId";
+       String TAG_LOGINID = "loginId";
        String TAG_NUMBERSEATS = "numberSeats";
+       String TAG_NUMBERAVAILABLE = "numberAvailable";
+       String TAG_STARTTIME = "startTime";
+       String TAG_ENDTIME = "endTime";
+       String TAG_DAYSOFWEEK = "daysofweek";
+       String TAG_EVENT_INTERVAL = "event_interval";
+       String TAG_STARTLATITUDE = "startLatitude";
+       String TAG_ENDLATITUDE = "endLatitude";
+       String TAG_ENDLONGITUDE = "endLongitude";
+       String TAG_EVENTTYPE = "eventType";
+       String TAG_CREATEDTIMESTAMP = "createdTimeStamp";
+
 
        // Building Parameters
        //ToDo remove deprecated approach and use URLBuilder instead
@@ -138,9 +151,22 @@ public class Event {
                // get event object from JSON Array
                JSONObject event = eventObj.getJSONObject(0);
 
+               //load the results of the JSON Array into the current object
                this.eventId = (event.getInt(TAG_EVENTID));
-               this.numberSeats = (event.getInt(TAG_NUMBERSEATS));
                this.loginId = (event.getString(TAG_LOGINID));
+               this.numberSeats = (event.getInt(TAG_NUMBERSEATS));
+               this.numberAvailable = (event.getInt(TAG_NUMBERAVAILABLE));
+               this.start_Time = (event.getString(TAG_STARTTIME));
+               this.end_Time = (event.getString(TAG_ENDTIME));
+               this.daysofweek = (event.getString(TAG_DAYSOFWEEK));
+               this.event_interval = (event.getString(TAG_EVENT_INTERVAL));
+               this.startLatitude = (event.getDouble(TAG_STARTLATITUDE));
+               this.startLongitude = (event.getDouble(TAG_ENDLATITUDE));
+               this.endLatitude = (event.getDouble(TAG_ENDLATITUDE));
+               this.endLongitude = (event.getDouble(TAG_ENDLONGITUDE));
+               this.eventType = (event.getString(TAG_EVENTTYPE));
+               this.createTimeStamp = (event.getString(TAG_CREATEDTIMESTAMP));
+
 
            } else {
                // Event with EventId not found
@@ -148,7 +174,7 @@ public class Event {
        } catch (JSONException e) {
            e.printStackTrace();
        }
-       return retrieveEvent;
+       return this;
     }
 
    public boolean update(String loginId, String password, int eventID, Event updateEvent){

@@ -17,9 +17,9 @@
 
     <!-- Internet Permissions -->
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
     <application
@@ -62,6 +62,14 @@
         <activity
             android:name=".EventDetailsActivity"
             android:label="@string/title_activity_event_details" >
+        </activity>
+        <activity
+            android:name=".TempDisplayActivity"
+            android:label="@string/title_activity_temp_display"
+            android:parentActivityName=".ReadEventActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sweng500team2summer15.hov_helper.ReadEventActivity" />
         </activity>
     </application>
 
