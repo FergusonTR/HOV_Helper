@@ -41,7 +41,7 @@
             android:label="Sign In" >
         </activity>
         <activity
-            android:name=".SignUp"
+            android:name=".SignUpActivity"
             android:label="Sign Up" >
         </activity>
     </application>

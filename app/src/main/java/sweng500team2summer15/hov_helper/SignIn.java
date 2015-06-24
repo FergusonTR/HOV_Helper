@@ -38,8 +38,7 @@ public class SignIn extends ActionBarActivity implements View.OnClickListener {
                 String login = etLogin.getText().toString();
                 String password = etPassword.getText().toString();
 
-                Login log = new Login(login, password);
-                authenticate(log);
+                //authenticate(log);
                 break;
             case R.id.tvCancel:
                 startActivity(new Intent(this, Start.class));
@@ -50,6 +49,7 @@ public class SignIn extends ActionBarActivity implements View.OnClickListener {
         }
     }
 
+    /*
     private void authenticate(Login login)
     {
         ServerRequests serverRequests = new ServerRequests(this);
@@ -65,7 +65,7 @@ public class SignIn extends ActionBarActivity implements View.OnClickListener {
                 }
             }
         });
-    }
+    }*/
 
     private void showErrorMessage(){
         AlertDialog.Builder alertBuilder = new AlertDialog.Builder(SignIn.this);
@@ -74,8 +74,8 @@ public class SignIn extends ActionBarActivity implements View.OnClickListener {
         alertBuilder.show();
     }
 
-    private void loginToApp(Login returnedLogin)
-    {
+    //private void loginToApp(Login returnedLogin)
+    //{
         //startActivity(new Intent(this, Profile.class));
-    }
+    //}
 }

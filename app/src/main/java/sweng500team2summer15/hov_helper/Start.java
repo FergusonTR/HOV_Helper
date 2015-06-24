@@ -33,7 +33,7 @@ public class Start extends ActionBarActivity implements View.OnClickListener {
                 startActivity(new Intent(this, SignIn.class));
                 break;
             case R.id.bSignUp:
-                startActivity(new Intent(this, SignUp.class));
+                startActivity(new Intent(this, SignUpActivity.class));
                 break;
         }
     }
