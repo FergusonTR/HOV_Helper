@@ -174,7 +174,7 @@ public class Event {
        } catch (JSONException e) {
            e.printStackTrace();
        }
-       return this;
+       return null;
     }
 
    public boolean update(String loginId, String password, int eventID, Event updateEvent){
