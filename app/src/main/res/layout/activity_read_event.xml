@@ -40,26 +40,6 @@
         android:layout_alignParentStart="true"
         android:inputType="text" />
 
-    <TextView
-        android:layout_width="122dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Number of Seats"
-        android:id="@+id/textView3"
-        android:layout_alignTop="@+id/editText_numberSeats"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="number"
-        android:ems="10"
-        android:id="@+id/editText_numberSeats"
-        android:layout_below="@+id/editText_loginId"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
     <Button
         style="?android:attr/buttonStyleSmall"
         android:layout_width="291dp"
@@ -70,4 +50,37 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number of Seats "
+        android:id="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/editText_loginId"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New Text"
+        android:id="@+id/text_numberSeats"
+        android:layout_below="@+id/textView3"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" /><![CDATA[
+
+    EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText_numberSeats2"
+        android:layout_below="@+id/editText_numberSeats"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+]]>
 </RelativeLayout>

@@ -68,8 +68,9 @@ public class ReadEventActivity extends Activity{
         protected String doInBackground(String... args) {
 
             inputEventId = (EditText) findViewById(R.id.editText_eventId);
-            outputLoginId = (TextView) findViewById(R.id.editText_loginId);
-            outputNumberSeats = (TextView)findViewById(R.id.editText_numberSeats);
+            outputLoginId = (EditText) findViewById(R.id.editText_loginId);
+            outputNumberSeats = (TextView)findViewById(R.id.text_numberSeats);
+
 
             int eventId = Integer.parseInt(inputEventId.getText().toString());
 
@@ -77,8 +78,19 @@ public class ReadEventActivity extends Activity{
 
             newEvent.read(eventId);
 
+            Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
+            startActivity(i);
+
+
+
             outputLoginId.setText(newEvent.loginId);
-            outputNumberSeats.setText(Integer.toString(newEvent.numberSeats));
+            outputNumberSeats.setText(String.valueOf(newEvent.numberSeats));
+
+
+            //ToDo Open a new screen showing the Event Data with a button to view the event
+
+
+
 
 
             // Context context = getApplicationContext();
@@ -100,9 +112,7 @@ public class ReadEventActivity extends Activity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-            //ToDo Open a new screen showing the Event Data with a button to view the event
-            //Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
-            //startActivity(i);
+;
 
         }
     }}
