@@ -126,7 +126,7 @@ public class MapController implements
         else {
             Log.i(TAG, "Handle New Location!.");
             mapControllerCallback.handleNewLocation(location);
-        };
+        }
     }
 
     public void connect() {

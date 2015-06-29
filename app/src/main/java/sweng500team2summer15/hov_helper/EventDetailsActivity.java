@@ -1,7 +1,7 @@
 package sweng500team2summer15.hov_helper;
 
+import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +11,7 @@ import android.widget.EditText;
 /**
  * Created by Steve on 6/6/2015.
  */
-public class EventDetailsActivity extends ActionBarActivity {
+public class EventDetailsActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -12,6 +12,7 @@ public class MainActivity extends Activity {
 
     Button btnNewEvent;
     Button btnReadEvent;
+    Button btnDeleteEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,6 +22,7 @@ public class MainActivity extends Activity {
         //Buttons
         btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);
         btnReadEvent = (Button) findViewById(R.id.btnReadEventScrn);
+        btnDeleteEvent = (Button) findViewById(R.id.btnDeleteEventScrn);
 
         btnNewEvent.setOnClickListener(new View.OnClickListener(){
 
@@ -41,6 +43,18 @@ public class MainActivity extends Activity {
                 startActivity(i);
             }
         });
+
+        btnDeleteEvent.setOnClickListener(new View.OnClickListener(){
+
+            @Override
+            public void onClick(View view){
+                //Launching read event activity
+                Intent i = new Intent(getApplicationContext(), deleteEventActivity.class);
+                startActivity(i);
+            }
+        });
+
+
             }
         }
 

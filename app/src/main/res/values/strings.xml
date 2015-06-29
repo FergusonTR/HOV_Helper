@@ -8,4 +8,5 @@
     <string name="title_activity_read_event">ReadEventActivity</string>
     <string name="title_activity_event_details">EventDetailsActivity</string>
     <string name="title_activity_temp_display">TempDisplayActivity</string>
+    <string name="title_activity_delete_event">deleteEventActivity</string>
 </resources>

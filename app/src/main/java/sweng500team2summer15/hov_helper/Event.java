@@ -12,6 +12,7 @@ package sweng500team2summer15.hov_helper;
         import android.content.Context;
         import android.content.ContextWrapper;
         import android.content.Intent;
+        import android.util.Log;
         import android.widget.EditText;
 
         import java.text.DateFormat;
@@ -29,6 +30,7 @@ public class Event {
 
     final JSONParser jsonParser = new JSONParser();
 
+    int createResult = 0;
     String loginId = "testLoginId";
     int eventId = 0;
     int numberSeats = 0;
@@ -96,23 +98,24 @@ public class Event {
            if (success == 1) {
                // successfully created event
                this.eventId = json.getInt("event");
+               createResult = 1;
+
 
            } else {
                // failed to create event
+               createResult = 0;
            }
        } catch (JSONException e) {
            e.printStackTrace();
        }
-        return this.eventId;
+        return createResult;
     }
 
    public Event read(int eventId){
-       //This would retrieve  the event from the mySQL database.
+       //This retrieves  the event from the mySQL database.
 
         //Event retrieveEvent = new Event();
 
-       // url to create new product
-       //ToDo Change this to point to the Hovhelper website
        String url_read_event = "http://www.hovhelper.com/read_event.php";
 
        // JSON Node names
@@ -174,23 +177,69 @@ public class Event {
        } catch (JSONException e) {
            e.printStackTrace();
        }
-       return null;
+       return this;
     }
 
    public boolean update(String loginId, String password, int eventID, Event updateEvent){
       //This would update an event with information changed from the screen and report success
-       boolean success = false;
+
       //ToDo SQL based JSON/PHP script work
 
        return false;
    }
 
-   public boolean delete (String loginId, String password, int eventId) {
-       //This would delete an report success
-       //boolean success = false;
-      //ToDo SQL based JSON/PHP script work
-       return false;
-   }
+   public String delete (String loginId, String password, int eventId) {
+       // This method deletes an event and report success or failure
 
+       String url_delete_event = "http://www.hovhelper.com/delete_event.php";
+
+       /* In generate this method needs to determine who is deleting an event and if they have
+       authorization to do so.  If they do not have permission it should be rejected with
+       failedReason being set to 1. Not sure if we actually need the password perhaps there
+       is a better approach.
+
+       LoginID should be checked in the delete_event.php vice here, if there is any reason
+       a call could be made directly to the php file it would be safer to ensure it is examined
+       there.
+
+       failedReason is signal to the calling method
+       This was done as there may be several reasons that a deletion would not complete
+       1. Login Id didn't match
+       2. event missing
+       3. password failure
+
+       */
+
+       // failedReason captures the feedback from the delete_event.php
+       String failedReason = "something went wrong";
+
+       // JSON Node names
+       String TAG_SUCCESS = "success";
+       String TAG_MESSAGE = "message";
+
+       //ToDo remove deprecated approach and use URLBuilder instead
+       List<NameValuePair> params = new ArrayList<NameValuePair>();
+       params.add(new BasicNameValuePair("eventId", Integer.toString(eventId)));
+       params.add(new BasicNameValuePair("loginId", loginId));
+       params.add(new BasicNameValuePair("password", password));
+
+       // deleting event by making HTTP request
+       JSONObject json = jsonParser.makeHttpRequest(url_delete_event, "POST", params);
+
+       try {
+           int success = json.getInt(TAG_SUCCESS);
+           if (success == 1) {
+               // successfully deleted event
+               failedReason = json.getString(TAG_MESSAGE);
+
+           } else {
+               // failed to create event, capture reason
+               failedReason = json.getString(TAG_MESSAGE);
+
+           }
+       } catch (JSONException e) {
+           e.printStackTrace();
+           }
+   return failedReason;}
 }
 

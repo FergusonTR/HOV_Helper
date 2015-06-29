@@ -75,20 +75,15 @@ public class CreateEventActivity extends Activity {
 
             Event newEvent = new Event();
 
+            //ToDo add code to capture all event parameters
             newEvent.numberSeats = Integer.parseInt(inputNumberSeats.getText().toString());
             newEvent.eventType = inputEventType.getText().toString();
             newEvent.loginId = inputLoginId.getText().toString();
 
+            //ToDo add code to call the map function and translate street address to lat long
+
+
             newEvent.create(newEvent.loginId, password);
-
-            // Context context = getApplicationContext();
-            // CharSequence text = "Event Created: "+ Integer.toString(newEvent.eventId);
-            // int duration = Toast.LENGTH_SHORT;
-
-            //Toast toast = Toast.makeText(context, text, duration);
-
-            //toast.show();
-
 
             return null;
         }
@@ -102,8 +97,8 @@ public class CreateEventActivity extends Activity {
             // dismiss the dialog once done
             pDialog.dismiss();
             //ToDo Open a new screen showing the Event Data with a button to view the event
-            Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(i);
+         //   Intent i = new Intent(getApplicationContext(), MainActivity.class);
+         //   startActivity(i);
 
         }
     }

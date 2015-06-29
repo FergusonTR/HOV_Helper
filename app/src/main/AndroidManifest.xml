@@ -4,7 +4,6 @@
 
     <uses-sdk android:minSdkVersion="8" />
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -70,6 +69,10 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="sweng500team2summer15.hov_helper.ReadEventActivity" />
+        </activity>
+        <activity
+            android:name=".deleteEventActivity"
+            android:label="@string/title_activity_delete_event" >
         </activity>
     </application>
 

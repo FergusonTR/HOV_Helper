@@ -4,6 +4,12 @@ import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
 import android.content.Intent;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 /**
  * Created by Terry on 6/5/2015.
  */
@@ -40,23 +46,27 @@ public class EventTest extends TestCase {
     //TC-23 Create Event
     @SmallTest
     public void testCreateEvent(){
+
+        //Creates a local instance of event
         Event myEvent = new Event();
+
         //populates this with dummy data
-        myEvent.loginId = "1234";
-        myEvent.eventType = "Share";
-        myEvent.numberSeats = 3;
-        //myEvent.frequencyId = 7;
-        //myEvent.locationId = 400;
+        DateFormat dateformat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date start_today = Calendar.getInstance().getTime();
+        Date end_today = Calendar.getInstance().getTime();
 
         //Fake user password
         String password = "Sweng_500";
-
-
+        myEvent.loginId = "testLoginId";
+        myEvent.eventType = "Share";
+        myEvent.numberSeats = 3;
+        myEvent.numberAvailable = 2;
+        myEvent.start_Time = dateformat.format(start_today);
+        myEvent.end_Time = dateformat.format(end_today);
 
         //Test with test data default values should be created in the database to have reliable response.
         //positive test case for event
         assertTrue("TC-23, Failed to create an event", myEvent.create(myEvent.loginId, password) > 0);
-
     }
 
     //TC-XX Read Event
@@ -64,10 +74,13 @@ public class EventTest extends TestCase {
     public void testRetrieveEvent(){
 
         Event myEvent = new Event();
-        myEvent = myEvent.read(7777);
+        myEvent.create("testLoginId","Sweng_500");
+        int testEventId = myEvent.eventId;
+        myEvent = myEvent.read(testEventId);
 
         //retrieves a known event and determines if it is returned
-        assertEquals("TC-XX, Failed to read an event",myEvent.eventId, 7777);
+        assertEquals("TC-XX, Failed to read an event",myEvent.eventId, testEventId);
+        myEvent.delete("testLoginId","Sweng_500",testEventId);
         //attempts to retrieve an unknown event ensures that it fails
         //assertEquals("TC-XX, Invalid read of an event",myEvent.read(0000), 0);
     }
@@ -111,7 +124,7 @@ public class EventTest extends TestCase {
        int myeventID = myEvent.create("1234","sweng_500");
 
         //tests that the event can be deleted.
-        assertTrue("TC-32, Failed to delete an event", myEvent.delete("1234","sweng_500",myeventID));
+        assertEquals("TC-32, Failed to delete an event", myEvent.delete("1234","sweng_500",myeventID),"success");
 
     }
 
