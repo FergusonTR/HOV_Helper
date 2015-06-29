@@ -98,7 +98,7 @@ public class Event {
            if (success == 1) {
                // successfully created event
                this.eventId = json.getInt("event");
-               createResult = 1;
+               createResult = this.eventId;
 
 
            } else {

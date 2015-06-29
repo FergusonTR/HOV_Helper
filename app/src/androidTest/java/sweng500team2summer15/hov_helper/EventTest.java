@@ -4,6 +4,7 @@ import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
 import android.content.Intent;
+import android.util.Log;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -96,10 +97,7 @@ public class EventTest extends TestCase {
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
-        //myEvent.frequencyId = 7;
-        //myEvent.startLocation
-        //myEvent.endLocation
-        //myEvent.startTime
+
 
         assertTrue("TC-30, Failed to update event", myEvent.update("1234","Sweng_500",1, myEvent));
 
@@ -115,16 +113,14 @@ public class EventTest extends TestCase {
         myEvent.eventId = 2;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 2;
-        //myEvent.frequencyId = 1;
-        //myEvent.startLocation
-        //myEvent.endLocation
-        //myEvent.startTime
 
         //Pushes the event to the server
        int myeventID = myEvent.create("1234","sweng_500");
+       String result =  myEvent.delete("1234", "sweng_500", myeventID);
+        Log.v("myApp", result);
 
         //tests that the event can be deleted.
-        assertEquals("TC-32, Failed to delete an event", myEvent.delete("1234","sweng_500",myeventID),"success");
+        assertEquals("TC-32, Failed to delete an event", result, "Event deleted");
 
     }
 
