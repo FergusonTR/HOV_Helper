@@ -31,6 +31,7 @@ public class Event {
     final JSONParser jsonParser = new JSONParser();
 
     int createResult = 0;
+    int updateResult = 0;
     String loginId = "testLoginId";
     int eventId = 0;
     int numberSeats = 0;
@@ -111,16 +112,17 @@ public class Event {
         return createResult;
     }
 
-   public Event read(int eventId){
+   public String read(int eventId){
        //This retrieves  the event from the mySQL database.
 
         //Event retrieveEvent = new Event();
 
        String url_read_event = "http://www.hovhelper.com/read_event.php";
+       String readResult = "";
 
        // JSON Node names
        String TAG_SUCCESS = "success";
-       String TAG_EVENT = "event";
+       String TAG_MESSAGE = "message";
        String TAG_EVENTID = "eventId";
        String TAG_LOGINID = "loginId";
        String TAG_NUMBERSEATS = "numberSeats";
@@ -149,7 +151,7 @@ public class Event {
 
            if (success == 1) {
                // successfully read event
-               JSONArray eventObj = json.getJSONArray(TAG_EVENT); // JSON Array
+               JSONArray eventObj = json.getJSONArray(TAG_MESSAGE); // JSON Array
 
                // get event object from JSON Array
                JSONObject event = eventObj.getJSONObject(0);
@@ -177,15 +179,63 @@ public class Event {
        } catch (JSONException e) {
            e.printStackTrace();
        }
-       return this;
+       return readResult;
     }
 
-   public boolean update(String loginId, String password, int eventID, Event updateEvent){
-      //This would update an event with information changed from the screen and report success
+   public String update(String loginId, String password, int eventID){
 
-      //ToDo SQL based JSON/PHP script work
+       //This would update an event to the mySQL database.
+       //Test Value
 
-       return false;
+       //ToDo Consider creating a counter to limit the number of entries created by one user over a period of time.
+
+       // url to update new product
+       String url_update_event = "http://www.hovhelper.com/update_event.php";
+
+       // JSON Node names
+       String TAG_SUCCESS = "success";
+       String TAG_MESSAGE = "message";
+       String updateResult = "";
+
+       // Building Parameters
+       //ToDo remove deprecated approach and use URLBuilder instead
+       List<NameValuePair> params = new ArrayList<NameValuePair>();
+       params.add(new BasicNameValuePair("loginId", loginId));
+       params.add(new BasicNameValuePair("password", password));
+       params.add(new BasicNameValuePair("numberSeats", Integer.toString(this.numberSeats)));
+       params.add(new BasicNameValuePair("numberAvailable", Integer.toString(this.numberSeats)));
+       params.add(new BasicNameValuePair("startTime", this.start_Time));
+       params.add(new BasicNameValuePair("endTime", this.end_Time));
+       params.add(new BasicNameValuePair("eventType", this.eventType));
+       params.add(new BasicNameValuePair("event_interval", this.event_interval));
+       params.add(new BasicNameValuePair("startLatitude", this.startLatitude.toString()));
+       params.add(new BasicNameValuePair("startLongitude", this.startLongitude.toString()));
+       params.add(new BasicNameValuePair("endLatitude", this.endLatitude.toString()));
+       params.add(new BasicNameValuePair("endLongitude", this.endLongitude.toString()));
+       params.add(new BasicNameValuePair("daysofweek", this.daysofweek));
+
+       // getting JSON Object
+       // Note that update event url accepts POST method
+       JSONObject json = jsonParser.makeHttpRequest(url_update_event,"POST", params);
+
+       // check for success tag
+       try {
+           int success = json.getInt(TAG_SUCCESS);
+
+           if (success == 1) {
+               // successfully updated  event
+               updateResult= json.getString(TAG_MESSAGE);
+
+
+
+           } else {
+               // failed to create event
+               updateResult = "Update Failed";
+           }
+       } catch (JSONException e) {
+           e.printStackTrace();
+       }
+       return updateResult;
    }
 
    public String delete (String loginId, String password, int eventId) {

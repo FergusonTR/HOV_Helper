@@ -77,7 +77,7 @@ public class EventTest extends TestCase {
         Event myEvent = new Event();
         myEvent.create("testLoginId","Sweng_500");
         int testEventId = myEvent.eventId;
-        myEvent = myEvent.read(testEventId);
+        myEvent.read(testEventId);
 
         //retrieves a known event and determines if it is returned
         assertEquals("TC-XX, Failed to read an event",myEvent.eventId, testEventId);
@@ -92,14 +92,16 @@ public class EventTest extends TestCase {
     public void testUpdateEvent(){
 
         Event myEvent = new Event();
+        myEvent.create("testLoginId","Sweng_500");
+        int myeventID = myEvent.eventId;
+
         //populates this with dummy data
         myEvent.loginId = "1234";
-        myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
 
 
-        assertTrue("TC-30, Failed to update event", myEvent.update("1234","Sweng_500",1, myEvent));
+        assertEquals("TC-30, Failed to update event", myEvent.update("1234","Sweng_500",myeventID));
 
     }
 
