@@ -1,6 +1,8 @@
 package sweng500team2summer15.hov_helper;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +13,10 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.model.LatLng;
+
+import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  * Created by Steve on 6/6/2015.
@@ -115,6 +121,51 @@ public class MapController implements
     {
         // TODO:
     }
+
+    /**
+     * Get the first found geo coordinate (latitude, longitude) from input address.
+     * @param context - the context (ie. Activity) calling this method
+     * @param address - string representation of address
+     * @return LatLng of closest match
+     */
+    public static LatLng getGeoCoordinateFromAddress(Context context, String address)
+    {
+        ArrayList<Address> addressArrayList = new ArrayList<Address>();
+        LatLng closestMatch = new LatLng(0,0);
+        Geocoder geoCoder = new Geocoder(context);
+        try {
+            addressArrayList = (ArrayList<Address>) geoCoder.getFromLocationName(address, 1);
+            if (!addressArrayList.isEmpty())
+            {
+                Address foundAddress = addressArrayList.get(0);
+                closestMatch = new LatLng(foundAddress.getLatitude(), foundAddress.getLongitude());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return closestMatch;
+    }
+
+    /**
+     * Get a list of addresses (including lat/lon) that match input address.
+     * Allows the user to select the closest match for multiple matches.
+     * @param context - the context (ie. Activity) calling this method
+     * @param address - string representation of address
+     * @param maxResults - maximum matches
+     * @return - ArrayList of matching address
+     */
+    public static ArrayList<Address> getGeoLocationsFromAddress(Context context, String address, int maxResults)
+    {
+        ArrayList<Address> addressArrayList = new ArrayList<Address>();
+        Geocoder geoCoder = new Geocoder(context);
+        try {
+            addressArrayList = (ArrayList<Address>) geoCoder.getFromLocationName(address, maxResults);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return addressArrayList;
+    }
+
     @Override
     public void onConnected(Bundle bundle) {
         Log.i(TAG, "Location services connected.");
@@ -126,7 +177,7 @@ public class MapController implements
         else {
             Log.i(TAG, "Handle New Location!.");
             mapControllerCallback.handleNewLocation(location);
-        };
+        }
     }
 
     public void connect() {

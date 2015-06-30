@@ -21,7 +21,7 @@ public class Profile {
     String UserLastName = "";
     int PhoneNumber = 0;
     String EmailAddress = "";
-    EmergencyContactInfo EmergencyContactInfo;
+    final EmergencyContactInfo EmergencyContactInfo;
     Sex UserSex = Sex.MALE;
     PreferredContactMethod UserPreferredContactMethod = PreferredContactMethod.CALL;
     SmokingPreference UserSmokingPreference = SmokingPreference.NONSMOKE;

@@ -2,7 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sweng500team2summer15.hov_helper" >
 
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-sdk android:minSdkVersion="8" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
@@ -12,6 +13,13 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- Internet Permissions -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="18" />
 
     <application
         android:allowBackup="true"
@@ -40,8 +48,31 @@
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
+            android:name=".CreateEventActivity"
+            android:label="@string/title_activity_create_event" >
+        </activity>
+        <activity
+            android:name=".ReadEventActivity"
+            android:label="@string/title_activity_read_event" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="MainActivity" />
+        </activity>
+        <activity
             android:name=".EventDetailsActivity"
             android:label="@string/title_activity_event_details" >
+        </activity>
+        <activity
+            android:name=".TempDisplayActivity"
+            android:label="@string/title_activity_temp_display"
+            android:parentActivityName=".ReadEventActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="sweng500team2summer15.hov_helper.ReadEventActivity" />
+        </activity>
+        <activity
+            android:name=".deleteEventActivity"
+            android:label="@string/title_activity_delete_event" >
         </activity>
     </application>
 
