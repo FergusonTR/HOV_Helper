@@ -227,8 +227,6 @@ public class Event {
                // successfully updated  event
                updateResult= json.getString(TAG_MESSAGE);
 
-
-
            } else {
                // failed to create event
                updateResult = "Update Failed";
