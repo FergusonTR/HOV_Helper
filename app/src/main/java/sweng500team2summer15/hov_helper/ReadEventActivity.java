@@ -98,7 +98,8 @@ public class ReadEventActivity extends Activity{
             int eventId = Integer.parseInt(inputEventId.getText().toString());
 
             Event newEvent = new Event();
-            newEvent.read(eventId);
+            newEvent = newEvent.read(eventId);
+
             if (newEvent.eventId != 0) {
 
                 publishProgress(newEvent.loginId,

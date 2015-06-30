@@ -112,17 +112,17 @@ public class Event {
         return createResult;
     }
 
-   public String read(int eventId){
+   public Event read(int eventId){
        //This retrieves  the event from the mySQL database.
 
         //Event retrieveEvent = new Event();
 
        String url_read_event = "http://www.hovhelper.com/read_event.php";
-       String readResult = "";
+
 
        // JSON Node names
        String TAG_SUCCESS = "success";
-       String TAG_MESSAGE = "message";
+       String TAG_EVENT= "event";
        String TAG_EVENTID = "eventId";
        String TAG_LOGINID = "loginId";
        String TAG_NUMBERSEATS = "numberSeats";
@@ -150,8 +150,9 @@ public class Event {
            int success = json.getInt(TAG_SUCCESS);
 
            if (success == 1) {
+
                // successfully read event
-               JSONArray eventObj = json.getJSONArray(TAG_MESSAGE); // JSON Array
+               JSONArray eventObj = json.getJSONArray(TAG_EVENT); // JSON Array
 
                // get event object from JSON Array
                JSONObject event = eventObj.getJSONObject(0);
@@ -179,7 +180,7 @@ public class Event {
        } catch (JSONException e) {
            e.printStackTrace();
        }
-       return readResult;
+       return this;
     }
 
    public String update(String loginId, String password, int eventID){
