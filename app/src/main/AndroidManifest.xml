@@ -59,18 +59,6 @@
                 android:value="MainActivity" />
         </activity>
         <activity
-            android:name=".EventDetailsActivity"
-            android:label="@string/title_activity_event_details" >
-        </activity>
-        <activity
-            android:name=".TempDisplayActivity"
-            android:label="@string/title_activity_temp_display"
-            android:parentActivityName=".ReadEventActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="sweng500team2summer15.hov_helper.ReadEventActivity" />
-        </activity>
-        <activity
             android:name=".deleteEventActivity"
             android:label="@string/title_activity_delete_event" >
         </activity>

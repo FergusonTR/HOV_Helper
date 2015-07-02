@@ -31,7 +31,7 @@
         android:text="Read Event"
         android:id="@+id/btnGetEvent"
         android:layout_gravity="center_horizontal"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView_endTime"
         android:layout_centerHorizontal="true" />
 
     <TextView
@@ -71,7 +71,7 @@
         android:layout_alignEnd="@+id/textView_eventType"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -104,9 +104,11 @@
         android:layout_below="@+id/textView_LoginID"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -115,9 +117,10 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/textView_LoginID"
-        android:layout_alignEnd="@+id/textView_LoginID" />
+        android:layout_alignEnd="@+id/textView_LoginID"
+        android:editable="false" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -141,7 +144,7 @@
         android:layout_alignEnd="@+id/textView_numberAvailable"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -165,14 +168,36 @@
         android:layout_alignParentEnd="true"
         android:textStyle="bold" />
 
-    <TextView
+    <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:id="@+id/textView_endTime"
-        android:layout_centerVertical="true"
+        android:layout_below="@+id/textView7"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/textView7"
-        android:layout_alignEnd="@+id/textView7" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Update Event"
+        android:id="@+id/btnUpdateEvent"
+        android:layout_below="@+id/btnGetEvent"
+        android:layout_alignLeft="@+id/btnGetEvent"
+        android:layout_alignStart="@+id/btnGetEvent"
+        android:layout_alignRight="@+id/btnGetEvent"
+        android:layout_alignEnd="@+id/btnGetEvent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView_status"
+        android:layout_below="@+id/btnUpdateEvent"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/textView_endTime"
+        android:layout_alignEnd="@+id/textView_endTime" />
 </RelativeLayout>

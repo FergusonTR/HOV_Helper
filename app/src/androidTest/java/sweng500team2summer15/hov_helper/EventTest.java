@@ -81,9 +81,13 @@ public class EventTest extends TestCase {
 
         //retrieves a known event and determines if it is returned
         assertEquals("TC-XX, Failed to read an event",myEvent.eventId, testEventId);
+
+        //delete the created event and retest
         myEvent.delete("testLoginId","Sweng_500",testEventId);
+
         //attempts to retrieve an unknown event ensures that it fails
-        //assertEquals("TC-XX, Invalid read of an event",myEvent.read(0000), 0);
+        //myEvent.read(testEventId);
+        //assertEquals("TC-XX, Invalid read of an event",myEvent.read(testEventId), 0);
     }
 
     //TC-30 Update Event - NumberSeats
