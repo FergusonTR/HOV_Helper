@@ -3,6 +3,8 @@ package sweng500team2summer15.hov_helper;
 import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
+import sweng500team2summer15.hov_helper.Account.AccountManagement;
+
 /**
  * Created by Edward J. Crishock on 6/6/2015.
  */
@@ -13,9 +15,7 @@ public class AccountManagementTest extends TestCase {
         super.setUp();
     }
 
-    // SignIn tests
-    // good username: "team_2"
-    // good password: "Sweng_500"
+    // TODO - redo tests based on new design
 
     // TC-03.1
     @SmallTest
@@ -24,7 +24,7 @@ public class AccountManagementTest extends TestCase {
         String username = "team_2";
         String password = "Sweng_500";
 
-        assertEquals(am.SignIn(username, password), 0);
+        assertEquals(am.signIn(username, password), 0);
     }
     // TC-03.2
     @SmallTest
@@ -33,7 +33,7 @@ public class AccountManagementTest extends TestCase {
         String username = "team2";
         String password = "Sweng_500";
 
-        assertEquals(am.SignIn(username, password), 1);
+        assertEquals(am.signIn(username, password), 1);
     }
     // TC-04
     @SmallTest
@@ -42,15 +42,10 @@ public class AccountManagementTest extends TestCase {
         String username = "team_2";
         String password = "sweng50";
 
-        assertEquals(am.SignIn(username, password), 1);
+        assertEquals(am.signIn(username, password), 1);
     }
 
-    // SignUp tests
-    // good username: "team2"
-    // good email: "team2sweng500@psu.edu"
-    // existing user: "team_2"
-    // existing email: "team2_sweng500@psu.edu"
-
+    // TODO - redo tests based on new design
 
     // TC-05.1 - success
     @SmallTest
@@ -58,9 +53,8 @@ public class AccountManagementTest extends TestCase {
         AccountManagement am = new AccountManagement();
         String username = "team2";
         String password = "Sweng_500";
-        String email = "team2sweng500@psu.edu";
 
-        assertEquals(am.SignUp(username, password, email), 0);
+        assertEquals(am.signUp(username, password), 0);
     }
     // TC-05.2 - User exists
     @SmallTest
@@ -68,9 +62,8 @@ public class AccountManagementTest extends TestCase {
         AccountManagement am = new AccountManagement();
         String username = "team_2";
         String password = "Sweng_500";
-        String email = "team2sweng500@psu.edu";
 
-        assertEquals(am.SignUp(username, password, email), 1);
+        assertEquals(am.signUp(username, password), 1);
     }
 
     @SmallTest
@@ -78,9 +71,8 @@ public class AccountManagementTest extends TestCase {
         AccountManagement am = new AccountManagement();
         String username = "team2";
         String password = "Sweng_500";
-        String email = "team2_sweng500@psu.edu";
 
-        assertEquals(am.SignUp(username, password, email), 1);
+        assertEquals(am.signUp(username, password), 1);
     }
 
     @Override
