@@ -27,7 +27,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name=".Start"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -61,6 +61,14 @@
         <activity
             android:name=".event.management.DeleteEventActivity"
             android:label="@string/title_activity_delete_event" >
+        </activity>
+	<activity
+            android:name=".Account.SignUpActivity"
+            android:label="Sign Up" >
+        </activity>
+        <activity
+            android:name=".Account.SignInActivity"
+            android:label="Sign In" >
         </activity>
     </application>
 
