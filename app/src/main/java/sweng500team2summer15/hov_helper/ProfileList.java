@@ -12,7 +12,7 @@ import java.util.ListIterator;
  */
 public class ProfileList {
 
-    List<Profile> ProfileList = new List<Profile>() {
+    final List<Profile> ProfileList = new List<Profile>() {
         @Override
         public void add(int location, Profile object) {
 
