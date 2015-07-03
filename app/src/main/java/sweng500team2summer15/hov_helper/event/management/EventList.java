@@ -1,4 +1,6 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.event.management;
+
+import sweng500team2summer15.hov_helper.event.management.Event;
 
 /**
  * Created by Terry on 6/4/2015.

@@ -2,14 +2,14 @@ package sweng500team2summer15.hov_helper;
 
 import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
-
-import android.content.Intent;
-import android.util.Log;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import sweng500team2summer15.hov_helper.event.management.Event;
+
+
 
 /**
  * Created by Terry on 6/5/2015.
@@ -68,6 +68,9 @@ public class EventTest extends TestCase {
         //Test with test data default values should be created in the database to have reliable response.
         //positive test case for event
         assertTrue("TC-23, Failed to create an event", myEvent.create(myEvent.loginId, password) > 0);
+
+        //clean up
+        myEvent.delete("testLoginId","Sweng_500",myEvent.eventId);
     }
 
     //TC-XX Read Event
@@ -95,17 +98,21 @@ public class EventTest extends TestCase {
    //Todo ADD test cases for other Update Event actions.
     public void testUpdateEvent(){
 
+        //create a temporary event to test the create method
         Event myEvent = new Event();
         myEvent.create("testLoginId","Sweng_500");
         int myeventID = myEvent.eventId;
 
-        //populates this with dummy data
-        myEvent.loginId = "1234";
+        //populates this with some dummy data
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;
 
 
-        assertEquals("TC-30, Failed to update event", myEvent.update("1234","Sweng_500",myeventID));
+        assertEquals("TC-30, Failed to update event", (myEvent.update("testLoginId","Sweng_500",myeventID)),"Event update completed.");
+
+        //clean up the event that was created
+        myEvent.delete("testLoginId","Sweng_500",myeventID);
+
 
     }
 
@@ -115,18 +122,16 @@ public class EventTest extends TestCase {
         //this test relies on the addition of a new event that is then deleted.
         Event myEvent = new Event();
         //populates this with dummy data
-        myEvent.loginId = "1234";
+        myEvent.loginId = "testLoginId";
         myEvent.eventId = 2;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 2;
 
         //Pushes the event to the server
-       int myeventID = myEvent.create("1234","sweng_500");
-       String result =  myEvent.delete("1234", "sweng_500", myeventID);
-        Log.v("myApp", result);
+       int myeventID = myEvent.create("testLoginId","sweng_500");
 
         //tests that the event can be deleted.
-        assertEquals("TC-32, Failed to delete an event", result, "Event deleted");
+        assertEquals("TC-32, Failed to delete an event",(myEvent.delete("testLoginId", "sweng_500", myeventID)), "Event deleted");
 
     }
 

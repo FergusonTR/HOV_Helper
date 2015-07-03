@@ -2,10 +2,13 @@ package sweng500team2summer15.hov_helper;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import sweng500team2summer15.hov_helper.event.management.CreateEventActivity;
+import sweng500team2summer15.hov_helper.event.management.DeleteEventActivity;
+import sweng500team2summer15.hov_helper.event.management.ReadEventActivity;
 
 //ToDo change the deprecated ActionBarActivity to something accepted.
 public class MainActivity extends Activity {
@@ -49,7 +52,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View view){
                 //Launching read event activity
-                Intent i = new Intent(getApplicationContext(), deleteEventActivity.class);
+                Intent i = new Intent(getApplicationContext(), DeleteEventActivity.class);
                 startActivity(i);
             }
         });

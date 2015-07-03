@@ -48,18 +48,18 @@
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".CreateEventActivity"
+            android:name=".event.management.CreateEventActivity"
             android:label="@string/title_activity_create_event" >
         </activity>
         <activity
-            android:name=".ReadEventActivity"
+            android:name=".event.management.ReadEventActivity"
             android:label="@string/title_activity_read_event" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="MainActivity" />
         </activity>
         <activity
-            android:name=".deleteEventActivity"
+            android:name=".event.management.DeleteEventActivity"
             android:label="@string/title_activity_delete_event" >
         </activity>
     </application>

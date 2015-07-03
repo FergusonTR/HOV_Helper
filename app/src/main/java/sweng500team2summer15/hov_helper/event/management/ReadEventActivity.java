@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.event.management;
 
         import android.app.Activity;
         import android.app.ProgressDialog;
@@ -8,6 +8,8 @@ package sweng500team2summer15.hov_helper;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.TextView;
+
+        import sweng500team2summer15.hov_helper.R;
 
 
 public class ReadEventActivity extends Activity{
@@ -211,11 +213,21 @@ public class ReadEventActivity extends Activity{
             inputEndTime = (EditText) findViewById(R.id.textView_endTime);
 
             newEvent.numberSeats = Integer.parseInt(inputNumberSeats.getText().toString());
-            newEvent.numberAvailable = Integer.parseInt(inputEventType.getText().toString());
+            newEvent.numberAvailable = Integer.parseInt(inputNumberAvailable.getText().toString());
+            newEvent.eventType = inputEventType.getText().toString();
             newEvent.start_Time = inputStartTime.getText().toString();
             newEvent.end_Time = inputEndTime.getText().toString();
 
-            status = newEvent.update(newEvent.loginId,"SWEng_500",eventId);
+            //ToDo Remove these hard coded values
+            newEvent.startLongitude = -71.19;
+            newEvent.startLatitude = 41.50;
+            newEvent.endLatitude = 41.30;
+            newEvent.endLongitude = -71.25;
+            newEvent.daysofweek = "Monday";
+            newEvent.event_interval = "daily";
+
+
+            status = newEvent.update(newEvent.loginId,"SWEng_500",newEvent.eventId);
 
             if (newEvent.eventId != 0) {
 
@@ -224,12 +236,8 @@ public class ReadEventActivity extends Activity{
 
             }
             else{
-                publishProgress("not found",
-                        "not found",
-                        "not found",
-                        "not found",
-                        "not found",
-                        "not found");
+                publishProgress("not found");
+
             }
 
 
