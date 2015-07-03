@@ -92,22 +92,13 @@ public class SignUpActivity extends Activity {
 
             // TODO - placeholder code
             if (_success == 1) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
-                builder.setMessage("Success")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent i = new Intent(getApplicationContext(), SignInActivity.class);
-                                startActivity(i);
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                Intent i = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(i);
             }
             else {
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignUpActivity.this);
-                    builder.setMessage("Failure")
+                    builder.setMessage("Sign Up Failed")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {

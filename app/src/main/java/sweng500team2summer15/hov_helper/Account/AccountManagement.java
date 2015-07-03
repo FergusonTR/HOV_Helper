@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,7 +26,10 @@ import sweng500team2summer15.hov_helper.JSONParser;
  */
 public class AccountManagement {
 
-    int loginId = 0;
+    JSONParser jsonParser = new JSONParser();
+
+    String login;
+    String password;
 
     // sign into HOV_Helper
     public int signIn(String login, String password)
@@ -41,8 +45,6 @@ public class AccountManagement {
 
         // return 0 for success, 1 for failure
 
-        JSONParser jsonParser = new JSONParser();
-
         //ToDo develop a way of performing the create over an SSL.
         //ToDo have user data verified prior to creation of event.
         //ToDo Consider creating a counter to limit the number of entries created by one user over a period of time.
@@ -52,6 +54,9 @@ public class AccountManagement {
 
         // JSON Node names
         String TAG_SUCCESS = "success";
+        String TAG_USER = "user";
+        String TAG_LOGIN = "login";
+        String TAG_PASSWORD = "password";
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -70,7 +75,15 @@ public class AccountManagement {
 
             if (success == 1) {
                 // successfully created account
-                //this.loginId = json.getInt("signup");
+                // successfully read event
+                JSONArray userArray = json.getJSONArray(TAG_USER); // JSON Array
+
+                // get event object from JSON Array
+                JSONObject userObj = userArray.getJSONObject(0);
+
+                //load the results of the JSON Array into the current object
+                this.login = (userObj.getString(TAG_LOGIN));
+                this.password = (userObj.getString(TAG_PASSWORD));
             } else {
                 // failed to create account
             }
@@ -93,8 +106,6 @@ public class AccountManagement {
             //redirect to create profile page
 
         // return 0 for success, 1 for failure
-
-        JSONParser jsonParser = new JSONParser();
 
         //ToDo develop a way of performing the create over an SSL.
         //ToDo have user data verified prior to creation of event.
