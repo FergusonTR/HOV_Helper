@@ -37,7 +37,7 @@ public class EventTest extends TestCase {
         //myEvent.endLocation
         //myEvent.startTime
 
-        assertEquals("Event Object Creation failed - loginId",myEvent.loginId, "1234");
+        assertEquals("Event Object Creation failed - loginId",myEvent.loginId, "testLoginId");
         assertEquals("Event Object Creation failed - eventId",myEvent.eventId, 1);
         assertEquals("Event Object Creation failed - eventType",myEvent.eventType, "Share");
         assertEquals("Event Object Creation failed - numberSeats",myEvent.numberSeats, 3);
