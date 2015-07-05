@@ -1,5 +1,6 @@
 package sweng500team2summer15.hov_helper.event.management;
 
+
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -10,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.util.Log;
 
-import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.*;
 
 
 public class DeleteEventActivity extends Activity {
