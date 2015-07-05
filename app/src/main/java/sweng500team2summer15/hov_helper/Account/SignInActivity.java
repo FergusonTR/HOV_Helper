@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import sweng500team2summer15.hov_helper.CreateEventActivity;
 import sweng500team2summer15.hov_helper.MainActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
@@ -89,12 +90,14 @@ public class SignInActivity extends Activity {
 
             etLogin = (EditText) findViewById(R.id.etLogin);
             etPassword = (EditText) findViewById(R.id.etPassword);
-            bSignIn = (Button) findViewById(R.id.bSignUp);
+            bSignIn = (Button) findViewById(R.id.bSignIn);
             tvCancel = (TextView) findViewById(R.id.tvCancel);
             tvForgot = (TextView) findViewById(R.id.tvForgot);
 
             AccountManagement user = new AccountManagement();
-            _success = user.signIn(etLogin.getText().toString(), etPassword.getText().toString());
+            user.login = etLogin.getText().toString();
+            user.password = etPassword.getText().toString();
+            _success = user.signIn(user.login, user.password);
 
             return null;
         }
@@ -106,22 +109,13 @@ public class SignInActivity extends Activity {
 
             // TODO - placeholder code
             if (_success == 1) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
-                builder.setMessage("Success")
-                        .setCancelable(false)
-                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(i);
-                            }
-                        });
-                AlertDialog alert = builder.create();
-                alert.show();
+                Intent i = new Intent(getApplicationContext(), CreateEventActivity.class);
+                startActivity(i);
             }
             else {
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
-                    builder.setMessage("Failure")
+                    builder.setMessage("Sign in Failed")
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {

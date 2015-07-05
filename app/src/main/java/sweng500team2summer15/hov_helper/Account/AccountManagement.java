@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -25,33 +26,26 @@ import sweng500team2summer15.hov_helper.JSONParser;
  */
 public class AccountManagement {
 
-    int loginId = 0;
+    final JSONParser jsonParser = new JSONParser();
+
+    String login;
+    String password;
 
     // sign into HOV_Helper
     public int signIn(String login, String password)
     {
-        //if username exists
-            //if password is bad
-                //prompt that password is incorrect
-            //else
-                //sign-in
-                //redirect to profile dashboard
-        //else
-            //prompt to sign up
-
-        // return 0 for success, 1 for failure
-
-        JSONParser jsonParser = new JSONParser();
+        // return 1 for success, 0 for failure
 
         //ToDo develop a way of performing the create over an SSL.
-        //ToDo have user data verified prior to creation of event.
-        //ToDo Consider creating a counter to limit the number of entries created by one user over a period of time.
 
-        // url to create new product
+        // url to sign in
         String url_sign_in = "http://www.hovhelper.com/signin.php";
 
         // JSON Node names
         String TAG_SUCCESS = "success";
+        String TAG_USER = "user";
+        String TAG_LOGIN = "login";
+        String TAG_PASSWORD = "password";
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -59,7 +53,6 @@ public class AccountManagement {
         params.add(new BasicNameValuePair("password", password));
 
         // getting JSON Object
-        // Note that create event url accepts POST method
         JSONObject json = jsonParser.makeHttpRequest(url_sign_in,"GET", params);
 
         // check for success tag
@@ -69,10 +62,17 @@ public class AccountManagement {
             tmp = success;
 
             if (success == 1) {
-                // successfully created account
-                //this.loginId = json.getInt("signup");
+                // successfully signed in
+                JSONArray userArray = json.getJSONArray(TAG_USER); // JSON Array
+
+                // get user object from JSON Array
+                JSONObject userObj = userArray.getJSONObject(0);
+
+                //load the results of the JSON Array into the current object
+                this.login = (userObj.getString(TAG_LOGIN));
+                this.password = (userObj.getString(TAG_PASSWORD));
             } else {
-                // failed to create account
+                // failed to sign in
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -84,23 +84,11 @@ public class AccountManagement {
     // sign up for HOV_Helper
     public int signUp(String login, String password)
     {
-        //if username exists
-            //prompt that username has been taken
-        //else if email exists
-            //prompt that email is already in use, use another email
-        //else
-            //sign-up; insert username, password, and email into database
-            //redirect to create profile page
-
-        // return 0 for success, 1 for failure
-
-        JSONParser jsonParser = new JSONParser();
+        // return 1 for success, 0 for failure
 
         //ToDo develop a way of performing the create over an SSL.
-        //ToDo have user data verified prior to creation of event.
-        //ToDo Consider creating a counter to limit the number of entries created by one user over a period of time.
 
-        // url to create new product
+        // url to sign up
         String url_sign_up = "http://www.hovhelper.com/signup.php";
 
         // JSON Node names
@@ -115,8 +103,7 @@ public class AccountManagement {
         params.add(new BasicNameValuePair("password", password));
         params.add(new BasicNameValuePair("verificationCode", Integer.toString(verificationCode)));
 
-        // getting JSON Object
-        // Note that create event url accepts POST method
+        // posting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_sign_up, "POST", params);
 
         // check for success tag
@@ -127,7 +114,7 @@ public class AccountManagement {
 
             if (success == 1) {
                 // successfully created account
-                //this.loginId = json.getInt("signup");
+                // this.loginId = json.getInt("signup");
             } else {
                 // failed to create account
             }

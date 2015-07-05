@@ -21,28 +21,28 @@ public class AccountManagementTest extends TestCase {
     @SmallTest
     public void test_SignIn_Success() {
         AccountManagement am = new AccountManagement();
-        String username = "team_2";
+        String email = "team_2@hovhelper.com";
         String password = "Sweng_500";
 
-        assertEquals(am.signIn(username, password), 0);
+        assertEquals(am.signIn(email, password), 1);
     }
     // TC-03.2
     @SmallTest
     public void test_SignIn_UserDoesNotExist() {
         AccountManagement am = new AccountManagement();
-        String username = "team2";
+        String email = "team2@hovhelper.com";
         String password = "Sweng_500";
 
-        assertEquals(am.signIn(username, password), 1);
+        assertEquals(am.signIn(email, password), 0);
     }
     // TC-04
     @SmallTest
     public void test_SignIn_BadPassword() {
         AccountManagement am = new AccountManagement();
-        String username = "team_2";
+        String email = "team_2@hovhelper.com";
         String password = "sweng50";
 
-        assertEquals(am.signIn(username, password), 1);
+        assertEquals(am.signIn(email, password), 0);
     }
 
     // TODO - redo tests based on new design
@@ -51,28 +51,30 @@ public class AccountManagementTest extends TestCase {
     @SmallTest
     public void test_SignUp_Success() {
         AccountManagement am = new AccountManagement();
-        String username = "team2";
+        String email = "team2";
         String password = "Sweng_500";
 
-        assertEquals(am.signUp(username, password), 0);
+        assertEquals(am.signUp(email, password), 1);
+
+        // TODO - delete user after test sign up
     }
     // TC-05.2 - User exists
     @SmallTest
     public void test_SignUp_UserExists() {
         AccountManagement am = new AccountManagement();
-        String username = "team_2";
+        String email = "team_2";
         String password = "Sweng_500";
 
-        assertEquals(am.signUp(username, password), 1);
+        assertEquals(am.signUp(email, password), 0);
     }
 
     @SmallTest
     public void test_SignUp_EmailExists() {
         AccountManagement am = new AccountManagement();
-        String username = "team2";
+        String email = "team2";
         String password = "Sweng_500";
 
-        assertEquals(am.signUp(username, password), 1);
+        assertEquals(am.signUp(email, password), 0);
     }
 
     @Override
