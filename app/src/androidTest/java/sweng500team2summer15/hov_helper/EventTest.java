@@ -28,7 +28,7 @@ public class EventTest extends TestCase {
 
         Event myEvent = new Event();
         //populates this with dummy data
-        myEvent.loginId = "1234";
+        myEvent.loginId = "testLoginId";
         myEvent.eventId = 1;
         myEvent.eventType = "Share";
         myEvent.numberSeats = 3;

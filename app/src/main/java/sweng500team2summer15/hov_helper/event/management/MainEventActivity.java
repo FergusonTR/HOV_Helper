@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.event.management;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -6,12 +6,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import sweng500team2summer15.hov_helper.event.management.CreateEventActivity;
-import sweng500team2summer15.hov_helper.event.management.DeleteEventActivity;
-import sweng500team2summer15.hov_helper.event.management.ReadEventActivity;
+import sweng500team2summer15.hov_helper.R;
 
 //ToDo change the deprecated ActionBarActivity to something accepted.
-public class MainActivity extends Activity {
+public class MainEventActivity extends Activity {
 
     Button btnNewEvent;
     Button btnReadEvent;
@@ -20,7 +18,7 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_event);
 
         //Buttons
         btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);

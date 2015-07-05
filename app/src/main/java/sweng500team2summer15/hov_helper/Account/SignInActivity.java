@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import sweng500team2summer15.hov_helper.CreateEventActivity;
-import sweng500team2summer15.hov_helper.MainActivity;
+import sweng500team2summer15.hov_helper.event.management.CreateEventActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 
 public class SignInActivity extends Activity {
 
@@ -109,7 +109,7 @@ public class SignInActivity extends Activity {
 
             // TODO - placeholder code
             if (_success == 1) {
-                Intent i = new Intent(getApplicationContext(), CreateEventActivity.class);
+                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(i);
             }
             else {

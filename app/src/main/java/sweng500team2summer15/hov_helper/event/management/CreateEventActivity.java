@@ -97,7 +97,7 @@ public class CreateEventActivity extends Activity {
             // dismiss the dialog once done
             pDialog.dismiss();
             //ToDo Open a new screen showing the Event Data with a button to view the event
-         //   Intent i = new Intent(getApplicationContext(), MainActivity.class);
+         //   Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
          //   startActivity(i);
 
         }

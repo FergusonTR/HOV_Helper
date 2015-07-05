@@ -13,4 +13,5 @@
     <string name="title_activity_temp_display">TempDisplayActivity</string>
     <string name="title_activity_delete_event">deleteEventActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string name="title_activity_main_event">MainEventActivity</string>
 </resources>
