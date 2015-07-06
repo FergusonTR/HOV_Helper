@@ -62,13 +62,7 @@
             android:name=".event.management.DeleteEventActivity"
             android:label="@string/title_activity_delete_event" >
         </activity>
-
-        <activity
-            android:name=".event.management.MainEventActivity"
-            android:label="MainEventActivity" >
-        </activity>
-
-        <activity
+	<activity
             android:name=".Account.SignUpActivity"
             android:label="Sign Up" >
         </activity>
