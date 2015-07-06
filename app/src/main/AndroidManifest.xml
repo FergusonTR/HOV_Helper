@@ -24,7 +24,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="HOV Helper"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Start"
@@ -62,13 +62,21 @@
             android:name=".event.management.DeleteEventActivity"
             android:label="@string/title_activity_delete_event" >
         </activity>
-	<activity
+        <activity
+            android:name=".event.management.MainEventActivity"
+            android:label="MainEventActivity" >
+        </activity>
+	    <activity
             android:name=".Account.SignUpActivity"
             android:label="Sign Up" >
         </activity>
         <activity
             android:name=".Account.SignInActivity"
             android:label="Sign In" >
+        </activity>
+        <activity
+            android:name=".Account.VerificationCodeActivity"
+            android:label="Verify Account" >
         </activity>
     </application>
 
