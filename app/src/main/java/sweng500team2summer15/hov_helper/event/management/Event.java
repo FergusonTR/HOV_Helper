@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.event.management;
 
         import java.util.ArrayList;
         import java.util.List;
@@ -9,17 +9,13 @@ package sweng500team2summer15.hov_helper;
         import org.json.JSONException;
         import org.json.JSONObject;
 
-        import android.content.Context;
-        import android.content.ContextWrapper;
-        import android.content.Intent;
-        import android.util.Log;
-        import android.widget.EditText;
-
         import java.text.DateFormat;
         import java.util.Date;
         import java.util.Calendar;
 
         import java.text.SimpleDateFormat;
+
+        import sweng500team2summer15.hov_helper.JSONParser;
 
 
 /**
@@ -32,28 +28,28 @@ public class Event {
 
     int createResult = 0;
     int updateResult = 0;
-    String loginId = "testLoginId";
-    int eventId = 0;
-    int numberSeats = 0;
-    int numberAvailable = 0;
-    Double startLatitude = 44.033300;
-    Double startLongitude = -71.134474;
-    Double endLatitude = 41.584987;
-    Double endLongitude = -71.264558;
-    String eventType = "Ride";
-    String event_interval = "weekly";
-    String daysofweek ="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday";
+    public String loginId = "testLoginId";
+    public int eventId = 0;
+    public int numberSeats = 0;
+    public int numberAvailable = 0;
+    public Double startLatitude = 44.033300;
+    public Double startLongitude = -71.134474;
+    public Double endLatitude = 41.584987;
+    public Double endLongitude = -71.264558;
+    public String eventType = "Ride";
+    public String event_interval = "weekly";
+    public String daysofweek ="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday";
 
     DateFormat dateformat =  new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 
 
     Date start_today = Calendar.getInstance().getTime();
-    String start_Time = dateformat.format(start_today);
+    public String start_Time = dateformat.format(start_today);
 
     Date end_today = Calendar.getInstance().getTime();
-    String end_Time = dateformat.format(end_today);
+    public String end_Time = dateformat.format(end_today);
 
-    String createTimeStamp ="";
+    public String createTimeStamp ="";
 
 
    public int create(String loginId, String password) {
@@ -200,11 +196,13 @@ public class Event {
 
        // Building Parameters
        //ToDo remove deprecated approach and use URLBuilder instead
+
        List<NameValuePair> params = new ArrayList<NameValuePair>();
        params.add(new BasicNameValuePair("loginId", loginId));
        params.add(new BasicNameValuePair("password", password));
+       params.add(new BasicNameValuePair("eventId", Integer.toString(this.eventId)));
        params.add(new BasicNameValuePair("numberSeats", Integer.toString(this.numberSeats)));
-       params.add(new BasicNameValuePair("numberAvailable", Integer.toString(this.numberSeats)));
+       params.add(new BasicNameValuePair("numberAvailable", Integer.toString(this.numberAvailable)));
        params.add(new BasicNameValuePair("startTime", this.start_Time));
        params.add(new BasicNameValuePair("endTime", this.end_Time));
        params.add(new BasicNameValuePair("eventType", this.eventType));
@@ -214,6 +212,7 @@ public class Event {
        params.add(new BasicNameValuePair("endLatitude", this.endLatitude.toString()));
        params.add(new BasicNameValuePair("endLongitude", this.endLongitude.toString()));
        params.add(new BasicNameValuePair("daysofweek", this.daysofweek));
+
 
        // getting JSON Object
        // Note that update event url accepts POST method

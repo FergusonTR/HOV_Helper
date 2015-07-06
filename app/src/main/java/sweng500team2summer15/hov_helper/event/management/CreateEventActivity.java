@@ -1,15 +1,15 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.event.management;
 
         import android.app.Activity;
         import android.app.ProgressDialog;
 
-        import android.content.Intent;
         import android.os.AsyncTask;
         import android.os.Bundle;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
 
+        import sweng500team2summer15.hov_helper.R;
 
 
 public class CreateEventActivity extends Activity {
@@ -97,7 +97,7 @@ public class CreateEventActivity extends Activity {
             // dismiss the dialog once done
             pDialog.dismiss();
             //ToDo Open a new screen showing the Event Data with a button to view the event
-         //   Intent i = new Intent(getApplicationContext(), MainActivity.class);
+         //   Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
          //   startActivity(i);
 
         }
