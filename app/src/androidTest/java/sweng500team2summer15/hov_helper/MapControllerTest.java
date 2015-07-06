@@ -9,6 +9,8 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+
 import junit.framework.TestCase;
 
 import java.io.IOException;
@@ -111,13 +113,19 @@ public class MapControllerTest extends ActivityInstrumentationTestCase2<MapsActi
         assertEquals(expectedAddressLine2, addressLine2);
         assertEquals(expectedAddressLine3, addressLine3);
     }
-//
-//    @SmallTest
-//    public void testCurrentLocationCity() {
-//        //Verify a currentLocation String is returned
-//        String currentLocation = myMapController.getCurrentLocationCity();
-//        assertEquals(false, currentLocation.isEmpty());
-//    }
+
+    @SmallTest
+    public void testGetLatLonFromStreetAddress() {
+        // test location (Beaver Stadium, PennState)
+        String testAddressLine = "Penn State University, 1 Beasver Stadium, State College, PA 16801";
+        double expectedLat = 40.8122837;
+        double expectedLon = -77.8561126;
+        LatLng latLng = MapController.getGeoCoordinateFromAddress(this.myMapsActivity,testAddressLine);
+        Log.e(TAG, "Lat/Lon Found: " + latLng);
+        assertNotNull(latLng);
+        assertEquals(expectedLat, latLng.latitude, .01);
+        assertEquals(expectedLon, latLng.longitude, .01);
+    }
 //
 //    @SmallTest
 //    public void testCurrentLocationState() {
