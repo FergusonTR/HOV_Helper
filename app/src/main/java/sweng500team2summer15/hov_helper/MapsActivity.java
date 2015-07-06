@@ -47,7 +47,7 @@ public class MapsActivity extends FragmentActivity implements MapController.MapC
         double pickupLon = this.getIntent().getDoubleExtra("pickupLon", 0.0);
         double dropOffLat = this.getIntent().getDoubleExtra("dropOffLat", 0.0);
         double dropOffLon = this.getIntent().getDoubleExtra("dropOffLon", 0.0);
-        displayRoute(pickupLat, pickupLon, dropOffLat, dropOffLon);
+        //displayRoute(pickupLat, pickupLon, dropOffLat, dropOffLon);
     }
 
     @Override
@@ -55,13 +55,20 @@ public class MapsActivity extends FragmentActivity implements MapController.MapC
         Log.i(TAG, "RESUME!!.");
         super.onResume();
         setUpMapIfNeeded();
-        mapController.connect();
+        if (mapController != null)
+        {
+            mapController.connect();
+        }
+
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        mapController.disconnect();
+        if (mapController != null)
+        {
+            mapController.disconnect();
+        }
     }
 
     /**
@@ -166,5 +173,10 @@ public class MapsActivity extends FragmentActivity implements MapController.MapC
             rectLine.add((LatLng)directionPoints.get(i));
         }
         newPolyline = mMap.addPolyline(rectLine);
+    }
+
+    public MapController getMapController()
+    {
+        return this.mapController;
     }
 }
