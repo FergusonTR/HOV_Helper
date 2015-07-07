@@ -3,6 +3,8 @@ package sweng500team2summer15.hov_helper;
 import android.test.suitebuilder.annotation.SmallTest;
 import junit.framework.TestCase;
 
+import sweng500team2summer15.hov_helper.Account.AccountManagement;
+
 /**
  * Created by Edward J. Crishock on 6/6/2015.
  */
@@ -13,74 +15,106 @@ public class AccountManagementTest extends TestCase {
         super.setUp();
     }
 
-    // SignIn tests
-    // good username: "team_2"
-    // good password: "Sweng_500"
-
     // TC-03.1
     @SmallTest
-    public void test_SignIn_Success() {
+    public void test_signIn_Success() {
         AccountManagement am = new AccountManagement();
-        String username = "team_2";
+        String email = "team_2@hovhelper.com";
         String password = "Sweng_500";
 
-        assertEquals(am.SignIn(username, password), 0);
+        assertNull(am.signIn(email, password));
+        //assertEquals(am.signIn(email, password), null);
     }
+
+    public void test_signIn_Disabled() {
+        AccountManagement am = new AccountManagement();
+        String email = "team_2_disabled@hovhelper.com";
+        String password = "Sweng_500";
+
+        assertNotNull(am.signIn(email, password));
+        assertEquals(am.signIn(email, password), "Invalid Login/Password");
+    }
+
     // TC-03.2
     @SmallTest
-    public void test_SignIn_UserDoesNotExist() {
+    public void test_signIn_UserDoesNotExist() {
         AccountManagement am = new AccountManagement();
-        String username = "team2";
+        String email = "team2@hovhelper.com";
         String password = "Sweng_500";
 
-        assertEquals(am.SignIn(username, password), 1);
+        assertNotNull(am.signIn(email, password));
+        assertEquals(am.signIn(email, password), "Invalid Login/Password");
     }
-    // TC-04
+
     @SmallTest
-    public void test_SignIn_BadPassword() {
+    public void test_signIn_NotAEmail() {
         AccountManagement am = new AccountManagement();
-        String username = "team_2";
+        String email = "team_2";
         String password = "sweng50";
 
-        assertEquals(am.SignIn(username, password), 1);
+        assertNotNull(am.signIn(email, password));
+        assertEquals(am.signIn(email, password), "Not a valid email address");
     }
 
-    // SignUp tests
-    // good username: "team2"
-    // good email: "team2sweng500@psu.edu"
-    // existing user: "team_2"
-    // existing email: "team2_sweng500@psu.edu"
+    // TC-04
+    @SmallTest
+    public void test_signIn_BadPassword() {
+        AccountManagement am = new AccountManagement();
+        String email = "team_2@hovhelper.com";
+        String password = "sweng50";
 
+        assertNotNull(am.signIn(email, password));
+        assertEquals(am.signIn(email, password), "Invalid Login/Password");
+    }
 
     // TC-05.1 - success
     @SmallTest
-    public void test_SignUp_Success() {
+    public void test_signUp_Success() {
         AccountManagement am = new AccountManagement();
-        String username = "team2";
+        String email = "team_2_test@hovhelper.com";
         String password = "Sweng_500";
-        String email = "team2sweng500@psu.edu";
 
-        assertEquals(am.SignUp(username, password, email), 0);
+        assertNull(am.signUp(email, password));
+        //assertEquals(am.signUp(email, password), null);
+
+        // TODO - delete user after test sign up
     }
     // TC-05.2 - User exists
     @SmallTest
-    public void test_SignUp_UserExists() {
+    public void test_signUp_LoginExists() {
         AccountManagement am = new AccountManagement();
-        String username = "team_2";
+        String email = "team_2@hovhelper.com";
         String password = "Sweng_500";
-        String email = "team2sweng500@psu.edu";
 
-        assertEquals(am.SignUp(username, password, email), 1);
+        assertNotNull(am.signUp(email, password));
+        assertEquals(am.signUp(email, password), "Login already exists");
     }
 
     @SmallTest
-    public void test_SignUp_EmailExists() {
+    public void test_signUp_NotAEmail() {
         AccountManagement am = new AccountManagement();
-        String username = "team2";
-        String password = "Sweng_500";
-        String email = "team2_sweng500@psu.edu";
+        String email = "team_2";
+        String password = "sweng50";
 
-        assertEquals(am.SignUp(username, password, email), 1);
+        assertNotNull(am.signUp(email, password));
+        assertEquals(am.signUp(email, password), "Not a valid email address");
+    }
+
+    @SmallTest
+    public void test_verifyAccount_Success() {
+        AccountManagement am = new AccountManagement();
+        String verificationCode = "566273";
+
+        assertNull(am.verifyAccount(verificationCode));
+    }
+
+    @SmallTest
+    public void test_verifyAccount_CodeDoesNotExist() {
+        AccountManagement am = new AccountManagement();
+        String verificationCode = "000000";
+
+        assertNotNull(am.verifyAccount(verificationCode));
+        assertEquals(am.verifyAccount(verificationCode), "Verification code not accepted");
     }
 
     @Override

@@ -1,4 +1,5 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.event.management;
+
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.util.Log;
 
+import sweng500team2summer15.hov_helper.*;
 
-public class deleteEventActivity extends Activity {
+
+public class DeleteEventActivity extends Activity {
 
     private ProgressDialog pDialog;
     EditText inputLoginId;
@@ -54,7 +57,7 @@ public class deleteEventActivity extends Activity {
                 @Override
                 protected void onPreExecute() {
                     super.onPreExecute();
-                    pDialog = new ProgressDialog(deleteEventActivity.this);
+                    pDialog = new ProgressDialog(DeleteEventActivity.this);
                     pDialog.setMessage("Deleting Event..");
                     pDialog.setIndeterminate(false);
                     pDialog.setCancelable(true);

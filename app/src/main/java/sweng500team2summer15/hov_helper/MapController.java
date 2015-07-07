@@ -59,18 +59,26 @@ public class MapController implements
      */
     public Location getCurrentLocation()
     {
-        Location currentLocation = null;
-        // TODO:
-
+        Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         return currentLocation;
     }
 
-    public String getCurrentLocationStreetAddress()
+    public Address getStreetAddressFromLatLon(Context context, double latitude, double longitude)
     {
-        String currentStreetAddress = "";
-        // TODO:
+        Address closestMatch = null;
+        ArrayList<Address> addressArrayList = new ArrayList<Address>();
+        Geocoder geoCoder = new Geocoder(context);
+        try {
+            addressArrayList = (ArrayList<Address>) geoCoder.getFromLocation(latitude, longitude, 1);
+            if (!addressArrayList.isEmpty())
+            {
+                closestMatch = addressArrayList.get(0);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        return currentStreetAddress;
+        return closestMatch;
     }
 
 
