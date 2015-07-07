@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.Profile;
 
 /**
  * Created by Mike on 6/7/2015.

@@ -4,6 +4,9 @@ import android.test.suitebuilder.annotation.SmallTest;
 
 import junit.framework.TestCase;
 
+import sweng500team2summer15.hov_helper.Profile.EmergencyContactInfo;
+import sweng500team2summer15.hov_helper.Profile.Profile;
+
 /**
  * Created by Mike on 6/7/2015.
  */
@@ -22,12 +25,10 @@ public class ProfileTest extends TestCase {
         EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
         Profile testProf = new Profile(1,"Test", "Test", Profile.Sex.MALE, 5555555, Profile.PreferredContactMethod.CALL, "Test@Test.Com", testEmergency ,Profile.SmokingPreference.NONSMOKE);
 
-        // Store it in the list
-        ProfileList profileList = new ProfileList();
-        profileList.ProfileList.add(testProf);
+        // Store in DB
+        testProf.SubmitProfile();
 
-        // Ensure the object is added and correct
-        assertTrue(profileList.ProfileList.contains(testProf));
+        // Retrieve profile from DB
     }
 
     // TC 12 - Profile - required fields are blank

@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.Profile;
 
 import android.util.Log;
 
@@ -8,29 +8,31 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.List;
+import java.util.Random;
+
+import sweng500team2summer15.hov_helper.JSONParser;
 
 /**
  * Created by Mike on 6/7/2015.
  */
-public class Profile {
+public class Profile{
 
-    int LoginID = 0;
-    String UserFirstName = "";
-    String UserLastName = "";
-    int PhoneNumber = 0;
-    String EmailAddress = "";
-    final EmergencyContactInfo EmergencyContactInfo;
-    Sex UserSex = Sex.MALE;
-    PreferredContactMethod UserPreferredContactMethod = PreferredContactMethod.CALL;
-    SmokingPreference UserSmokingPreference = SmokingPreference.NONSMOKE;
+    public int LoginID = 0;
+    public String UserFirstName = "";
+    public String UserLastName = "";
+    public int PhoneNumber = 0;
+    public String EmailAddress = "";
+    public sweng500team2summer15.hov_helper.Profile.EmergencyContactInfo EmergencyContactInfo;
+    public Sex UserSex = Sex.MALE;
+    public PreferredContactMethod UserPreferredContactMethod = PreferredContactMethod.CALL;
+    public SmokingPreference UserSmokingPreference = SmokingPreference.NONSMOKE;
 
-    enum Sex {MALE, FEMALE}
+    public enum Sex {MALE, FEMALE}
+    public enum PreferredContactMethod {TEXT, CALL}
+    public enum SmokingPreference {SMOKE, NONSMOKE, NOPREF}
 
-    enum PreferredContactMethod {TEXT, CALL}
-
-    enum SmokingPreference {SMOKE, NONSMOKE, NOPREF}
+    public Profile(){}
 
     public Profile(int loginID, String firstName, String lastName, Sex sex, int phoneNumber, PreferredContactMethod preferredContactMethod,
                    String email, EmergencyContactInfo emergencyContactInfo, SmokingPreference smokingPreference)
@@ -44,39 +46,43 @@ public class Profile {
         this.EmailAddress = email;
         this.EmergencyContactInfo = emergencyContactInfo;
         this.UserSmokingPreference = smokingPreference;
-
-        boolean success = SubmitProfile(this);
-
-        //if(!success)
-          // TODO - what to do if we fail to create the profile?
     }
 
     // Submit a profile to the database
-    private Boolean SubmitProfile(Profile profile)
+    public Boolean SubmitProfile()
     {
         //This code was borrowed from http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
         JSONParser jsonParser = new JSONParser();
 
         // url to create new product
         //ToDo Change this to point to the Hovhelper website
-        String url_create_event = "http://192.168.1.6/create_event.php";
+        String url_create_event = "http://www.hovhelper.com/create_profile.php";
 
         // JSON Node names
         String TAG_SUCCESS = "success";
 
+        // TODO !!! these are hardcoded for now, but need to change this
+        Random rand = new Random();
+        int randomLoginId = rand.nextInt((99999 - 1) + 1) + 1;
+        String loginId = Integer.toString(randomLoginId);
+        String password = "password";
+
         // Building Parameters
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("LoginID", Integer.toString(profile.LoginID)));
-        params.add(new BasicNameValuePair("UserFirstName", profile.UserFirstName));
-        params.add(new BasicNameValuePair("UserLastName", profile.UserLastName));
-        params.add(new BasicNameValuePair("PhoneNumber", Integer.toString(profile.PhoneNumber)));
-        params.add(new BasicNameValuePair("EmailAddress", profile.EmailAddress));
-        params.add(new BasicNameValuePair("EmergencyContactInfo_Name", profile.EmergencyContactInfo.ContactName));
-        params.add(new BasicNameValuePair("EmergencyContactInfo_Number", Integer.toString(profile.EmergencyContactInfo.ContactNumber)));
-        params.add(new BasicNameValuePair("Sex", profile.UserSex.toString()));
-        params.add(new BasicNameValuePair("PreferredContactMethod", profile.UserPreferredContactMethod.toString()));
-        params.add(new BasicNameValuePair("SmokingPreference", profile.UserSmokingPreference.toString()));
+        //params.add(new BasicNameValuePair("LoginID", Integer.toString(this.LoginID)));
+        params.add(new BasicNameValuePair("loginId", loginId));
+        params.add(new BasicNameValuePair("password", password));
+
+        params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
+        params.add(new BasicNameValuePair("userLastName", this.UserLastName));
+        params.add(new BasicNameValuePair("phoneNumber", Integer.toString(this.PhoneNumber)));
+        params.add(new BasicNameValuePair("email", this.EmailAddress));
+        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", Integer.toString(this.EmergencyContactInfo.ContactNumber)));
+        params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
+        params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
+        params.add(new BasicNameValuePair("preferredContactMethod", this.UserPreferredContactMethod.toString()));
+        params.add(new BasicNameValuePair("smokingPreference", this.UserSmokingPreference.toString()));
 
         // getting JSON Object
         // Note that create product url accepts POST method

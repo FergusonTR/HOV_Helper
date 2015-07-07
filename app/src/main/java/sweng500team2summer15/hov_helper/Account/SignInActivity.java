@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
@@ -106,7 +107,7 @@ public class SignInActivity extends Activity {
             pDialog.dismiss();
 
             if (result == null) {
-                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+                Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
                 startActivity(i);
             }
             else {

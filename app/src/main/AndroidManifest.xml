@@ -78,6 +78,18 @@
             android:name=".Account.VerificationCodeActivity"
             android:label="Verify Account" >
         </activity>
+        <activity
+            android:name=".Profile.CreateProfileActivity"
+            android:label="CreateProfileActivity">
+        </activity>
+        <activity
+            android:name=".Profile.ProfileManagement"
+            android:label="ProfileManagement">
+        </activity>
+        <activity
+            android:name=".Profile.ViewProfileActivity"
+            android:label="ViewProfileActivity">
+        </activity>
     </application>
 
 </manifest>
