@@ -14,4 +14,10 @@
     <string name="title_activity_delete_event">deleteEventActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_main_event">MainEventActivity</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
+
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_search_result">SearchResultActivity</string>
 </resources>
