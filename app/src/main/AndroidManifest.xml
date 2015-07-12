@@ -76,6 +76,10 @@
             android:name=".Account.SignInActivity"
             android:label="Sign In" >
         </activity>
+        <activity
+            android:name=".SearchResultActivity"
+            android:label="@string/title_activity_search_result" >
+        </activity>
     </application>
 
 </manifest>
