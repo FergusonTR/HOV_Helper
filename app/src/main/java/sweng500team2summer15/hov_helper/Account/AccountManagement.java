@@ -13,12 +13,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigInteger;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.security.SecureRandom;
 
 import sweng500team2summer15.hov_helper.JSONParser;
 
@@ -145,6 +147,50 @@ public class AccountManagement {
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("verificationCode", verificationCode));
+
+        //Uri.Builder builder = Uri.parse(url_sign_up)
+        //        .buildUpon()
+        //        .appendQueryParameter("login", login)
+        //        .appendQueryParameter("password", password)
+        //        .appendQueryParameter("verificationCode", Integer.toString(verificationCode));
+
+        // posting JSON Object
+        JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
+
+        // check for success tag
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                // successfully verified account
+            } else {
+                // failed to create account
+                message = json.getString(TAG_MESSAGE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+    public String resetPassword(String email)
+    {
+        // url to verify account
+        String url_verify = "http://www.hovhelper.com/reset.php";
+
+        // JSON Node names
+        String TAG_SUCCESS = "success";
+        String TAG_MESSAGE = "message";
+
+        //generate password
+        SecureRandom random = new SecureRandom();
+        String password = new BigInteger(130, random).toString(32).substring(0, 7);
+
+        //ToDo remove deprecated approach and use URLBuilder instead
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("login", email));
+        params.add(new BasicNameValuePair("password", password));
 
         //Uri.Builder builder = Uri.parse(url_sign_up)
         //        .buildUpon()

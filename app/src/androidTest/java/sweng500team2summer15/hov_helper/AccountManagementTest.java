@@ -117,6 +117,23 @@ public class AccountManagementTest extends TestCase {
         assertEquals(am.verifyAccount(verificationCode), "Verification code not accepted");
     }
 
+    @SmallTest
+    public void test_resetPassword_Success() {
+        AccountManagement am = new AccountManagement();
+        String email = "reset@hovhelper.com";
+
+        assertNull(am.resetPassword(email));
+    }
+
+    @SmallTest
+    public void test_resetPassword_UserDoesNotExist() {
+        AccountManagement am = new AccountManagement();
+        String email = "team2@hovhelper.com";
+
+        assertNotNull(am.resetPassword(email));
+        assertEquals(am.resetPassword(email), "Password not reset");
+    }
+
     @Override
     protected void tearDown() throws Exception {
         super.tearDown();

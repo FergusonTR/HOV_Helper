@@ -78,6 +78,10 @@
             android:name=".Account.VerificationCodeActivity"
             android:label="Verify Account" >
         </activity>
+        <activity
+            android:name=".Account.ResetPasswordActivity"
+            android:label="Reset Password" >
+        </activity>
     </application>
 
 </manifest>
