@@ -186,11 +186,53 @@ public class AccountManagement {
         //generate password
         SecureRandom random = new SecureRandom();
         String password = new BigInteger(130, random).toString(32).substring(0, 7);
+        int verificationCode = 100000 + new Random().nextInt(900000);
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("login", email));
         params.add(new BasicNameValuePair("password", password));
+        params.add(new BasicNameValuePair("verificationCode", Integer.toString(verificationCode)));
+
+        //Uri.Builder builder = Uri.parse(url_sign_up)
+        //        .buildUpon()
+        //        .appendQueryParameter("login", login)
+        //        .appendQueryParameter("password", password)
+        //        .appendQueryParameter("verificationCode", Integer.toString(verificationCode));
+
+        // posting JSON Object
+        JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
+
+        // check for success tag
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                // successfully verified account
+            } else {
+                // failed to create account
+                message = json.getString(TAG_MESSAGE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+    public String resendVerificationCode(String email)
+    {
+        // url to verify account
+        String url_verify = "http://www.hovhelper.com/resend.php";
+
+        // JSON Node names
+        String TAG_SUCCESS = "success";
+        String TAG_MESSAGE = "message";
+
+
+        //ToDo remove deprecated approach and use URLBuilder instead
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("login", email));
 
         //Uri.Builder builder = Uri.parse(url_sign_up)
         //        .buildUpon()

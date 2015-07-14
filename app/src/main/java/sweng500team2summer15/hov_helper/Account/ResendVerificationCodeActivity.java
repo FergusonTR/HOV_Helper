@@ -13,40 +13,40 @@ import android.widget.EditText;
 
 import sweng500team2summer15.hov_helper.R;
 
-public class ResetPasswordActivity extends ActionBarActivity {
+public class ResendVerificationCodeActivity extends ActionBarActivity {
 
     private ProgressDialog pDialog;
 
-    Button bReset;
+    Button bResend;
     EditText etEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_resetpassword);
+        setContentView(R.layout.activity_resendverificationcode);
 
         etEmail = (EditText) findViewById(R.id.etEmail);
-        bReset = (Button) findViewById(R.id.bReset);
+        bResend = (Button) findViewById(R.id.bResend);
 
         // sign up button click event
-        bReset.setOnClickListener(new View.OnClickListener() {
+        bResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // sign up a new user in background thread
-                new ResetPassword().execute();
+                new ResendVerificationCode().execute();
             }
         });
     }
 
     // Background Async Task to sign up a new user
-    class ResetPassword extends AsyncTask<String, String, String> {
+    class ResendVerificationCode extends AsyncTask<String, String, String> {
 
         // Before starting background thread Show Progress Dialog
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(ResetPasswordActivity.this);
-            pDialog.setMessage("Resetting password...");
+            pDialog = new ProgressDialog(ResendVerificationCodeActivity.this);
+            pDialog.setMessage("Resending Verification Code...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -56,10 +56,10 @@ public class ResetPasswordActivity extends ActionBarActivity {
         protected String doInBackground(String... args) {
 
             etEmail = (EditText) findViewById(R.id.etEmail);
-            bReset = (Button) findViewById(R.id.bReset);
+            bResend = (Button) findViewById(R.id.bResend);
 
-            AccountManagement resetUserPw = new AccountManagement();
-            String result = resetUserPw.resetPassword(etEmail.getText().toString());
+            AccountManagement resendUserVCode = new AccountManagement();
+            String result = resendUserVCode.resendVerificationCode(etEmail.getText().toString());
 
             return result;
         }
@@ -75,7 +75,7 @@ public class ResetPasswordActivity extends ActionBarActivity {
             }
             else {
                 {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ResetPasswordActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ResendVerificationCodeActivity.this);
                     builder.setMessage(result)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
