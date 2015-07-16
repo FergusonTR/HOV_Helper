@@ -6,16 +6,22 @@
     android:layout_height="match_parent"
     tools:context="sweng500team2summer15.hov_helper.Account.SignInActivity">
 
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hov_helper"
+        android:layout_marginBottom="12dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email/Phone Number"/>
+        android:text="Email Address"/>
     
     <EditText
         android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,14 +33,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/bSignIn"
         android:text="Sign In"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp" />
+        android:layout_marginBottom="12dp" />
 
     <TextView
         android:id="@+id/tvCancel"
@@ -43,7 +49,7 @@
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:text="Cancel"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <TextView
         android:id="@+id/tvForgot"

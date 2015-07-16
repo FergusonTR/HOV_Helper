@@ -63,7 +63,7 @@ public class SignInActivity extends Activity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.tvForgot:
-                        startActivity(new Intent(SignInActivity.this, Start.class));
+                        startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
                         break;
                 }
             }

@@ -22,7 +22,7 @@ public class SignUpActivity extends Activity {
 
     Button bSignUp;
     EditText etLogin, etPassword;
-    TextView tvCancel;
+    TextView tvCancel, tvResendVerificationCode;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +33,7 @@ public class SignUpActivity extends Activity {
             etPassword = (EditText) findViewById(R.id.etPassword);
             bSignUp = (Button) findViewById(R.id.bSignUp);
             tvCancel = (TextView) findViewById(R.id.tvCancel);
+            tvResendVerificationCode = (TextView) findViewById(R.id.tvResendVerificationCode);
 
             // sign up button click event
             bSignUp.setOnClickListener(new View.OnClickListener() {
@@ -50,6 +51,17 @@ public class SignUpActivity extends Activity {
                 switch(v.getId()) {
                     case R.id.tvCancel:
                         startActivity(new Intent(SignUpActivity.this, Start.class));
+                        break;
+                }
+            }
+        });
+
+        tvResendVerificationCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(v.getId()) {
+                    case R.id.tvResendVerificationCode:
+                        startActivity(new Intent(SignUpActivity.this, ResendVerificationCodeActivity.class));
                         break;
                 }
             }

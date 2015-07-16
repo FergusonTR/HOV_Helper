@@ -4,29 +4,29 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sweng500team2summer15.hov_helper.Account.VerificationCodeActivity">
+    tools:context="sweng500team2summer15.hov_helper.Account.ResendVerificationCodeActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:layout_marginBottom="12dp"
-        android:text="Your verification code has been sent to you via email/phone number. Please enter your verification code below to verify your account. "/>
+        android:text="Please enter your email address to resend your verification code."
+        android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verification Code"/>
+        android:text="Email Address"/>
 
     <EditText
-        android:id="@+id/etVerificationCode"
+        android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"/>
 
     <Button
-        android:id="@+id/bVerify"
-        android:text="Verify"
+        android:id="@+id/bResend"
+        android:text="Resend"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
