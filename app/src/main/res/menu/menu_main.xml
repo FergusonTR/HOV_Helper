@@ -1,6 +1,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
-    <item android:id="@+id/action_settings" android:title="@string/action_settings"
-        android:orderInCategory="100" app:showAsAction="never" />
+    <item android:id="@+id/action_profile"
+        android:icon="@drawable/ic_action_profile"
+        android:title="Profile"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_event"
+        android:icon="@drawable/ic_action_event"
+        android:title="Events"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_map"
+        android:icon="@drawable/ic_action_map"
+        android:title="Map"
+        app:showAsAction="always" />
+    <item android:id="@+id/action_change_password"
+        android:title="Change Password"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
+    <item android:id="@+id/action_sign_out"
+        android:title="Sign Out"
+        android:orderInCategory="100"
+        app:showAsAction="never" />
 </menu>

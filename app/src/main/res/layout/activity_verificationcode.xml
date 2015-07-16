@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="12dp"
         android:text="Your verification code has been sent to you via email/phone number. Please enter your verification code below to verify your account. "/>
 
     <TextView
@@ -22,13 +22,12 @@
         android:id="@+id/etVerificationCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/bVerify"
         android:text="Verify"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>

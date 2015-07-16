@@ -4,7 +4,14 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="sweng500team2summer15.hov_helper.Account.SignUpActivity">
+    tools:context="sweng500team2summer15.hov_helper.Account.SignUpActivity"
+    >
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/hov_helper"
+        android:layout_marginBottom="12dp" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,7 +22,7 @@
         android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -27,14 +34,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <Button
         android:id="@+id/bSignUp"
         android:text="Sign Up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <TextView
         android:id="@+id/tvCancel"
@@ -43,7 +50,7 @@
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:text="Cancel"
-        android:layout_marginBottom="15dp"/>
+        android:layout_marginBottom="12dp"/>
 
     <TextView
         android:id="@+id/tvResendVerificationCode"

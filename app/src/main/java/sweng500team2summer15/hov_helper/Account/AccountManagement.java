@@ -1,5 +1,7 @@
 package sweng500team2summer15.hov_helper.Account;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.test.suitebuilder.annotation.SmallTest;
@@ -90,6 +92,10 @@ public class AccountManagement {
     public String signUp(String login, String password)
     {
         //ToDo develop a way of performing the create over an SSL.
+
+        if (password.length() < 6) {
+            return "Please enter a password with more than 6 characters";
+        }
 
         // url to sign up
         String url_sign_up = "http://www.hovhelper.com/signup.php";
@@ -242,6 +248,91 @@ public class AccountManagement {
 
         // posting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
+
+        // check for success tag
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                // successfully verified account
+            } else {
+                // failed to create account
+                message = json.getString(TAG_MESSAGE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return message;
+    }
+
+    // TODO - bring in the persisted user
+    public String changePassword(String currentPassword, String newPassword, String reenterPassword)
+    {
+        // url to verify account
+        String url_getpassword = "http://www.hovhelper.com/get_old_password.php";
+        String url_changepassword = "http://www.hovhelper.com/change_password.php";
+
+        // JSON Node names
+        String TAG_SUCCESS = "success";
+        String TAG_MESSAGE = "message";
+
+        //ToDo remove deprecated approach and use URLBuilder instead
+        List<NameValuePair> oldParams = new ArrayList<NameValuePair>();
+        //oldParams.add(new BasicNameValuePair("login", login));
+        oldParams.add(new BasicNameValuePair("password", currentPassword));
+
+        // posting JSON Object
+        JSONObject json = jsonParser.makeHttpRequest(url_getpassword, "GET", oldParams);
+        int oldPasswordCheck = 0;
+
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+            oldPasswordCheck = success;
+
+            if (success == 1) {
+                // successfully verified account
+            } else {
+                // failed to create account
+                message = json.getString(TAG_MESSAGE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        // is old password correct?
+        if (oldPasswordCheck == 0) {
+            return message;
+        }
+
+        // is new password and reentered password different?
+        if (!newPassword.equals(reenterPassword)) {
+            return "New passwords do not match";
+        }
+
+        // does new password have characters?
+        if (newPassword.length() < 6) {
+            return "Please enter a password with more than 6 characters";
+        }
+
+        // is new password the same as the old password?
+        if (currentPassword.equals(newPassword)) {
+            return "The new password cannot be the same as the current password";
+        }
+
+        //ToDo remove deprecated approach and use URLBuilder instead
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        //params.add(new BasicNameValuePair("login", login));
+        params.add(new BasicNameValuePair("password", newPassword));
+
+        //Uri.Builder builder = Uri.parse(url_sign_up)
+        //        .buildUpon()
+        //        .appendQueryParameter("login", login)
+        //        .appendQueryParameter("password", password)
+        //        .appendQueryParameter("verificationCode", Integer.toString(verificationCode));
+
+        // posting JSON Object
+        json = jsonParser.makeHttpRequest(url_changepassword, "POST", params);
 
         // check for success tag
         try {

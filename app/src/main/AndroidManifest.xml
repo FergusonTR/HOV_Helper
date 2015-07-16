@@ -66,25 +66,29 @@
             android:name=".event.management.MainEventActivity"
             android:label="MainEventActivity" >
         </activity>
-	    <activity
+        <activity
             android:name=".Account.SignUpActivity"
-            android:label="Sign Up" >
+            android:label="@string/title_activity_sign_up" >
         </activity>
         <activity
             android:name=".Account.SignInActivity"
-            android:label="Sign In" >
+            android:label="@string/title_activity_sign_in" >
         </activity>
         <activity
             android:name=".Account.VerificationCodeActivity"
-            android:label="Verify Account" >
+            android:label="@string/title_activity_verification_code" >
         </activity>
         <activity
             android:name=".Account.ResetPasswordActivity"
-            android:label="Reset Password" >
+            android:label="@string/title_activity_reset_password" >
         </activity>
         <activity
             android:name=".Account.ResendVerificationCodeActivity"
-            android:label="Resend Verification Code" >
+            android:label="@string/title_activity_resend_verification_code" >
+        </activity>
+        <activity
+            android:name=".Account.ChangePasswordActivity"
+            android:label="@string/title_activity_change_password" >
         </activity>
     </application>
 
