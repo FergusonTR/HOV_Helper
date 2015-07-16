@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -106,6 +107,15 @@ public class SignInActivity extends Activity {
             pDialog.dismiss();
 
             if (result == null) {
+                // TODO - encrypt password
+
+                // write credentials to file
+                SharedPreferences pref = getSharedPreferences("hovhelper", 0);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("LOGIN", etLogin.getText().toString());
+                // TODO - add encrypted password
+                editor.commit();
+
                 Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(i);
             }

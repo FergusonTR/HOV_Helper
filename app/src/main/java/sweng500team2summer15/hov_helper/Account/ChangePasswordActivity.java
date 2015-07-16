@@ -2,8 +2,10 @@ package sweng500team2summer15.hov_helper.Account;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -62,8 +64,12 @@ public class ChangePasswordActivity extends ActionBarActivity {
             etReenterPassword = (EditText) findViewById(R.id.etReenterPassword);
             bChange = (Button) findViewById(R.id.bChange);
 
+            // get current user's login
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+            String login = pref.getString("LOGIN", "");
+
             AccountManagement changeUserPw = new AccountManagement();
-            String result = changeUserPw.changePassword(etCurrentPassword.getText().toString(), etNewPassword.getText().toString(), etReenterPassword.getText().toString());
+            String result = changeUserPw.changePassword(login, etCurrentPassword.getText().toString(), etNewPassword.getText().toString(), etReenterPassword.getText().toString());
 
             return result;
         }
