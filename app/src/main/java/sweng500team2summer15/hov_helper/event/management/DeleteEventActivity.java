@@ -3,6 +3,7 @@ package sweng500team2summer15.hov_helper.event.management;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -149,7 +150,7 @@ public class DeleteEventActivity extends ActionBarActivity {
                 return true;
             case R.id.action_sign_out:
                 // delete credentials file
-                SharedPreferences pref = this.getSharedPreferences("hovhelper",0);
+                SharedPreferences pref = this.getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.clear();
                 editor.commit();

@@ -3,6 +3,7 @@ package sweng500team2summer15.hov_helper.Account;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
+import sweng500team2summer15.hov_helper.resource.Encryption;
 
 public class SignInActivity extends Activity {
 
@@ -106,14 +108,16 @@ public class SignInActivity extends Activity {
             // dismiss the dialog once done
             pDialog.dismiss();
 
-            if (result == null) {
-                // TODO - encrypt password
+            if (result.equals("Success")) {
+                // for encrypting password
+                Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+                String encryptPw = encryption.encryptOrNull(etPassword.getText().toString());
 
                 // write credentials to file
-                SharedPreferences pref = getSharedPreferences("hovhelper", 0);
+                SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = pref.edit();
                 editor.putString("LOGIN", etLogin.getText().toString());
-                // TODO - add encrypted password
+                editor.putString("PASSWORD", encryptPw);
                 editor.commit();
 
                 Intent i = new Intent(getApplicationContext(), MainEventActivity.class);

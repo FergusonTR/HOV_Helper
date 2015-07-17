@@ -46,9 +46,6 @@ public class AccountManagement {
         // JSON Node names
         String TAG_SUCCESS = "success";
         String TAG_MESSAGE = "message";
-        String TAG_USER = "user";
-        String TAG_LOGIN = "login";
-        String TAG_PASSWORD = "password";
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -63,24 +60,10 @@ public class AccountManagement {
         // getting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_sign_in,"GET", params);
 
-        // check for success tag
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                // successfully signed in
-                JSONArray userArray = json.getJSONArray(TAG_USER); // JSON Array
-
-                // get user object from JSON Array
-                JSONObject userObj = userArray.getJSONObject(0);
-
-                //load the results of the JSON Array into the current object
-                this.login = (userObj.getString(TAG_LOGIN));
-                this.password = (userObj.getString(TAG_PASSWORD));
-            } else {
-                // failed to sign in
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -94,7 +77,7 @@ public class AccountManagement {
         //ToDo develop a way of performing the create over an SSL.
 
         if (password.length() < 6) {
-            return "Please enter a password with more than 6 characters";
+            return "Error: Please enter a password with more than 6 characters";
         }
 
         // url to sign up
@@ -122,18 +105,10 @@ public class AccountManagement {
         // posting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_sign_up, "POST", params);
 
-        // check for success tag
-        int tmp = 0;
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-            tmp = success;
-
-            if (success == 1) {
-                // successfully created account
-            } else {
-                // failed to create account
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -163,16 +138,10 @@ public class AccountManagement {
         // posting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
 
-        // check for success tag
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                // successfully verified account
-            } else {
-                // failed to create account
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -209,16 +178,10 @@ public class AccountManagement {
         // posting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
 
-        // check for success tag
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                // successfully verified account
-            } else {
-                // failed to create account
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -249,16 +212,10 @@ public class AccountManagement {
         // posting JSON Object
         JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
 
-        // check for success tag
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                // successfully verified account
-            } else {
-                // failed to create account
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -285,16 +242,11 @@ public class AccountManagement {
         JSONObject json = jsonParser.makeHttpRequest(url_getpassword, "GET", oldParams);
         int oldPasswordCheck = 0;
 
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-            oldPasswordCheck = success;
-
-            if (success == 1) {
-                // successfully verified account
-            } else {
-                // failed to create account
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            oldPasswordCheck = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -306,17 +258,17 @@ public class AccountManagement {
 
         // is new password and reentered password different?
         if (!newPassword.equals(reenterPassword)) {
-            return "New passwords do not match";
+            return "Error: New passwords do not match";
         }
 
         // does new password have characters?
         if (newPassword.length() < 6) {
-            return "Please enter a password with more than 6 characters";
+            return "Error: Please enter a password with more than 6 characters";
         }
 
         // is new password the same as the old password?
         if (currentPassword.equals(newPassword)) {
-            return "The new password cannot be the same as the current password";
+            return "Error: The new password cannot be the same as the current password";
         }
 
         //ToDo remove deprecated approach and use URLBuilder instead
@@ -333,16 +285,10 @@ public class AccountManagement {
         // posting JSON Object
         json = jsonParser.makeHttpRequest(url_changepassword, "POST", params);
 
-        // check for success tag
+        // get value from message tag
         try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                // successfully verified account
-            } else {
-                // failed to create account
-                message = json.getString(TAG_MESSAGE);
-            }
+            //int success = json.getInt(TAG_SUCCESS);
+            message = json.getString(TAG_MESSAGE);
         } catch (JSONException e) {
             e.printStackTrace();
         }

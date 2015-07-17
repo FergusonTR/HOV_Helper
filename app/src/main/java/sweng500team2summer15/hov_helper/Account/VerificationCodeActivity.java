@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import sweng500team2summer15.hov_helper.R;
 
@@ -72,9 +73,14 @@ public class VerificationCodeActivity extends ActionBarActivity {
             // dismiss the dialog once done
             pDialog.dismiss();
 
-            if (result == null) {
-                Intent i = new Intent(getApplicationContext(), SignInActivity.class);
-                startActivity(i);
+            if (result.equals("Success")) {
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Account Verified", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    Intent i = new Intent(getApplicationContext(), SignInActivity.class);
+                    startActivity(i);
+                }
             }
             else {
                 {
