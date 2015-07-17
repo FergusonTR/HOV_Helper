@@ -12,8 +12,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.resource.Encryption;
 
 public class ChangePasswordActivity extends ActionBarActivity {
 
@@ -68,6 +70,11 @@ public class ChangePasswordActivity extends ActionBarActivity {
             SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
             String login = pref.getString("LOGIN", "");
 
+            // test to decrypt password
+            String password = pref.getString("PASSWORD", "");
+            Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+            String decryptPw = decryption.decryptOrNull(password);
+
             AccountManagement changeUserPw = new AccountManagement();
             String result = changeUserPw.changePassword(login, etCurrentPassword.getText().toString(), etNewPassword.getText().toString(), etReenterPassword.getText().toString());
 
@@ -80,18 +87,21 @@ public class ChangePasswordActivity extends ActionBarActivity {
             // dismiss the dialog once done
             pDialog.dismiss();
 
-            if (result == null) {
-                {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(ChangePasswordActivity.this);
-                    builder.setMessage("Password changed successfully")
-                            .setCancelable(false)
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                }
-                            });
-                    AlertDialog alert = builder.create();
-                    alert.show();
-                }
+            if (result.equals("Success")) {
+                Toast toast = Toast.makeText(getApplicationContext(), "Password Changed Successfully", Toast.LENGTH_SHORT);
+                toast.show();
+
+                // for encrypting password
+                Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+                String encryptPw = encryption.encryptOrNull(etNewPassword.getText().toString());
+
+                // write new credentials to file
+                SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("PASSWORD", encryptPw);
+                editor.commit();
+
+                finish();
             }
             else {
                 {

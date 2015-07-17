@@ -10,6 +10,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import sweng500team2summer15.hov_helper.R;
 
@@ -69,9 +70,14 @@ public class ResendVerificationCodeActivity extends ActionBarActivity {
             // dismiss the dialog once done
             pDialog.dismiss();
 
-            if (result == null) {
-                Intent i = new Intent(getApplicationContext(), VerificationCodeActivity.class);
-                startActivity(i);
+            if (result.equals("Success")) {
+                {
+                    Toast toast = Toast.makeText(getApplicationContext(), "Verification Code Resent", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                    Intent i = new Intent(getApplicationContext(), VerificationCodeActivity.class);
+                    startActivity(i);
+                }
             }
             else {
                 {

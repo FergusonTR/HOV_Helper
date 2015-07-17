@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:layout_marginBottom="12dp"
-        android:text="Your verification code has been sent to you via email/phone number. Please enter your verification code below to verify your account. "/>
+        android:text="Your verification code has been sent to your email. Please enter your verification code below to verify your account. "/>
 
     <TextView
         android:layout_width="wrap_content"
