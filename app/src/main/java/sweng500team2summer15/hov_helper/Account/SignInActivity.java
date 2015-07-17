@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -12,7 +13,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
@@ -107,7 +107,16 @@ public class SignInActivity extends Activity {
             pDialog.dismiss();
 
             if (result == null) {
-                Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
+                // TODO - encrypt password
+
+                // write credentials to file
+                SharedPreferences pref = getSharedPreferences("hovhelper", 0);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("LOGIN", etLogin.getText().toString());
+                // TODO - add encrypted password
+                editor.commit();
+
+                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(i);
             }
             else {

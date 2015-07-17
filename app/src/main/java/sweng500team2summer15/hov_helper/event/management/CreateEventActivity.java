@@ -4,6 +4,7 @@ package sweng500team2summer15.hov_helper.event.management;
         import android.app.ProgressDialog;
 
         import android.content.Intent;
+        import android.content.SharedPreferences;
         import android.os.AsyncTask;
         import android.os.Bundle;
         import android.support.v7.app.ActionBarActivity;
@@ -141,7 +142,12 @@ public class CreateEventActivity extends ActionBarActivity {
                 startActivity(changePassword);
                 return true;
             case R.id.action_sign_out:
-                // TODO - sign out, no longer persist login/password
+                // delete credentials file
+                SharedPreferences pref = this.getSharedPreferences("hovhelper",0);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
                 Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(signOut);
                 return true;

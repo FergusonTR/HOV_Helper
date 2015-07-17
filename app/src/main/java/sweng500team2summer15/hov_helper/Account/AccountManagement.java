@@ -266,8 +266,7 @@ public class AccountManagement {
         return message;
     }
 
-    // TODO - bring in the persisted user
-    public String changePassword(String currentPassword, String newPassword, String reenterPassword)
+    public String changePassword(String login, String currentPassword, String newPassword, String reenterPassword)
     {
         // url to verify account
         String url_getpassword = "http://www.hovhelper.com/get_old_password.php";
@@ -279,7 +278,7 @@ public class AccountManagement {
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> oldParams = new ArrayList<NameValuePair>();
-        //oldParams.add(new BasicNameValuePair("login", login));
+        oldParams.add(new BasicNameValuePair("login", login));
         oldParams.add(new BasicNameValuePair("password", currentPassword));
 
         // posting JSON Object
@@ -322,7 +321,7 @@ public class AccountManagement {
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        //params.add(new BasicNameValuePair("login", login));
+        params.add(new BasicNameValuePair("login", login));
         params.add(new BasicNameValuePair("password", newPassword));
 
         //Uri.Builder builder = Uri.parse(url_sign_up)
