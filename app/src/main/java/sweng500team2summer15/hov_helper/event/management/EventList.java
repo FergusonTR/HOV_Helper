@@ -20,4 +20,16 @@ public class EventList {
         return 0;
 
     }
+
+    public String searchByDistance(String eventType, double startLatitude, double startLongitude,double endLatitude, double endLongitude, double startDistance, double endDistance){
+        String status = "";
+
+
+
+
+
+
+
+        return status;
+    }
 }
