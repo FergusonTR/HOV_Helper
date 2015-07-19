@@ -2,8 +2,10 @@ package sweng500team2summer15.hov_helper.Account;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,14 +21,14 @@ public class ResetPasswordActivity extends ActionBarActivity {
     private ProgressDialog pDialog;
 
     Button bReset;
-    EditText etEmail;
+    EditText etLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resetpassword);
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
+        etLogin = (EditText) findViewById(R.id.etLogin);
         bReset = (Button) findViewById(R.id.bReset);
 
         // sign up button click event
@@ -56,11 +58,11 @@ public class ResetPasswordActivity extends ActionBarActivity {
         // verify a new user
         protected String doInBackground(String... args) {
 
-            etEmail = (EditText) findViewById(R.id.etEmail);
+            etLogin = (EditText) findViewById(R.id.etLogin);
             bReset = (Button) findViewById(R.id.bReset);
 
             AccountManagement resetUserPw = new AccountManagement();
-            String result = resetUserPw.resetPassword(etEmail.getText().toString());
+            String result = resetUserPw.resetPassword(etLogin.getText().toString());
 
             return result;
         }
@@ -72,6 +74,12 @@ public class ResetPasswordActivity extends ActionBarActivity {
 
             if (result.equals("Success")) {
                 {
+                    // write credentials to file
+                    SharedPreferences pref = getSharedPreferences("prehovhelper", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("LOGIN", etLogin.getText().toString());
+                    editor.commit();
+
                     Toast toast = Toast.makeText(getApplicationContext(), "Password Reset Successfully", Toast.LENGTH_SHORT);
                     toast.show();
 

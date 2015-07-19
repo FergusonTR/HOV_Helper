@@ -2,8 +2,10 @@ package sweng500team2summer15.hov_helper.Account;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -19,14 +21,14 @@ public class ResendVerificationCodeActivity extends ActionBarActivity {
     private ProgressDialog pDialog;
 
     Button bResend;
-    EditText etEmail;
+    EditText etLogin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resendverificationcode);
 
-        etEmail = (EditText) findViewById(R.id.etEmail);
+        etLogin = (EditText) findViewById(R.id.etLogin);
         bResend = (Button) findViewById(R.id.bResend);
 
         // sign up button click event
@@ -56,11 +58,11 @@ public class ResendVerificationCodeActivity extends ActionBarActivity {
         // verify a new user
         protected String doInBackground(String... args) {
 
-            etEmail = (EditText) findViewById(R.id.etEmail);
+            etLogin = (EditText) findViewById(R.id.etLogin);
             bResend = (Button) findViewById(R.id.bResend);
 
             AccountManagement resendUserVCode = new AccountManagement();
-            String result = resendUserVCode.resendVerificationCode(etEmail.getText().toString());
+            String result = resendUserVCode.resendVerificationCode(etLogin.getText().toString());
 
             return result;
         }
@@ -72,6 +74,12 @@ public class ResendVerificationCodeActivity extends ActionBarActivity {
 
             if (result.equals("Success")) {
                 {
+                    // write credentials to file
+                    SharedPreferences pref = getSharedPreferences("prehovhelper", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("LOGIN", etLogin.getText().toString());
+                    editor.commit();
+
                     Toast toast = Toast.makeText(getApplicationContext(), "Verification Code Resent", Toast.LENGTH_SHORT);
                     toast.show();
 
