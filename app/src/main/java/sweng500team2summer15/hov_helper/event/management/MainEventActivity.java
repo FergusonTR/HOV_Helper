@@ -14,7 +14,7 @@ import android.widget.Button;
 
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
-import sweng500team2summer15.hov_helper.MapsActivity;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
 
 //ToDo change the deprecated ActionBarActivity to something accepted.

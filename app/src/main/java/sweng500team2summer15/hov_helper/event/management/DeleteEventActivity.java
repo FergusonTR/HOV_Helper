@@ -21,6 +21,7 @@ import android.util.Log;
 import sweng500team2summer15.hov_helper.*;
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 
 
 public class DeleteEventActivity extends ActionBarActivity {
