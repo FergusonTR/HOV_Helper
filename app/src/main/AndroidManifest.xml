@@ -44,7 +44,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".map.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
@@ -62,12 +62,10 @@
             android:name=".event.management.DeleteEventActivity"
             android:label="@string/title_activity_delete_event" >
         </activity>
-
         <activity
             android:name=".event.management.MainEventActivity"
             android:label="MainEventActivity" >
         </activity>
-
         <activity
             android:name=".Account.SignUpActivity"
             android:label="Sign Up" >
@@ -81,8 +79,16 @@
             android:label="Verify Account" >
         </activity>
         <activity
-            android:name=".SearchResultActivity"
+            android:name=".eventdisplay.SearchResultActivity"
             android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+            android:name=".eventdisplay.SearchResultsActivity"
+            android:label="@string/title_activity_search_results" >
+        </activity>
+        <activity
+            android:name=".eventdisplay.EventDetailsActivity"
+            android:label="@string/title_activity_event_details" >
         </activity>
     </application>
 

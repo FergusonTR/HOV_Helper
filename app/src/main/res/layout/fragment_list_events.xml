@@ -5,7 +5,7 @@
     android:paddingRight="16dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    tools:context="sweng500team2summer15.hov_helper.ListEventsFragment">
+    tools:context="sweng500team2summer15.hov_helper.eventdisplay.ListEventsFragment">
 
     <!--TextView android:text="Event Search Results"
         android:layout_width="wrap_content"

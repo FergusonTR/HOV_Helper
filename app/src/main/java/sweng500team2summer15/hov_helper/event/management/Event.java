@@ -1,5 +1,6 @@
 package sweng500team2summer15.hov_helper.event.management;
 
+        import java.io.Serializable;
         import java.util.ArrayList;
         import java.util.List;
 
@@ -21,7 +22,7 @@ package sweng500team2summer15.hov_helper.event.management;
 /**
  * Created by Terry on 6/4/2015.
  */
-public class Event {
+public class Event implements Serializable{
     //Portions code was borrowed from http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
 
     final JSONParser jsonParser = new JSONParser();

@@ -24,7 +24,6 @@ import java.util.Map;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import sweng500team2summer15.hov_helper.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
 
 /**

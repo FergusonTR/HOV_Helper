@@ -10,7 +10,6 @@ import com.google.android.gms.maps.model.LatLng;
 import java.util.ArrayList;
 
 import sweng500team2summer15.hov_helper.R;
-import sweng500team2summer15.hov_helper.SearchResultsTabAdapter;
 import sweng500team2summer15.hov_helper.event.management.Event;
 import sweng500team2summer15.hov_helper.map.MapController;
 
@@ -29,7 +28,7 @@ public class SearchResultsActivity extends ActionBarActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
 
-        LatLng found = MapController.getGeoCoordinateFromAddress(this, "20425 sw imperial pl. aloha, OR 97006");
+        LatLng found = MapController.getGeoCoordinateFromAddress(this, "181 sweet farm road portsmouth, ri 02871");
         System.out.println("FOUND LAT LON: " + found.latitude + ", " + found.longitude);
 
 
