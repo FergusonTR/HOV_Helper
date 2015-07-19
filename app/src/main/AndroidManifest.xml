@@ -24,7 +24,7 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
+        android:label="HOV Helper"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".Start"
@@ -75,6 +75,10 @@
         <activity
             android:name=".Account.SignInActivity"
             android:label="Sign In" >
+        </activity>
+        <activity
+            android:name=".Account.VerificationCodeActivity"
+            android:label="Verify Account" >
         </activity>
         <activity
             android:name=".SearchResultActivity"

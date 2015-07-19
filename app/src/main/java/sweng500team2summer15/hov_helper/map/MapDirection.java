@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.map;
 
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
@@ -23,6 +23,9 @@ import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+
+import sweng500team2summer15.hov_helper.MapsActivity;
+import sweng500team2summer15.hov_helper.R;
 
 /**
  * Created by Steve on 6/10/2015.

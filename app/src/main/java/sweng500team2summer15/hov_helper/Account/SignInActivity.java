@@ -14,12 +14,11 @@ import android.widget.TextView;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
-import sweng500team2summer15.hov_helper.event.management.*;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 
 public class SignInActivity extends Activity {
 
     private ProgressDialog pDialog;
-    private int _success = 0;
 
     Button bSignIn;
     EditText etLogin, etPassword;
@@ -96,37 +95,33 @@ public class SignInActivity extends Activity {
             AccountManagement user = new AccountManagement();
             user.login = etLogin.getText().toString();
             user.password = etPassword.getText().toString();
-            _success = user.signIn(user.login, user.password);
+            String result = user.signIn(user.login, user.password);
 
-            return null;
+            return result;
         }
 
         // After completing background task Dismiss the progress dialog
-        protected void onPostExecute(String file_url) {
+        protected void onPostExecute(String result) {
             // dismiss the dialog once done
             pDialog.dismiss();
 
-            // TODO - placeholder code
-            if (_success == 1) {
-                Intent i = new Intent(getApplicationContext(),MainEventActivity.class);
+            if (result == null) {
+                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(i);
             }
             else {
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
-                    builder.setMessage("Sign in Failed")
+                    builder.setMessage(result)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent i = new Intent(getApplicationContext(), SignInActivity.class);
-                                    startActivity(i);
                                 }
                             });
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
             }
-            _success = 0;
         }
     }
 }

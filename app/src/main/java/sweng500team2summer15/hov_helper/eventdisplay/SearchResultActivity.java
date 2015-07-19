@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.eventdisplay;
 
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
+import sweng500team2summer15.hov_helper.eventdisplay.EventArrayAdapter;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 
 public class SearchResultActivity extends ActionBarActivity {
 
@@ -40,6 +42,7 @@ public class SearchResultActivity extends ActionBarActivity {
         listView.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
         // Attach the adapter to a listview
         listView.setAdapter(adapter);
+
 
 
 

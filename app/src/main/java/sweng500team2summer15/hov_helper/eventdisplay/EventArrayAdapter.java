@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.eventdisplay;
 
 import android.content.Context;
 import android.location.Address;
@@ -10,7 +10,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
+import sweng500team2summer15.hov_helper.map.MapController;
 
 /**
  * Created by Steve on 7/5/2015.
