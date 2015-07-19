@@ -3,8 +3,10 @@ package sweng500team2summer15.hov_helper.Account;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -14,12 +16,12 @@ import android.widget.TextView;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
-import sweng500team2summer15.hov_helper.event.management.*;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
+import sweng500team2summer15.hov_helper.resource.Encryption;
 
 public class SignInActivity extends Activity {
 
     private ProgressDialog pDialog;
-    private int _success = 0;
 
     Button bSignIn;
     EditText etLogin, etPassword;
@@ -63,7 +65,7 @@ public class SignInActivity extends Activity {
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.tvForgot:
-                        startActivity(new Intent(SignInActivity.this, Start.class));
+                        startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
                         break;
                 }
             }
@@ -96,37 +98,44 @@ public class SignInActivity extends Activity {
             AccountManagement user = new AccountManagement();
             user.login = etLogin.getText().toString();
             user.password = etPassword.getText().toString();
-            _success = user.signIn(user.login, user.password);
+            String result = user.signIn(user.login, user.password);
 
-            return null;
+            return result;
         }
 
         // After completing background task Dismiss the progress dialog
-        protected void onPostExecute(String file_url) {
+        protected void onPostExecute(String result) {
             // dismiss the dialog once done
             pDialog.dismiss();
 
-            // TODO - placeholder code
-            if (_success == 1) {
-                Intent i = new Intent(getApplicationContext(),MainEventActivity.class);
+            if (result.equals("Success")) {
+                // for encrypting password
+                Encryption encryption = Encryption.getDefault("Key", "Salt", new byte[16]);
+                String encryptPw = encryption.encryptOrNull(etPassword.getText().toString());
+
+                // write credentials to file
+                SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.putString("LOGIN", etLogin.getText().toString());
+                editor.putString("PASSWORD", encryptPw);
+                editor.commit();
+
+                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(i);
             }
             else {
                 {
                     AlertDialog.Builder builder = new AlertDialog.Builder(SignInActivity.this);
-                    builder.setMessage("Sign in Failed")
+                    builder.setMessage(result)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
-                                    Intent i = new Intent(getApplicationContext(), SignInActivity.class);
-                                    startActivity(i);
                                 }
                             });
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
             }
-            _success = 0;
         }
     }
 }

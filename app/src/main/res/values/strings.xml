@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">HOV_Helper</string>
+    <string name="app_name">HOV Helper</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
@@ -12,16 +12,12 @@
     <string name="title_activity_event_details">EventDetailsActivity</string>
     <string name="title_activity_temp_display">TempDisplayActivity</string>
     <string name="title_activity_delete_event">deleteEventActivity</string>
-    <string name="title_activity_sign_up">SignUpActivity</string>
     <string name="title_activity_main_event">MainEventActivity</string>
-    <string name="title_activity_verification_code">VerificationCodeActivity</string>
-    <string name="title_activity_search_results">SearchResultsActivity</string>
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-    <string name="title_activity_search_result">SearchResultActivity</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="title_activity_sign_in">Sign In</string>
+    <string name="title_activity_reset_password">Reset Password</string>
+    <string name="title_activity_resend_verification_code">Resend Verification Code</string>
+    <string name="title_activity_verification_code">Verify Account</string>
+    <string name="title_activity_change_password">Change Password</string>
 </resources>

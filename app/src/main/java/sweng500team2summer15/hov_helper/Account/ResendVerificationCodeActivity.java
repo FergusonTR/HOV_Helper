@@ -5,52 +5,49 @@ import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v7.app.ActionBarActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import sweng500team2summer15.hov_helper.R;
 
-public class VerificationCodeActivity extends ActionBarActivity {
+public class ResendVerificationCodeActivity extends ActionBarActivity {
 
     private ProgressDialog pDialog;
 
-    Button bVerify;
-    EditText etVerificationCode;
+    Button bResend;
+    EditText etEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_verificationcode);
+        setContentView(R.layout.activity_resendverificationcode);
 
-        etVerificationCode = (EditText) findViewById(R.id.etVerificationCode);
-        bVerify = (Button) findViewById(R.id.bVerify);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        bResend = (Button) findViewById(R.id.bResend);
 
         // sign up button click event
-        bVerify.setOnClickListener(new View.OnClickListener() {
+        bResend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // sign up a new user in background thread
-                new VerifyUser().execute();
+                new ResendVerificationCode().execute();
             }
         });
     }
 
     // Background Async Task to sign up a new user
-    class VerifyUser extends AsyncTask<String, String, String> {
+    class ResendVerificationCode extends AsyncTask<String, String, String> {
 
         // Before starting background thread Show Progress Dialog
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            pDialog = new ProgressDialog(VerificationCodeActivity.this);
-            pDialog.setMessage("Verifying...");
+            pDialog = new ProgressDialog(ResendVerificationCodeActivity.this);
+            pDialog.setMessage("Resending Verification Code...");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
@@ -59,11 +56,11 @@ public class VerificationCodeActivity extends ActionBarActivity {
         // verify a new user
         protected String doInBackground(String... args) {
 
-            etVerificationCode = (EditText) findViewById(R.id.etVerificationCode);
-            bVerify = (Button) findViewById(R.id.bVerify);
+            etEmail = (EditText) findViewById(R.id.etEmail);
+            bResend = (Button) findViewById(R.id.bResend);
 
-            AccountManagement verifyUser = new AccountManagement();
-            String result = verifyUser.verifyAccount(etVerificationCode.getText().toString());
+            AccountManagement resendUserVCode = new AccountManagement();
+            String result = resendUserVCode.resendVerificationCode(etEmail.getText().toString());
 
             return result;
         }
@@ -75,16 +72,16 @@ public class VerificationCodeActivity extends ActionBarActivity {
 
             if (result.equals("Success")) {
                 {
-                    Toast toast = Toast.makeText(getApplicationContext(), "Account Verified", Toast.LENGTH_SHORT);
+                    Toast toast = Toast.makeText(getApplicationContext(), "Verification Code Resent", Toast.LENGTH_SHORT);
                     toast.show();
 
-                    Intent i = new Intent(getApplicationContext(), SignInActivity.class);
+                    Intent i = new Intent(getApplicationContext(), VerificationCodeActivity.class);
                     startActivity(i);
                 }
             }
             else {
                 {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(VerificationCodeActivity.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ResendVerificationCodeActivity.this);
                     builder.setMessage(result)
                             .setCancelable(false)
                             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
