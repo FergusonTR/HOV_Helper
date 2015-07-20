@@ -25,7 +25,7 @@ public class SignInActivity extends Activity {
 
     Button bSignIn;
     EditText etLogin, etPassword;
-    TextView tvCancel, tvForgot;
+    TextView tvCancel, tvForgot, tvResendVerificationCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,7 @@ public class SignInActivity extends Activity {
         bSignIn = (Button) findViewById(R.id.bSignIn);
         tvCancel = (TextView) findViewById(R.id.tvCancel);
         tvForgot = (TextView) findViewById(R.id.tvForgot);
+        tvResendVerificationCode = (TextView) findViewById(R.id.tvResendVerificationCode);
 
         // sign up button click event
         bSignIn.setOnClickListener(new View.OnClickListener() {
@@ -66,6 +67,17 @@ public class SignInActivity extends Activity {
                 switch (v.getId()) {
                     case R.id.tvForgot:
                         startActivity(new Intent(SignInActivity.this, ResetPasswordActivity.class));
+                        break;
+                }
+            }
+        });
+
+        tvResendVerificationCode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                switch(v.getId()) {
+                    case R.id.tvResendVerificationCode:
+                        startActivity(new Intent(SignInActivity.this, ResendVerificationCodeActivity.class));
                         break;
                 }
             }

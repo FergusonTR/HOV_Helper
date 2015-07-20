@@ -45,7 +45,7 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
+            android:name=".map.MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
@@ -90,6 +90,18 @@
         <activity
             android:name=".Account.ChangePasswordActivity"
             android:label="@string/title_activity_change_password" >
+        </activity>
+        <activity
+            android:name=".eventdisplay.SearchResultActivity"
+            android:label="@string/title_activity_search_result" >
+        </activity>
+        <activity
+            android:name=".eventdisplay.SearchResultsActivity"
+            android:label="@string/title_activity_search_results" >
+        </activity>
+        <activity
+            android:name=".eventdisplay.EventDetailsActivity"
+            android:label="@string/title_activity_event_details" >
         </activity>
     </application>
 

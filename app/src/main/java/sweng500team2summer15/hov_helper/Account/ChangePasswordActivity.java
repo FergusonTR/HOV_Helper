@@ -70,11 +70,6 @@ public class ChangePasswordActivity extends ActionBarActivity {
             SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
             String login = pref.getString("LOGIN", "");
 
-            // test to decrypt password
-            String password = pref.getString("PASSWORD", "");
-            Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);
-            String decryptPw = decryption.decryptOrNull(password);
-
             AccountManagement changeUserPw = new AccountManagement();
             String result = changeUserPw.changePassword(login, etCurrentPassword.getText().toString(), etNewPassword.getText().toString(), etReenterPassword.getText().toString());
 

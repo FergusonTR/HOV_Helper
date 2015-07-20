@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -23,7 +25,7 @@ public class SignUpActivity extends Activity {
 
     Button bSignUp;
     EditText etLogin, etPassword;
-    TextView tvCancel, tvResendVerificationCode;
+    TextView tvCancel;
 
     @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +36,6 @@ public class SignUpActivity extends Activity {
             etPassword = (EditText) findViewById(R.id.etPassword);
             bSignUp = (Button) findViewById(R.id.bSignUp);
             tvCancel = (TextView) findViewById(R.id.tvCancel);
-            tvResendVerificationCode = (TextView) findViewById(R.id.tvResendVerificationCode);
 
             // sign up button click event
             bSignUp.setOnClickListener(new View.OnClickListener() {
@@ -52,17 +53,6 @@ public class SignUpActivity extends Activity {
                 switch(v.getId()) {
                     case R.id.tvCancel:
                         startActivity(new Intent(SignUpActivity.this, Start.class));
-                        break;
-                }
-            }
-        });
-
-        tvResendVerificationCode.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                switch(v.getId()) {
-                    case R.id.tvResendVerificationCode:
-                        startActivity(new Intent(SignUpActivity.this, ResendVerificationCodeActivity.class));
                         break;
                 }
             }
@@ -104,6 +94,12 @@ public class SignUpActivity extends Activity {
 
             if (result.equals("Success")) {
                 {
+                    // write credentials to file
+                    SharedPreferences pref = getSharedPreferences("prehovhelper", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.putString("LOGIN", etLogin.getText().toString());
+                    editor.commit();
+
                     Toast toast = Toast.makeText(getApplicationContext(), "Sign Up Successful", Toast.LENGTH_SHORT);
                     toast.show();
 

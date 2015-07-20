@@ -1,23 +1,21 @@
 package sweng500team2summer15.hov_helper;
 
-import android.content.Context;
 import android.location.Address;
 import android.location.Location;
-import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.suitebuilder.annotation.SmallTest;
 import android.util.Log;
 
 import com.google.android.gms.maps.model.LatLng;
 
-import junit.framework.TestCase;
-
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.net.Socket;
 import java.net.UnknownHostException;
+
+import sweng500team2summer15.hov_helper.map.MapController;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 
 /**
  * Created by Steve Lanehome on 6/7/2015.
@@ -50,6 +48,7 @@ public class MapControllerTest extends ActivityInstrumentationTestCase2<MapsActi
             myMapController = myMapsActivity.getMapController();
             // setup test location at Beaver Stadium Penn State
             sendLocation(40.8122837,-77.8561126);
+            Thread.sleep(500);
         }
 
         //activity.onCreate(new Bundle());
