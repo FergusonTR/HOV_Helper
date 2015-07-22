@@ -2,8 +2,10 @@ package sweng500team2summer15.hov_helper.Account;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -62,8 +64,12 @@ public class VerificationCodeActivity extends ActionBarActivity {
             etVerificationCode = (EditText) findViewById(R.id.etVerificationCode);
             bVerify = (Button) findViewById(R.id.bVerify);
 
+            // get current user's login
+            SharedPreferences pref = getSharedPreferences("prehovhelper", Context.MODE_PRIVATE);
+            String login = pref.getString("LOGIN", "");
+
             AccountManagement verifyUser = new AccountManagement();
-            String result = verifyUser.verifyAccount(etVerificationCode.getText().toString());
+            String result = verifyUser.verifyAccount(login, etVerificationCode.getText().toString());
 
             return result;
         }
@@ -75,6 +81,12 @@ public class VerificationCodeActivity extends ActionBarActivity {
 
             if (result.equals("Success")) {
                 {
+                    // delete credentials file
+                    SharedPreferences pref = getSharedPreferences("prehovhelper", Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = pref.edit();
+                    editor.clear();
+                    editor.commit();
+
                     Toast toast = Toast.makeText(getApplicationContext(), "Account Verified", Toast.LENGTH_SHORT);
                     toast.show();
 

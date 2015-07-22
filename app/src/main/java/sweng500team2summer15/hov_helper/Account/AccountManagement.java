@@ -58,7 +58,7 @@ public class AccountManagement {
         //        .appendQueryParameter("password", password)
 
         // getting JSON Object
-        JSONObject json = jsonParser.makeHttpRequest(url_sign_in,"GET", params);
+        JSONObject json = jsonParser.makeHttpRequest(url_sign_in, "GET", params);
 
         // get value from message tag
         try {
@@ -116,7 +116,7 @@ public class AccountManagement {
         return message;
     }
 
-    public String verifyAccount(String verificationCode)
+    public String verifyAccount(String login, String verificationCode)
     {
         // url to verify account
         String url_verify = "http://www.hovhelper.com/verify.php";
@@ -127,6 +127,7 @@ public class AccountManagement {
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("login", login));
         params.add(new BasicNameValuePair("verificationCode", verificationCode));
 
         //Uri.Builder builder = Uri.parse(url_sign_up)
@@ -149,10 +150,10 @@ public class AccountManagement {
         return message;
     }
 
-    public String resetPassword(String email)
+    public String resetPassword(String login)
     {
-        // url to verify account
-        String url_verify = "http://www.hovhelper.com/reset.php";
+        // url to reset password
+        String url_reset = "http://www.hovhelper.com/reset.php";
 
         // JSON Node names
         String TAG_SUCCESS = "success";
@@ -165,7 +166,7 @@ public class AccountManagement {
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("login", email));
+        params.add(new BasicNameValuePair("login", login));
         params.add(new BasicNameValuePair("password", password));
         params.add(new BasicNameValuePair("verificationCode", Integer.toString(verificationCode)));
 
@@ -176,7 +177,7 @@ public class AccountManagement {
         //        .appendQueryParameter("verificationCode", Integer.toString(verificationCode));
 
         // posting JSON Object
-        JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
+        JSONObject json = jsonParser.makeHttpRequest(url_reset, "POST", params);
 
         // get value from message tag
         try {
@@ -189,10 +190,10 @@ public class AccountManagement {
         return message;
     }
 
-    public String resendVerificationCode(String email)
+    public String resendVerificationCode(String login)
     {
-        // url to verify account
-        String url_verify = "http://www.hovhelper.com/resend.php";
+        // url to resend verification code
+        String url_resend = "http://www.hovhelper.com/resend.php";
 
         // JSON Node names
         String TAG_SUCCESS = "success";
@@ -201,7 +202,7 @@ public class AccountManagement {
 
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("login", email));
+        params.add(new BasicNameValuePair("login", login));
 
         //Uri.Builder builder = Uri.parse(url_sign_up)
         //        .buildUpon()
@@ -210,7 +211,7 @@ public class AccountManagement {
         //        .appendQueryParameter("verificationCode", Integer.toString(verificationCode));
 
         // posting JSON Object
-        JSONObject json = jsonParser.makeHttpRequest(url_verify, "POST", params);
+        JSONObject json = jsonParser.makeHttpRequest(url_resend, "GET", params);
 
         // get value from message tag
         try {
@@ -225,7 +226,7 @@ public class AccountManagement {
 
     public String changePassword(String login, String currentPassword, String newPassword, String reenterPassword)
     {
-        // url to verify account
+        // url to change password
         String url_getpassword = "http://www.hovhelper.com/get_old_password.php";
         String url_changepassword = "http://www.hovhelper.com/change_password.php";
 

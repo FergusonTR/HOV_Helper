@@ -20,6 +20,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
@@ -47,7 +48,7 @@ import android.util.Log;
 
 //Todo Revise deprecated code to use URLBuilder
 
-public class JSONParser {
+public class JSONParser implements Serializable{
 
     static InputStream is = null;
     static JSONObject jObj = null;

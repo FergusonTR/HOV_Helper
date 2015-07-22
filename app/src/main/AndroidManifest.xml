@@ -91,18 +91,6 @@
             android:name=".Account.ChangePasswordActivity"
             android:label="@string/title_activity_change_password" >
         </activity>
-        <activity
-            android:name=".Profile.CreateProfileActivity"
-            android:label="CreateProfileActivity">
-        </activity>
-        <activity
-            android:name=".Profile.ProfileManagement"
-            android:label="ProfileManagement">
-        </activity>
-        <activity
-            android:name=".Profile.ViewProfileActivity"
-            android:label="ViewProfileActivity">
-        </activity>
     </application>
 
 </manifest>

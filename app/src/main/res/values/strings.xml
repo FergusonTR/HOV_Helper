@@ -20,4 +20,7 @@
     <string name="title_activity_resend_verification_code">Resend Verification Code</string>
     <string name="title_activity_verification_code">Verify Account</string>
     <string name="title_activity_change_password">Change Password</string>
+
+    <string name="title_activity_search_result">SearchResultActivity</string>
+    <string name="title_activity_search_results">SearchResultsActivity</string>
 </resources>

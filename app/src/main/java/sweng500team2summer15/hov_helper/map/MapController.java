@@ -1,4 +1,4 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.map;
 
 import android.content.Context;
 import android.location.Address;
@@ -12,7 +12,6 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -63,7 +62,7 @@ public class MapController implements
         return currentLocation;
     }
 
-    public Address getStreetAddressFromLatLon(Context context, double latitude, double longitude)
+    public static Address getStreetAddressFromLatLon(Context context, double latitude, double longitude)
     {
         Address closestMatch = null;
         ArrayList<Address> addressArrayList = new ArrayList<Address>();

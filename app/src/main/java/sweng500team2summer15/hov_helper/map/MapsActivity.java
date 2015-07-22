@@ -1,21 +1,15 @@
-package sweng500team2summer15.hov_helper;
+package sweng500team2summer15.hov_helper.map;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationListener;
-import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
@@ -24,6 +18,8 @@ import com.google.android.gms.maps.model.PolylineOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import sweng500team2summer15.hov_helper.R;
 
 /**
  * Created by Steve on 6/6/2015.
@@ -47,7 +43,7 @@ public class MapsActivity extends FragmentActivity implements MapController.MapC
         double pickupLon = this.getIntent().getDoubleExtra("pickupLon", 0.0);
         double dropOffLat = this.getIntent().getDoubleExtra("dropOffLat", 0.0);
         double dropOffLon = this.getIntent().getDoubleExtra("dropOffLon", 0.0);
-        //displayRoute(pickupLat, pickupLon, dropOffLat, dropOffLon);
+        displayRoute(pickupLat, pickupLon, dropOffLat, dropOffLon);
     }
 
     @Override
@@ -117,6 +113,8 @@ public class MapsActivity extends FragmentActivity implements MapController.MapC
         MarkerOptions options = new MarkerOptions()
                 .position(new LatLng(startLat, startLon))
                 .title("START LOCATION");
+        options.icon(BitmapDescriptorFactory
+                .defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
         mMap.addMarker(options);
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(startLat, startLon), 15));
 
