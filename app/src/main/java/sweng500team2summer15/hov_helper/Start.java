@@ -12,10 +12,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.Scopes;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.common.api.Scope;
 import com.google.android.gms.plus.Plus;
@@ -31,6 +33,7 @@ public class Start extends Activity implements
         View.OnClickListener {
 
     Button bSignIn, bSignUp;
+    SignInButton signInButton;
 
     /* Request code used to invoke sign in user interactions. */
     private static final int RC_SIGN_IN = 0;
@@ -59,10 +62,13 @@ public class Start extends Activity implements
 
         bSignIn = (Button) findViewById(R.id.bSignIn);
         bSignUp = (Button) findViewById(R.id.bSignUp);
+        signInButton = (SignInButton) findViewById(R.id.sign_in_button);
 
-        findViewById(R.id.sign_in_button).setOnClickListener(this);
+        signInButton.setOnClickListener(this);
         bSignIn.setOnClickListener(this);
         bSignUp.setOnClickListener(this);
+
+        setGooglePlusButtonText(signInButton, "Sign In with Google");
     }
 
     @Override
@@ -169,5 +175,18 @@ public class Start extends Activity implements
     @Override
     public void onConnectionSuspended(int cause) {
         mGoogleApiClient.connect();
+    }
+
+    protected void setGooglePlusButtonText(SignInButton signInButton, String buttonText) {
+        // Find the TextView that is inside of the SignInButton and set its text
+        for (int i = 0; i < signInButton.getChildCount(); i++) {
+            View v = signInButton.getChildAt(i);
+
+            if (v instanceof TextView) {
+                TextView tv = (TextView) v;
+                tv.setText(buttonText);
+                return;
+            }
+        }
     }
 }

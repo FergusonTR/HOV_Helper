@@ -1,5 +1,6 @@
 package sweng500team2summer15.hov_helper.Account;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,7 +17,7 @@ import android.widget.Toast;
 
 import sweng500team2summer15.hov_helper.R;
 
-public class ResendVerificationCodeActivity extends ActionBarActivity {
+public class ResendVerificationCodeActivity extends Activity {
 
     private ProgressDialog pDialog;
 

@@ -9,38 +9,50 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/hov_helper"
-        android:layout_marginBottom="12dp" />
+        android:src="@drawable/hov_helper_main"
+        android:layout_margin="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email Address"/>
+        android:text="Email Address"
+        android:layout_marginLeft="10dp"/>
     
     <EditText
         android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Password"/>
+        android:text="Password"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/etPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:id="@+id/bSignIn"
         android:text="Sign In"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp" />
+        android:layout_margin="10dp"/>
 
     <TextView
         android:id="@+id/tvCancel"
@@ -49,7 +61,8 @@
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
         android:text="Cancel"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="2dp"/>
 
     <TextView
         android:id="@+id/tvForgot"
@@ -66,6 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:textStyle="bold"
-        android:text="Resend Verification Code" />
+        android:text="Resend Verification Code"
+        android:layout_marginBottom="12dp"/>
 
 </LinearLayout>
