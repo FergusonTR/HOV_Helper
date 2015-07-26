@@ -2,6 +2,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Start">
@@ -9,21 +10,39 @@
     <ImageView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/hov_helper"
-        android:layout_marginBottom="12dp" />
+        android:src="@drawable/hov_helper_main"
+        android:layout_margin="10dp" />
 
     <Button
         android:id="@+id/bSignIn"
         android:text="Sign In"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        android:layout_margin="10dp"/>
 
     <Button
         android:id="@+id/bSignUp"
         android:text="Sign Up"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        android:layout_margin="10dp"/>
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"/>
 
 </LinearLayout>

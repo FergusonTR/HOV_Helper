@@ -11,23 +11,33 @@
         android:layout_height="wrap_content"
         android:textSize="18dp"
         android:text="Please enter your email address to resend your verification code."
-        android:layout_marginBottom="12dp" />
+        android:layout_margin="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Email Address"/>
+        android:text="Email Address"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/etLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:id="@+id/bResend"
         android:text="Resend"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
 </LinearLayout>

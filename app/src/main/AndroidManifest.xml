@@ -21,9 +21,13 @@
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="18" />
 
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
+        android:logo="@drawable/hov_helper_logo"
         android:label="HOV Helper"
         android:theme="@style/AppTheme"
         android:screenOrientation="portrait" >
@@ -46,62 +50,104 @@
 
         <activity
             android:name=".map.MapsActivity"
-            android:label="@string/title_activity_maps" >
+            android:label="@string/title_activity_maps"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".event.management.CreateEventActivity"
-            android:label="@string/title_activity_create_event" >
+            android:label="@string/title_activity_create_event"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".event.management.ReadEventActivity"
-            android:label="@string/title_activity_read_event" >
+            android:label="@string/title_activity_read_event"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".event.management.MainEventActivity" />
         </activity>
         <activity
             android:name=".event.management.DeleteEventActivity"
-            android:label="@string/title_activity_delete_event" >
+            android:label="@string/title_activity_delete_event"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".event.management.MainEventActivity"
-            android:label="MainEventActivity" >
+            android:label="MainEventActivity"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Account.SignUpActivity"
-            android:label="@string/title_activity_sign_up" >
+            android:label="@string/title_activity_sign_up"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Account.SignInActivity"
-            android:label="@string/title_activity_sign_in" >
+            android:label="@string/title_activity_sign_in"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Account.VerificationCodeActivity"
-            android:label="@string/title_activity_verification_code" >
+            android:label="@string/title_activity_verification_code"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Account.ResetPasswordActivity"
-            android:label="@string/title_activity_reset_password" >
+            android:label="@string/title_activity_reset_password"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Account.ResendVerificationCodeActivity"
-            android:label="@string/title_activity_resend_verification_code" >
+            android:label="@string/title_activity_resend_verification_code"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".Account.ChangePasswordActivity"
-            android:label="@string/title_activity_change_password" >
+            android:label="@string/title_activity_change_password"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".eventdisplay.SearchResultActivity"
-            android:label="@string/title_activity_search_result" >
+            android:label="@string/title_activity_search_result"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".eventdisplay.SearchResultsActivity"
-            android:label="@string/title_activity_search_results" >
+            android:label="@string/title_activity_search_results"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".eventdisplay.EventDetailsActivity"
-            android:label="@string/title_activity_event_details" >
+            android:label="@string/title_activity_event_details"
+            android:icon="@drawable/hov_helper_logo"
+            android:configChanges="orientation"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

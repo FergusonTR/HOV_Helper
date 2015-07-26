@@ -28,11 +28,7 @@ public class SearchResultsActivity extends ActionBarActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_results);
 
-        LatLng found = MapController.getGeoCoordinateFromAddress(this, "181 sweet farm road portsmouth, ri 02871");
-        System.out.println("FOUND LAT LON: " + found.latitude + ", " + found.longitude);
-
-
-        // TODO: populate event list for testing only *****
+        // TODO: Remove below arraylist. populate event list for testing only *****
         ArrayList<Event> myList = new ArrayList<Event>();
         // populate with dummy data
         Event e1 = new Event();
@@ -50,8 +46,7 @@ public class SearchResultsActivity extends ActionBarActivity implements
         e2.endLongitude = -77.8561126;
         myList.add(e2);
 
-        getIntent().putExtra("eventList", myList);
-        // TODO: remove above *****
+        // TODO: remove, for testing only getIntent().putExtra("eventList", myList);
 
 
         // get arraylist of events passed in
