@@ -10,24 +10,34 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18dp"
-        android:layout_marginBottom="12dp"
-        android:text="Your verification code has been sent to your email. Please enter your verification code below to verify your account. "/>
+        android:text="Your verification code has been sent to your email. Please enter your verification code below to verify your account. "
+        android:layout_margin="10dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Verification Code"/>
+        android:text="Verification Code"
+        android:layout_marginLeft="10dp"/>
 
     <EditText
         android:id="@+id/etVerificationCode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"/>
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <Button
         android:id="@+id/bVerify"
         android:text="Verify"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"/>
 
 </LinearLayout>

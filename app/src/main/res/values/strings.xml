@@ -23,4 +23,7 @@
 
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
+
+    <color name="white">#FFFFFF</color>
+    <color name="green">#32733A</color>
 </resources>
