@@ -121,6 +121,22 @@
             android:configChanges="orientation"
             android:screenOrientation="portrait">
         </activity>
+        <activity
+            android:name=".Profile.ProfileManagement"
+            android:label="@string/title_activity_profile_management" >
+        </activity>
+        <activity
+            android:name=".Profile.UpdateProfileActivity"
+            android:label="@string/title_activity_profile_update" >
+        </activity>
+        <activity
+            android:name=".Profile.ViewProfileActivity"
+            android:label="@string/title_activity_profile_view" >
+        </activity>
+        <activity
+            android:name=".Profile.CreateProfileActivity"
+            android:label="@string/title_activity_profile_create" >
+        </activity>
     </application>
 
 </manifest>

@@ -1,9 +1,13 @@
 package sweng500team2summer15.hov_helper.Profile;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+import android.content.SharedPreferences;
 import android.util.Log;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,7 +22,7 @@ import sweng500team2summer15.hov_helper.JSONParser;
  */
 public class Profile{
 
-    public int LoginID = 0;
+    public String LoginID = "";
     public String UserFirstName = "";
     public String UserLastName = "";
     public int PhoneNumber = 0;
@@ -34,7 +38,7 @@ public class Profile{
 
     public Profile(){}
 
-    public Profile(int loginID, String firstName, String lastName, Sex sex, int phoneNumber, PreferredContactMethod preferredContactMethod,
+    public Profile(String loginID, String firstName, String lastName, Sex sex, int phoneNumber, PreferredContactMethod preferredContactMethod,
                    String email, EmergencyContactInfo emergencyContactInfo, SmokingPreference smokingPreference)
     {
         this.LoginID = loginID;
@@ -49,7 +53,7 @@ public class Profile{
     }
 
     // Submit a profile to the database
-    public Boolean SubmitProfile()
+    public Boolean SubmitProfile(String loginID)
     {
         //This code was borrowed from http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
         JSONParser jsonParser = new JSONParser();
@@ -61,19 +65,10 @@ public class Profile{
         // JSON Node names
         String TAG_SUCCESS = "success";
 
-        // TODO !!! these are hardcoded for now, but need to change this
-        Random rand = new Random();
-        int randomLoginId = rand.nextInt((99999 - 1) + 1) + 1;
-        String loginId = Integer.toString(randomLoginId);
-        String password = "password";
-
         // Building Parameters
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        //params.add(new BasicNameValuePair("LoginID", Integer.toString(this.LoginID)));
-        params.add(new BasicNameValuePair("loginId", loginId));
-        params.add(new BasicNameValuePair("password", password));
-
+        params.add(new BasicNameValuePair("loginID", loginID));
         params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
         params.add(new BasicNameValuePair("phoneNumber", Integer.toString(this.PhoneNumber)));
@@ -91,64 +86,125 @@ public class Profile{
         // check log cat for response
         Log.d("Create Response", json.toString());
 
+        Boolean success = false;
+
         // check for success tag
         try {
             int wasSuccess = json.getInt(TAG_SUCCESS);
 
             if (wasSuccess == 1) {
-                return true;
+                success = true;
             } else {
-                return false;
+                success = false;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return false;
+        return success;
     }
 
     // Retrieve the profile matching the supplied profile ID
-    private Profile GetProfile(int profileID) {
-
-        Profile returnedProfile;
+    public Profile GetProfile(String loginID) {
 
         //This code was borrowed from http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
         JSONParser jsonParser = new JSONParser();
 
         // url to create new product
-        //ToDo Change this to point to the Hovhelper website
-        String url_create_event = "http://192.168.1.6/create_event.php";
+        String url_read_profile = "http://www.hovhelper.com/read_profile.php";
 
         // JSON Node names
         String TAG_SUCCESS = "success";
+        String TAG_PROFILE = "profile";
+        String TAG_LOGIN = "loginID";
+        String TAG_FIRSTNAME = "userFirstName";
+        String TAG_LASTNAME = "userLastName";
+        String TAG_PHONE = "phoneNumber";
+        String TAG_EMAIL = "email";
+        String TAG_ECNUMBER = "emergencyContact_ContactNumber";
+        String TAG_ECNAME = "emergencyContact_ContactName";
+        String TAG_SEX = "sex";
+        String TAG_CONTACTMETHOD = "preferredContactMethod";
+        String TAG_SMOKING = "smokingPreference";
 
         // Building Parameters
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
-        params.add(new BasicNameValuePair("LoginID", Integer.toString(profileID)));
+        params.add(new BasicNameValuePair("loginID", loginID));
 
         // getting JSON Object
         // Note that create product url accepts POST method
-        JSONObject json = jsonParser.makeHttpRequest(url_create_event, "GET", params);
+        JSONObject json = jsonParser.makeHttpRequest(url_read_profile,"GET", params);
 
         // check log cat for response
         Log.d("Create Response", json.toString());
 
-        // check for success tag
         try {
-            int wasSuccess = json.getInt(TAG_SUCCESS);
+            int success = json.getInt(TAG_SUCCESS);
 
-            if (wasSuccess == 1) {
-                // TODO - set the values for the returned profile
+            if (success == 1) {
 
-                //return returnedProfile;
+                // successfully read event
+                JSONArray eventObj = json.getJSONArray(TAG_PROFILE); // JSON Array
+
+                // get event object from JSON Array
+                JSONObject profile = eventObj.getJSONObject(0);
+
+                this.LoginID = (profile.getString(TAG_LOGIN));
+                this.UserFirstName = (profile.getString(TAG_FIRSTNAME));
+                this.UserLastName = (profile.getString(TAG_LASTNAME));
+                String sex = (profile.getString(TAG_SEX));
+                switch (sex)
+                {
+                    case "MALE":
+                        this.UserSex = Sex.MALE;
+                        break;
+                    case "FEMALE":
+                        this.UserSex = Sex.FEMALE;
+                        break;
+                }
+
+                this.PhoneNumber = (profile.getInt(TAG_PHONE));
+                String contact = (profile.getString(TAG_CONTACTMETHOD));
+                switch (contact)
+                {
+                    case "CALL":
+                        this.UserPreferredContactMethod = PreferredContactMethod.CALL;
+                        break;
+                    case "TEXT":
+                        this.UserPreferredContactMethod = PreferredContactMethod.TEXT;
+                        break;
+                }
+
+                this.EmailAddress = ((profile.getString(TAG_EMAIL)));
+
+                String emergencyContactName = ((profile.getString(TAG_ECNAME)));
+                int emergencyContactNumber = ((profile.getInt(TAG_ECNUMBER)));
+                this.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
+
+                String smokingPreference = ((profile.getString(TAG_SMOKING)));
+
+                switch (smokingPreference){
+                    case "NONSMOKE" :
+                        this.UserSmokingPreference = SmokingPreference.NONSMOKE;
+                        break;
+                    case "SMOKE" :
+                        this.UserSmokingPreference = SmokingPreference.SMOKE;
+                        break;
+                    case "NOPREF" :
+                        this.UserSmokingPreference = SmokingPreference.NOPREF;
+                        break;
+                }
+
             } else {
-                return null;
+                // This will indicate the profile wasn't returned
+                this.LoginID = "";
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        return null;
+
+        return this;
     }
 }

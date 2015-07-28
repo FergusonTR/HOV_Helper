@@ -2,21 +2,31 @@ package sweng500team2summer15.hov_helper.Profile;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
+import sweng500team2summer15.hov_helper.Account.SignInActivity;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 
 /**
  * Created by Mike on 6/30/2015.
  */ // Event Listeners to move the page to the following pages
-public class CreateProfileActivity extends Activity {
+public class CreateProfileActivity extends ActionBarActivity {
 
     private ProgressDialog pDialog;
 
@@ -47,7 +57,6 @@ public class CreateProfileActivity extends Activity {
 
                 // creating a new event in background thread
                 new CreateNewProfile().execute();
-                // TODO - mike - navigate away from this page after creating a valid profile
             }
         });
 
@@ -85,6 +94,9 @@ public class CreateProfileActivity extends Activity {
          */
         protected String doInBackground(String... args)
         {
+            Intent thisIntent = getIntent();
+            String LoginID = thisIntent.getStringExtra("LoginID");
+
             inputFirstName = (EditText) findViewById(R.id.txtFirstName);
             inputLastName = (EditText) findViewById(R.id.txtLastName);
             inputPhoneNumber = (EditText) findViewById(R.id.txtPhone);
@@ -110,7 +122,7 @@ public class CreateProfileActivity extends Activity {
             newProfile.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
 
             // Handles submission of the Profile to the database
-            newProfile.SubmitProfile();
+            newProfile.SubmitProfile(LoginID);
 
             return null;
         }
@@ -123,10 +135,53 @@ public class CreateProfileActivity extends Activity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-            //ToDo Open a new screen showing the Profile Data with a button to update the profile
-            //   Intent i = new Intent(getApplicationContext(), MainActivity.class);
-            //   startActivity(i);
+               Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
+               startActivity(i);
 
+        }
+    }
+
+    // ACTION BAR ITEMS
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_profile:
+                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                startActivity(profile);
+                return true;
+            case R.id.action_event:
+                Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
+                startActivity(event);
+                return true;
+            case R.id.action_map:
+                Intent map = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(map);
+                return true;
+            case R.id.action_change_password:
+                Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                startActivity(changePassword);
+                return true;
+            case R.id.action_sign_out:
+                // delete credentials file
+                SharedPreferences pref = this.getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(signOut);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
