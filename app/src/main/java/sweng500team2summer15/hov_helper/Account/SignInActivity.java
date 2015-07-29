@@ -154,7 +154,7 @@ public class SignInActivity extends Activity {
     }
 
     /**
-     * Background Async Task to Create new event
+     * Background Async Task to read a profile
      * */
     class ReadProfile extends AsyncTask<String, String, String> {
 

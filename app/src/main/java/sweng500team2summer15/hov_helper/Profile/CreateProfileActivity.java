@@ -114,7 +114,21 @@ public class CreateProfileActivity extends ActionBarActivity {
             newProfile.EmailAddress = inputEmailAddress.getText().toString();
             newProfile.UserSex = inputSexMale.isChecked() ? Profile.Sex.MALE : Profile.Sex.FEMALE;
             newProfile.UserPreferredContactMethod = inputContactCall.isChecked() ? Profile.PreferredContactMethod.CALL : Profile.PreferredContactMethod.TEXT;
-            //TODO - determine how to pass in smoking preference
+
+            int selectedSmokingPref = inputSmokingPref.getCheckedRadioButtonId();
+            switch (selectedSmokingPref)
+            {
+                case R.id.rbtnSMOKE:
+                    newProfile.UserSmokingPreference = Profile.SmokingPreference.SMOKE;
+                    break;
+                case R.id.rbtnNONSMOKE:
+                    newProfile.UserSmokingPreference = Profile.SmokingPreference.NONSMOKE;
+                    break;
+                case R.id.rbtnNOPREF:
+                    newProfile.UserSmokingPreference = Profile.SmokingPreference.NOPREF;
+                    break;
+            }
+
             //TODO - error handling for phone numbers when they arent integers
 
             int emergencyContactNumber = Integer.parseInt(inputEmergencyPhone.getText().toString());

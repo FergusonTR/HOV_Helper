@@ -205,7 +205,17 @@ public class ViewProfileActivity extends ActionBarActivity {
 
     class UpdateProfile extends AsyncTask<String, String, String> {
 
-        String updatesuccess = "false";
+        private ProgressDialog pDialog;
+
+        EditText inputFirstName;
+        EditText inputLastName;
+        EditText inputPhoneNumber;
+        EditText inputEmailAddress;
+        RadioButton inputSexMale;
+        RadioButton inputContactCall;
+        RadioGroup inputSmokingPref;
+        EditText inputEmergencyName;
+        EditText inputEmergencyPhone;
 
         /**
          * Before starting background thread Show Progress Dialog
@@ -214,72 +224,74 @@ public class ViewProfileActivity extends ActionBarActivity {
         protected void onPreExecute() {
             super.onPreExecute();
             pDialog = new ProgressDialog(ViewProfileActivity.this);
-            pDialog.setMessage("Reading Profile..");
+            pDialog.setMessage("Updating Profile..");
             pDialog.setIndeterminate(false);
             pDialog.setCancelable(true);
             pDialog.show();
         }
 
         /**
-         * retrieving event
+         * Creating event
          */
-        protected String doInBackground(String... args) {
-
+        protected String doInBackground(String... args)
+        {
             Intent thisIntent = getIntent();
-            String loginID = thisIntent.getStringExtra("LoginID");
+            String LoginID = thisIntent.getStringExtra("LoginID");
+
+            inputFirstName = (EditText) findViewById(R.id.txtProfile_FirstName);
+            inputLastName = (EditText) findViewById(R.id.txtProfile_LastName);
+            inputPhoneNumber = (EditText) findViewById(R.id.txtProfile_Phone);
+            inputEmailAddress = (EditText) findViewById(R.id.txtProfile_Email);
+            inputEmergencyName = (EditText) findViewById(R.id.txtProfileUpdate_ContactName);
+            inputEmergencyPhone = (EditText) findViewById(R.id.txtProfileUpdate_ContactNumber);
+            inputSmokingPref = (RadioGroup)findViewById(R.id.txtProfileUpdate_Smoking);
+            inputSexMale = (RadioButton) findViewById(R.id.profileUpdate_male);
+            inputContactCall = (RadioButton) findViewById(R.id.rbtnUpdate_CALL);
 
             Profile newProfile = new Profile();
-            newProfile = newProfile.GetProfile(loginID);
+            newProfile.UserFirstName = inputFirstName.getText().toString();
+            newProfile.UserLastName = inputLastName.getText().toString();
+            newProfile.PhoneNumber = Integer.parseInt(inputPhoneNumber.getText().toString());
+            newProfile.EmailAddress = inputEmailAddress.getText().toString();
+            newProfile.UserSex = inputSexMale.isChecked() ? Profile.Sex.MALE : Profile.Sex.FEMALE;
+            newProfile.UserPreferredContactMethod = inputContactCall.isChecked() ? Profile.PreferredContactMethod.CALL : Profile.PreferredContactMethod.TEXT;
 
-            if (newProfile.LoginID != "") {
-
-                String ecName = newProfile.EmergencyContactInfo.ContactName;
-                int ecNumber = newProfile.EmergencyContactInfo.ContactNumber;
-
-                publishProgress(newProfile.UserFirstName,
-                        newProfile.UserLastName,
-                        String.valueOf(newProfile.PhoneNumber),
-                        newProfile.EmailAddress,
-                        String.valueOf(newProfile.UserSex),
-                        String.valueOf(newProfile.UserSmokingPreference),
-                        String.valueOf(newProfile.UserPreferredContactMethod),
-                        ecName,
-                        String.valueOf(ecNumber));
-                updatesuccess = "true";
-
-            } else {
-                // display error message and return to profile screen
-
-                updatesuccess = "false";
+            int selectedSmokingPref = inputSmokingPref.getCheckedRadioButtonId();
+            switch (selectedSmokingPref)
+            {
+                case R.id.rbtnUpdate_SMOKE:
+                    newProfile.UserSmokingPreference = Profile.SmokingPreference.SMOKE;
+                    break;
+                case R.id.rbtnUpdate_NONSMOKE:
+                    newProfile.UserSmokingPreference = Profile.SmokingPreference.NONSMOKE;
+                    break;
+                case R.id.rbtnUpdate_NOPREF:
+                    newProfile.UserSmokingPreference = Profile.SmokingPreference.NOPREF;
+                    break;
             }
 
-            return updatesuccess;
+            //TODO - error handling for phone numbers when they arent integers
+
+            int emergencyContactNumber = Integer.parseInt(inputEmergencyPhone.getText().toString());
+            String emergencyContactName = inputEmergencyName.getText().toString();
+            newProfile.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
+
+            // Handles submission of the Profile to the database
+            newProfile.UpdateProfile(LoginID);
+
+            return null;
         }
 
-        @Override
-        protected void onProgressUpdate(String... values) {
-            super.onProgressUpdate(values);
-            // Update the view with the user's profile info
-            displayNames(values[0], values[1]);
-            displayPhone(values[2]);
-            displayEmail(values[3]);
-            displaySex(values[4]);
-            displaySmokingPref(values[5]);
-            displayContactMethod(values[6]);
-            displayEmergencyContact(values[7],values[8]);
-        }
 
         /**
          * After completing background task Dismiss the progress dialog
          * *
          */
-        @Override
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
-            Button btnUpdateProfile = (Button) findViewById(R.id.btnProfileUpdate);
             pDialog.dismiss();
-            if (updatesuccess.equals("true")){btnUpdateProfile.setEnabled(true);}
-            else{btnUpdateProfile.setEnabled(false);}
+            Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
+            startActivity(i);
         }
     }
 

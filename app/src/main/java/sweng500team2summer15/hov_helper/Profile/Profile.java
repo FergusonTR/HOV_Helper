@@ -207,4 +207,52 @@ public class Profile{
 
         return this;
     }
+
+    public String UpdateProfile(String loginID){
+
+        JSONParser jsonParser = new JSONParser();
+
+        // url to update new product
+        String url_update_profile = "http://www.hovhelper.com/update_profile.php";
+
+        // JSON Node names
+        String TAG_SUCCESS = "success";
+        String TAG_MESSAGE = "message";
+        String updateResult = "";
+
+        // Building Parameters
+        //ToDo remove deprecated approach and use URLBuilder instead
+        List<NameValuePair> params = new ArrayList<NameValuePair>();
+        params.add(new BasicNameValuePair("loginID", loginID));
+        params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
+        params.add(new BasicNameValuePair("userLastName", this.UserLastName));
+        params.add(new BasicNameValuePair("phoneNumber", Integer.toString(this.PhoneNumber)));
+        params.add(new BasicNameValuePair("email", this.EmailAddress));
+        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", Integer.toString(this.EmergencyContactInfo.ContactNumber)));
+        params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
+        params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
+        params.add(new BasicNameValuePair("preferredContactMethod", this.UserPreferredContactMethod.toString()));
+        params.add(new BasicNameValuePair("smokingPreference", this.UserSmokingPreference.toString()));
+
+        // getting JSON Object
+        // Note that update event url accepts POST method
+        JSONObject json = jsonParser.makeHttpRequest(url_update_profile,"POST", params);
+
+        // check for success tag
+        try {
+            int success = json.getInt(TAG_SUCCESS);
+
+            if (success == 1) {
+                // successfully updated  event
+                updateResult= json.getString(TAG_MESSAGE);
+
+            } else {
+                // failed to update profile
+                updateResult = "Update Failed";
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return updateResult;
+    }
 }

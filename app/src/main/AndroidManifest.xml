@@ -126,10 +126,6 @@
             android:label="@string/title_activity_profile_management" >
         </activity>
         <activity
-            android:name=".Profile.UpdateProfileActivity"
-            android:label="@string/title_activity_profile_update" >
-        </activity>
-        <activity
             android:name=".Profile.ViewProfileActivity"
             android:label="@string/title_activity_profile_view" >
         </activity>

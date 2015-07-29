@@ -33,7 +33,6 @@ import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.JSONParser;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
-import sweng500team2summer15.hov_helper.event.management.Event;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 
@@ -60,11 +59,8 @@ public class ProfileManagement extends ActionBarActivity {
 
         //}
 
-        // todo: add activity bar
-
         //Create button
         Button btnCreateProfile = (Button) findViewById(R.id.btnCreateProfileScrn);
-        Button btnUpdateProfile = (Button) findViewById(R.id.btnUpdateProfileScrn);
         Button btnDeleteProfile = (Button) findViewById(R.id.btnDeleteProfileScrn);
         Button btnViewProfile = (Button) findViewById(R.id.btnViewProfileScrn);
         Button btnSignOut = (Button) findViewById(R.id.btnSignOut);
@@ -76,17 +72,6 @@ public class ProfileManagement extends ActionBarActivity {
             public void onClick(View view) {
                 // Launching profile create activity
                 Intent i = new Intent(getApplicationContext(), CreateProfileActivity.class);
-                i.putExtra("LoginID", login);
-                startActivity(i);
-            }
-        });
-
-        btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View view) {
-                // Launching profile update activity
-                Intent i = new Intent(getApplicationContext(), UpdateProfileActivity.class);
                 i.putExtra("LoginID", login);
                 startActivity(i);
             }

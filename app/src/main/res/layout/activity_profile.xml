@@ -15,33 +15,23 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Update My Profile"
-            android:id="@+id/btnUpdateProfileScrn"
-            android:layout_below="@+id/btnCreateProfileScrn"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <Button
+    <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Delete My Profile"
             android:id="@+id/btnDeleteProfileScrn"
-            android:layout_below="@+id/btnUpdateProfileScrn"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+        android:layout_below="@+id/btnViewProfileScrn"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="View Profiles (Test)"
+            android:text="View My Profile"
             android:id="@+id/btnViewProfileScrn"
-            android:layout_below="@+id/btnDeleteProfileScrn"
+            android:layout_below="@+id/btnCreateProfileScrn"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
 
