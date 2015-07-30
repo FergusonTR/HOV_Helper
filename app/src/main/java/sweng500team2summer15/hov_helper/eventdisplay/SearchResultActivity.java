@@ -21,7 +21,7 @@ public class SearchResultActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_search_result);
+        setContentView(R.layout.activity_search_results);
         // Construct the data source
         ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
         // populate with dummy data
@@ -76,7 +76,7 @@ public class SearchResultActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_result, menu);
+        getMenuInflater().inflate(R.menu.menu_search_results, menu);
         return true;
     }
 
