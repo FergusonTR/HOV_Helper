@@ -14,6 +14,7 @@ import android.widget.Button;
 
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
+import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
 
@@ -81,9 +82,8 @@ public class MainEventActivity extends ActionBarActivity {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
             case R.id.action_profile:
-                // TODO - link to profile activity
-                //Intent profile = new Intent(getApplicationContext(), ProfileActivity.class);
-                //startActivity(profile);
+                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                startActivity(profile);
                 return true;
             case R.id.action_event:
                 Intent event = new Intent(getApplicationContext(), MainEventActivity.class);

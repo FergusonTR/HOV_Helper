@@ -14,6 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import sweng500team2summer15.hov_helper.Profile.CreateProfileActivity;
+import sweng500team2summer15.hov_helper.Profile.Profile;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
@@ -132,8 +134,8 @@ public class SignInActivity extends Activity {
                 editor.putString("PASSWORD", encryptPw);
                 editor.commit();
 
-                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
-                startActivity(i);
+                // We're logged in, check to see if a profile already exists...
+                new ReadProfile().execute(etLogin.getText().toString());
             }
             else {
                 {
@@ -147,6 +149,70 @@ public class SignInActivity extends Activity {
                     AlertDialog alert = builder.create();
                     alert.show();
                 }
+            }
+        }
+    }
+
+    /**
+     * Background Async Task to read a profile
+     * */
+    class ReadProfile extends AsyncTask<String, String, String> {
+
+        String readsuccess = "false";
+        String loginID = "";
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(SignInActivity.this);
+            pDialog.setMessage("Reading Profile..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * retrieving profile
+         */
+        protected String doInBackground(String... args) {
+
+            loginID = args[0];
+
+            Profile newProfile = new Profile();
+            newProfile = newProfile.GetProfile(loginID);
+
+            if (newProfile.LoginID != "")
+                readsuccess = "true";
+            else
+                readsuccess = "false";
+
+            return readsuccess;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * *
+         */
+        @Override
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+
+            if(readsuccess == "true")
+            {
+                // profile exists. redirect to event mgmt screen
+                Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+                startActivity(i);
+            }
+            else if(readsuccess == "false")
+            {
+                // profile is not created, redirect to profile creation screen
+                Intent i = new Intent(getApplicationContext(), CreateProfileActivity.class);
+                i.putExtra("LoginID", loginID);
+                startActivity(i);
             }
         }
     }
