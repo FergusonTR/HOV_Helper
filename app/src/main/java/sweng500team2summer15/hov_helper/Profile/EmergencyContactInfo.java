@@ -7,8 +7,8 @@ public class EmergencyContactInfo
 {
     // 'Struct' to hold emergency contact info
     public String ContactName = "";
-    public int ContactNumber = 0;
-    public EmergencyContactInfo(String contactName, int contactNumber)
+    public String ContactNumber = "";
+    public EmergencyContactInfo(String contactName, String contactNumber)
     {
         this.ContactName = contactName;
         this.ContactNumber = contactNumber;

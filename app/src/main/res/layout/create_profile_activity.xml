@@ -22,7 +22,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="First Name"
+        android:hint="First Name"
         android:ems="10"
         android:id="@+id/txtFirstName"
         android:layout_gravity="center_horizontal"
@@ -32,7 +32,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Last Name"
+        android:hint="Last Name"
         android:ems="10"
         android:id="@+id/txtLastName"
         android:editable="true" />
@@ -43,7 +43,7 @@
         android:inputType="phone"
         android:ems="10"
         android:id="@+id/txtPhone"
-        android:text="Phone Number"
+        android:hint="Phone Number"
         android:editable="true" />
 
     <EditText
@@ -52,7 +52,7 @@
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/txtEmailAddress"
-        android:text="Email Address"
+        android:hint="Email Address"
         android:editable="true" />
 
 
@@ -170,7 +170,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Emergency Contact Name"
+            android:hint="Emergency Contact Name"
             android:ems="10"
             android:id="@+id/txtEmergencyName"
             android:layout_gravity="center_vertical" />
@@ -181,7 +181,7 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/txtEmergencyNumber"
-            android:text="Emergency Contact Phone Number" />
+            android:hint="Emergency Contact Phone Number" />
 
     </LinearLayout>
 
@@ -196,15 +196,15 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirm"
-            android:id="@+id/btnProfileConfirm" />
+            android:text="Cancel"
+            android:id="@+id/btnProfileCancel"/>
 
         <Button
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/btnProfileCancel"/>
+            android:text="Confirm"
+            android:id="@+id/btnProfileConfirm" />
 
     </LinearLayout>
 

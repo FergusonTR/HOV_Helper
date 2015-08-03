@@ -22,7 +22,7 @@ public class ProfileTest extends TestCase {
     public void test_CreateProfile()
     {
         // Setup Profile object
-        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
+        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", "55-555-5555");
         //Profile testProf = new Profile(1,"Test", "Test", Profile.Sex.MALE, 5555555, Profile.PreferredContactMethod.CALL, "Test@Test.Com", testEmergency ,Profile.SmokingPreference.NONSMOKE);
 
         // Store in DB
@@ -35,7 +35,7 @@ public class ProfileTest extends TestCase {
     @SmallTest
     public void test_CreateProfile_Blank()
     {
-        EmergencyContactInfo testEmergency = new EmergencyContactInfo("", 0);
+        EmergencyContactInfo testEmergency = new EmergencyContactInfo("","555-555-5555");
         //Profile testProf = new Profile(0, "","", Profile.Sex.MALE, 0, Profile.PreferredContactMethod.CALL, "", testEmergency, Profile.SmokingPreference.NONSMOKE);
 
         // Assert that the following values are not the default (empty) values
@@ -52,7 +52,7 @@ public class ProfileTest extends TestCase {
     public void test_UpdateProfile_FirstName()
     {
         // Setup Profile object
-        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
+        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", "555-555-5555");
         //Profile testProf = new Profile(1,"InitialName", "Test", Profile.Sex.MALE, 5555555, Profile.PreferredContactMethod.CALL, "Test@Test.Com", testEmergency ,Profile.SmokingPreference.NONSMOKE);
 
         // Update the First Name property
@@ -66,7 +66,7 @@ public class ProfileTest extends TestCase {
     public void test_UpdateProfile_LastName()
     {
         // Setup Profile object
-        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
+        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", "555-555-5555");
         //Profile testProf = new Profile(1,"InitialName", "InitialName", Profile.Sex.MALE, 5555555, Profile.PreferredContactMethod.CALL, "Test@Test.Com", testEmergency ,Profile.SmokingPreference.NONSMOKE);
 
         // Update the First Name property
@@ -122,7 +122,7 @@ public class ProfileTest extends TestCase {
     public void test_UpdateProfile_OtherPreferences()
     {
         // Setup Profile object
-        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", 5555555);
+        EmergencyContactInfo testEmergency = new EmergencyContactInfo("TestContact", "555-555-5555");
         //Profile testProf = new Profile(1,"Caitlyn", "Jenner", Profile.Sex.MALE, 5555555, Profile.PreferredContactMethod.CALL, "Test@Test.Com", testEmergency ,Profile.SmokingPreference.NONSMOKE);
 
         // Update the enum properties

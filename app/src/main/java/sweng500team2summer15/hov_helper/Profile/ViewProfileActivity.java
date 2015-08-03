@@ -24,6 +24,7 @@ import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
+import sweng500team2summer15.hov_helper.resource.Encryption;
 
 /**
  * Created by Mike on 6/30/2015.
@@ -32,8 +33,24 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     String readSuccess = "false";
 
+
+    EditText inputFirstName;
+    EditText inputLastName;
+    EditText inputPhoneNumber;
+    EditText inputEmailAddress;
+    RadioButton inputSexMale;
+    RadioButton inputContactCall;
+    RadioGroup inputSmokingPref;
+    EditText inputEmergencyName;
+    EditText inputEmergencyPhone;
+
+    private String login;
+    private String password;
+
     //Progress Dialog
     private ProgressDialog pDialog;
+
+    Profile newProfile = new Profile();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +59,16 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         Button btnConfirmUpdate = (Button) findViewById(R.id.btnProfileUpdate);
         Button btnCancelProfile = (Button) findViewById(R.id.btnProfileUpdateCancel);
+
+        inputFirstName = (EditText) findViewById(R.id.txtProfile_FirstName);
+        inputLastName = (EditText) findViewById(R.id.txtProfile_LastName);
+        inputPhoneNumber = (EditText) findViewById(R.id.txtProfile_Phone);
+        inputEmailAddress = (EditText) findViewById(R.id.txtProfile_Email);
+        inputEmergencyName = (EditText) findViewById(R.id.txtProfileUpdate_ContactName);
+        inputEmergencyPhone = (EditText) findViewById(R.id.txtProfileUpdate_ContactNumber);
+        inputSmokingPref = (RadioGroup)findViewById(R.id.txtProfileUpdate_Smoking);
+        inputSexMale = (RadioButton) findViewById(R.id.profileUpdate_male);
+        inputContactCall = (RadioButton) findViewById(R.id.rbtnUpdate_CALL);
 
         // Attempt to get the profile
         new ReadProfile().execute();
@@ -54,6 +81,44 @@ public class ViewProfileActivity extends AppCompatActivity {
             public void onClick(View view)
             {
                 // update profile
+                Intent thisIntent = getIntent();
+                String LoginID = thisIntent.getStringExtra("LoginID");
+
+
+
+                //Mike I didn't touch this however I would move this block of code to the onCreate or an onClick activity and pull it out of the AsyncTask
+                //I would then just execute your upDateProfile in the AsyncTask doInbackground review my CreateEventDataEndActivity.class for an example.
+
+                Profile newProfile = new Profile();
+                newProfile.UserFirstName = inputFirstName.getText().toString();
+                newProfile.UserLastName = inputLastName.getText().toString();
+                newProfile.PhoneNumber = inputPhoneNumber.getText().toString();
+                newProfile.EmailAddress = inputEmailAddress.getText().toString();
+                newProfile.UserSex = inputSexMale.isChecked() ? Profile.Sex.MALE : Profile.Sex.FEMALE;
+                newProfile.UserPreferredContactMethod = inputContactCall.isChecked() ? Profile.PreferredContactMethod.CALL : Profile.PreferredContactMethod.TEXT;
+
+                int selectedSmokingPref = inputSmokingPref.getCheckedRadioButtonId();
+                switch (selectedSmokingPref)
+                {
+                    case R.id.rbtnUpdate_SMOKE:
+                        newProfile.UserSmokingPreference = Profile.SmokingPreference.SMOKE;
+                        break;
+                    case R.id.rbtnUpdate_NONSMOKE:
+                        newProfile.UserSmokingPreference = Profile.SmokingPreference.NONSMOKE;
+                        break;
+                    case R.id.rbtnUpdate_NOPREF:
+                        newProfile.UserSmokingPreference = Profile.SmokingPreference.NOPREF;
+                        break;
+                }
+
+                //TODO - error handling for phone numbers when they arent integers
+                //Mike I think you can set the EditText Field for a filter or mask which would reduce the need for type checking.
+                //http://stackoverflow.com/questions/12592915/how-do-i-implement-specific-phone-number-formatting-with-an-edittext-and-ics
+
+                String emergencyContactNumber = inputEmergencyPhone.getText().toString();
+                String emergencyContactName = inputEmergencyName.getText().toString();
+                newProfile.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
+
                 new UpdateProfile().execute();
             }
         });
@@ -146,26 +211,30 @@ public class ViewProfileActivity extends AppCompatActivity {
          */
         protected String doInBackground(String... args) {
 
-            Intent thisIntent = getIntent();
-            String loginID = thisIntent.getStringExtra("LoginID");
+            //Intent thisIntent = getIntent();
+            //String loginID = thisIntent.getStringExtra("LoginID");
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+            login = pref.getString("LOGIN", "");                                              // key/value, get value for key "LOGIN"
+            password = pref.getString("PASSWORD", "");                                        // key/value, get value for key "PASSWORD" (currently encrypted)
+            Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);       // class to encrypt/decrypt strings, see NOTE
+            String decryptPw = decryption.decryptOrNull(password);                            // get password after decrypting
 
-            Profile newProfile = new Profile();
-            newProfile = newProfile.GetProfile(loginID);
+            newProfile = newProfile.GetProfile(login);
 
             if (newProfile.LoginID != "") {
 
                 String ecName = newProfile.EmergencyContactInfo.ContactName;
-                int ecNumber = newProfile.EmergencyContactInfo.ContactNumber;
+                String ecNumber = newProfile.EmergencyContactInfo.ContactNumber;
 
                 publishProgress(newProfile.UserFirstName,
                         newProfile.UserLastName,
-                        String.valueOf(newProfile.PhoneNumber),
+                        newProfile.PhoneNumber,
                         newProfile.EmailAddress,
                         String.valueOf(newProfile.UserSex),
                         String.valueOf(newProfile.UserSmokingPreference),
                         String.valueOf(newProfile.UserPreferredContactMethod),
                         ecName,
-                        String.valueOf(ecNumber));
+                        ecNumber);
                 readsuccess = "true";
 
             } else {
@@ -206,19 +275,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
     class UpdateProfile extends AsyncTask<String, String, String> {
 
-        private ProgressDialog pDialog;
-
-        EditText inputFirstName;
-        EditText inputLastName;
-        EditText inputPhoneNumber;
-        EditText inputEmailAddress;
-        RadioButton inputSexMale;
-        RadioButton inputContactCall;
-        RadioGroup inputSmokingPref;
-        EditText inputEmergencyName;
-        EditText inputEmergencyPhone;
-
-        /**
+         /**
          * Before starting background thread Show Progress Dialog
          */
         @Override
@@ -236,54 +293,15 @@ public class ViewProfileActivity extends AppCompatActivity {
          */
         protected String doInBackground(String... args)
         {
-            Intent thisIntent = getIntent();
-            String LoginID = thisIntent.getStringExtra("LoginID");
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+            login = pref.getString("LOGIN", "");                                              // key/value, get value for key "LOGIN"
+            password = pref.getString("PASSWORD", "");                                        // key/value, get value for key "PASSWORD" (currently encrypted)
+            //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
+            //String decryptPw = decryption.decryptOrNull(password);                          // get password after decrypting
 
-            inputFirstName = (EditText) findViewById(R.id.txtProfile_FirstName);
-            inputLastName = (EditText) findViewById(R.id.txtProfile_LastName);
-            inputPhoneNumber = (EditText) findViewById(R.id.txtProfile_Phone);
-            inputEmailAddress = (EditText) findViewById(R.id.txtProfile_Email);
-            inputEmergencyName = (EditText) findViewById(R.id.txtProfileUpdate_ContactName);
-            inputEmergencyPhone = (EditText) findViewById(R.id.txtProfileUpdate_ContactNumber);
-            inputSmokingPref = (RadioGroup)findViewById(R.id.txtProfileUpdate_Smoking);
-            inputSexMale = (RadioButton) findViewById(R.id.profileUpdate_male);
-            inputContactCall = (RadioButton) findViewById(R.id.rbtnUpdate_CALL);
-
-            //Mike I didn't touch this however I would move this block of code to the onCreate or an onClick activity and pull it out of the AsyncTask
-            //I would then just execute your upDateProfile in the AsyncTask doInbackground review my CreateEventDataEndActivity.class for an example.
-
-            Profile newProfile = new Profile();
-            newProfile.UserFirstName = inputFirstName.getText().toString();
-            newProfile.UserLastName = inputLastName.getText().toString();
-            newProfile.PhoneNumber = Integer.parseInt(inputPhoneNumber.getText().toString());
-            newProfile.EmailAddress = inputEmailAddress.getText().toString();
-            newProfile.UserSex = inputSexMale.isChecked() ? Profile.Sex.MALE : Profile.Sex.FEMALE;
-            newProfile.UserPreferredContactMethod = inputContactCall.isChecked() ? Profile.PreferredContactMethod.CALL : Profile.PreferredContactMethod.TEXT;
-
-            int selectedSmokingPref = inputSmokingPref.getCheckedRadioButtonId();
-            switch (selectedSmokingPref)
-            {
-                case R.id.rbtnUpdate_SMOKE:
-                    newProfile.UserSmokingPreference = Profile.SmokingPreference.SMOKE;
-                    break;
-                case R.id.rbtnUpdate_NONSMOKE:
-                    newProfile.UserSmokingPreference = Profile.SmokingPreference.NONSMOKE;
-                    break;
-                case R.id.rbtnUpdate_NOPREF:
-                    newProfile.UserSmokingPreference = Profile.SmokingPreference.NOPREF;
-                    break;
-            }
-
-            //TODO - error handling for phone numbers when they arent integers
-            //Mike I think you can set the EditText Field for a filter or mask which would reduce the need for type checking.
-            //http://stackoverflow.com/questions/12592915/how-do-i-implement-specific-phone-number-formatting-with-an-edittext-and-ics
-
-            int emergencyContactNumber = Integer.parseInt(inputEmergencyPhone.getText().toString());
-            String emergencyContactName = inputEmergencyName.getText().toString();
-            newProfile.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
 
             // Handles submission of the Profile to the database
-            newProfile.UpdateProfile(LoginID);
+            newProfile.UpdateProfile(login);
 
             return null;
         }

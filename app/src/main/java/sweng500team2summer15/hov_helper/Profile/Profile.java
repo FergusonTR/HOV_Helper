@@ -25,7 +25,7 @@ public class Profile{
     public String LoginID = "";
     public String UserFirstName = "";
     public String UserLastName = "";
-    public int PhoneNumber = 0;
+    public String PhoneNumber = "";
     public String EmailAddress = "";
     public sweng500team2summer15.hov_helper.Profile.EmergencyContactInfo EmergencyContactInfo;
     public Sex UserSex = Sex.MALE;
@@ -38,7 +38,7 @@ public class Profile{
 
     public Profile(){}
 
-    public Profile(String loginID, String firstName, String lastName, Sex sex, int phoneNumber, PreferredContactMethod preferredContactMethod,
+    public Profile(String loginID, String firstName, String lastName, Sex sex, String phoneNumber, PreferredContactMethod preferredContactMethod,
                    String email, EmergencyContactInfo emergencyContactInfo, SmokingPreference smokingPreference)
     {
         this.LoginID = loginID;
@@ -53,7 +53,7 @@ public class Profile{
     }
 
     // Submit a profile to the database
-    public Boolean SubmitProfile(String loginID)
+    public Boolean SubmitProfile(String loginID, String password)
     {
         //This code was borrowed from http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
         JSONParser jsonParser = new JSONParser();
@@ -65,16 +65,21 @@ public class Profile{
         // JSON Node names
         String TAG_SUCCESS = "success";
 
+        EmergencyContactInfo tempContactInfo = this.EmergencyContactInfo;
+
         // Building Parameters
         //ToDo remove deprecated approach and use URLBuilder instead
         List<NameValuePair> params = new ArrayList<NameValuePair>();
         params.add(new BasicNameValuePair("loginID", loginID));
+        params.add(new BasicNameValuePair("password",password));
         params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
-        params.add(new BasicNameValuePair("phoneNumber", Integer.toString(this.PhoneNumber)));
+        params.add(new BasicNameValuePair("phoneNumber",this.PhoneNumber));
         params.add(new BasicNameValuePair("email", this.EmailAddress));
-        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", Integer.toString(this.EmergencyContactInfo.ContactNumber)));
-        params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
+        // params.add(new BasicNameValuePair("emergencyContact_ContactNumber", this.EmergencyContactInfo.ContactNumber));
+        //params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
+        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", tempContactInfo.ContactNumber));
+        params.add(new BasicNameValuePair("emergencyContact_ContactName", tempContactInfo.ContactName));
         params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
         params.add(new BasicNameValuePair("preferredContactMethod", this.UserPreferredContactMethod.toString()));
         params.add(new BasicNameValuePair("smokingPreference", this.UserSmokingPreference.toString()));
@@ -164,7 +169,7 @@ public class Profile{
                         break;
                 }
 
-                this.PhoneNumber = (profile.getInt(TAG_PHONE));
+                this.PhoneNumber = (profile.getString(TAG_PHONE));
                 String contact = (profile.getString(TAG_CONTACTMETHOD));
                 switch (contact)
                 {
@@ -179,7 +184,7 @@ public class Profile{
                 this.EmailAddress = ((profile.getString(TAG_EMAIL)));
 
                 String emergencyContactName = ((profile.getString(TAG_ECNAME)));
-                int emergencyContactNumber = ((profile.getInt(TAG_ECNUMBER)));
+                String emergencyContactNumber = ((profile.getString(TAG_ECNUMBER)));
                 this.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
 
                 String smokingPreference = ((profile.getString(TAG_SMOKING)));
@@ -226,9 +231,9 @@ public class Profile{
         params.add(new BasicNameValuePair("loginID", loginID));
         params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
-        params.add(new BasicNameValuePair("phoneNumber", Integer.toString(this.PhoneNumber)));
+        params.add(new BasicNameValuePair("phoneNumber", this.PhoneNumber));
         params.add(new BasicNameValuePair("email", this.EmailAddress));
-        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", Integer.toString(this.EmergencyContactInfo.ContactNumber)));
+        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", this.EmergencyContactInfo.ContactNumber));
         params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
         params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
         params.add(new BasicNameValuePair("preferredContactMethod", this.UserPreferredContactMethod.toString()));
