@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -27,7 +28,7 @@ import sweng500team2summer15.hov_helper.map.MapsActivity;
 /**
  * Created by Mike on 6/30/2015.
  */
-public class ViewProfileActivity extends ActionBarActivity {
+public class ViewProfileActivity extends AppCompatActivity {
 
     String readSuccess = "false";
 
@@ -248,6 +249,9 @@ public class ViewProfileActivity extends ActionBarActivity {
             inputSexMale = (RadioButton) findViewById(R.id.profileUpdate_male);
             inputContactCall = (RadioButton) findViewById(R.id.rbtnUpdate_CALL);
 
+            //Mike I didn't touch this however I would move this block of code to the onCreate or an onClick activity and pull it out of the AsyncTask
+            //I would then just execute your upDateProfile in the AsyncTask doInbackground review my CreateEventDataEndActivity.class for an example.
+
             Profile newProfile = new Profile();
             newProfile.UserFirstName = inputFirstName.getText().toString();
             newProfile.UserLastName = inputLastName.getText().toString();
@@ -271,6 +275,8 @@ public class ViewProfileActivity extends ActionBarActivity {
             }
 
             //TODO - error handling for phone numbers when they arent integers
+            //Mike I think you can set the EditText Field for a filter or mask which would reduce the need for type checking.
+            //http://stackoverflow.com/questions/12592915/how-do-i-implement-specific-phone-number-formatting-with-an-edittext-and-ics
 
             int emergencyContactNumber = Integer.parseInt(inputEmergencyPhone.getText().toString());
             String emergencyContactName = inputEmergencyName.getText().toString();

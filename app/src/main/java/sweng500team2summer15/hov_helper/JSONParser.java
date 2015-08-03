@@ -60,7 +60,7 @@ public class JSONParser implements Serializable{
     }
 
     // function get json from url
-    // by making HTTP POST or GET mehtod
+    // by making HTTP POST or GET method
     public JSONObject makeHttpRequest(String url, String method,
                                       List<NameValuePair> params) {
 

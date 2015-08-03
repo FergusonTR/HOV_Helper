@@ -1,19 +1,23 @@
 <resources>
-    <string name="app_name">HOV Helper</string>
-
+    <color name="white">#FFFFFF</color>
+    <color name="green">#32733A</color>
+    <string name="app_name">HOV_Helper</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Login</string>
     <string name="title_activity_register">register</string>
     <string name="title_activity_start">Start</string>
-    <string name="title_activity_create_event">CreateEventActivity</string>
-    <string name="title_activity_read_event">ReadEventActivity</string>
-    <string name="title_activity_event_details">EventDetailsActivity</string>
+    <string name="title_activity_main_event">My Events</string>
+    <string name="title_activity_create_event">Create Event</string>
+    <string name="title_activity_read_event">Read Event</string>
+    <string name="title_activity_delete_event">Delete Event</string>
+    <string name="title_activity_event_type_selection">Create Event</string>
+    <string name="title_activity_create_event_data">Create Event</string>
+    <string name="subtitle_activity_create_event_data">Start Location</string>
+    <string name="title_activity_create_event_data_end">Create Event</string>
+    <string name="title_activity_event_details">Event Details</string>
     <string name="title_activity_temp_display">TempDisplayActivity</string>
-    <string name="title_activity_delete_event">deleteEventActivity</string>
-    <string name="title_activity_main_event">MainEventActivity</string>
-
     <string name="title_activity_sign_up">Sign Up</string>
     <string name="title_activity_sign_in">Sign In</string>
     <string name="title_activity_reset_password">Reset Password</string>
@@ -24,10 +28,16 @@
     <string name="title_activity_profile_update">Profile Update</string>
     <string name="title_activity_profile_view">My Profile</string>
     <string name="title_activity_profile_create">Create Profile</string>
-
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
+    <string name="title_activity_test_address">TestAddressActivity</string>
+    <string name="CurrentPassword">Current Password</string>
+    <string name="NewPassword">New Password</string>
+    <string name="Re_enterNewPassword">Re-enter New Password</string>
+    <string name="ChangePassword">Change Password</string>
+    <string name="NumberOfSeats">Number of Seats (Available or Required)</string>
+    <string name="EventType">Event Type (Ride or Share)</string>
 
-    <color name="white">#FFFFFF</color>
-    <color name="green">#32733A</color>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

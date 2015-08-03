@@ -69,9 +69,41 @@ public class EventTest extends TestCase {
         //positive test case for event
         assertTrue("TC-23, Failed to create an event", myEvent.create(myEvent.loginId, password) > 0);
 
+
         //clean up
         myEvent.delete("testLoginId","Sweng_500",myEvent.eventId);
     }
+    //TC-24 Create Event - required fields are blank
+    @SmallTest
+    public void testCreateEventInvalid(){
+
+        //Creates a local instance of event
+        Event myEvent = new Event();
+
+        //populates this with dummy data
+        DateFormat dateformat =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date start_today = Calendar.getInstance().getTime();
+        Date end_today = Calendar.getInstance().getTime();
+
+        //Fake user password
+        String password = "Sweng_500";
+        myEvent.loginId = "testLoginId";
+        myEvent.eventType = "Share";
+        myEvent.numberSeats = 3;
+        myEvent.numberAvailable = 2;
+        myEvent.start_Time = ""; //start time is imperative, blanked here for test
+        myEvent.end_Time = "";  //end time is imperative, blanked here for test
+
+        //ToDo change this test to check for the presence of a event entry with blank fields.
+
+        //Test with test data default values should be created in the database to have reliable response.
+        //positive test case for event
+        assertTrue("TC-24, Created an event with blank fields!", myEvent.create(myEvent.loginId, password) > 0);
+
+        //clean up
+        myEvent.delete("testLoginId","Sweng_500",myEvent.eventId);
+    }
+
 
     //TC-XX Read Event
     @SmallTest
@@ -111,7 +143,7 @@ public class EventTest extends TestCase {
         assertEquals("TC-30, Failed to update event", (myEvent.update("testLoginId","Sweng_500",myeventID)),"Event update completed.");
 
         //clean up the event that was created
-        myEvent.delete("testLoginId","Sweng_500",myeventID);
+        myEvent.delete("testLoginId", "Sweng_500", myeventID);
 
 
     }

@@ -1,0 +1,203 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context=".createEventDataEndActivity">
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="End Date"
+        android:id="@+id/end_date_label"
+        android:layout_alignTop="@+id/end_date_box"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="false"
+        android:layout_alignBottom="@+id/end_date_box"
+        android:layout_toLeftOf="@+id/end_date_box"
+        android:layout_toStartOf="@+id/end_date_box"
+        android:textSize="@dimen/abc_text_size_small_material"
+        android:textStyle="bold"
+        android:gravity="left|center" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:id="@+id/end_date_box"
+        android:hint="Click to Select"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:inputType="date|text"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:text="End Time (24 hour)"
+        android:id="@+id/end_time_label"
+        android:textSize="@dimen/abc_text_size_small_material"
+        android:textStyle="bold"
+        android:layout_below="@+id/end_date_label"
+        android:layout_alignBottom="@+id/end_time_box"
+        android:layout_alignRight="@+id/end_date_label"
+        android:layout_alignEnd="@+id/end_date_label"
+        android:gravity="left|center"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="text|time"
+        android:ems="10"
+        android:id="@+id/end_time_box"
+        android:hint="Click to Select"
+        android:textSize="14sp"
+        android:layout_below="@+id/end_date_box"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End Street Address"
+        android:id="@+id/end_street_address_label"
+        android:layout_below="@+id/end_time_label"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignBottom="@+id/end_street_address_box"
+        android:gravity="left|center"
+        android:layout_toLeftOf="@+id/end_time_box"
+        android:layout_toStartOf="@+id/end_time_box"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/end_street_address_box"
+        android:hint="Street Address"
+        android:layout_below="@+id/end_time_box"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/end_time_label"
+        android:layout_toEndOf="@+id/end_time_label"
+        android:gravity="center"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/end_city_box"
+        android:hint="City/Town"
+        android:layout_below="@+id/end_street_address_box"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/end_street_address_label"
+        android:layout_toEndOf="@+id/end_street_address_label"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End State"
+        android:id="@+id/end_state_label"
+        android:gravity="left|center"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/end_city_box"
+        android:layout_alignBottom="@+id/end_state_box"
+        android:layout_alignTop="@+id/end_state_box" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/end_state_box"
+        android:hint="State"
+        android:textSize="14sp"
+        android:layout_below="@+id/end_city_box"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_toRightOf="@+id/end_state_label"
+        android:layout_toEndOf="@+id/end_state_label"
+        android:gravity="center" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create"
+        android:id="@+id/Create_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/end_state_box"
+        android:layout_alignStart="@+id/end_state_box" />
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:id="@+id/Cancel_btn"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/Create_btn"
+        android:layout_toStartOf="@+id/Create_btn" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End City"
+        android:id="@+id/end_city_label"
+        android:gravity="left|center"
+        android:textStyle="bold"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/end_city_box"
+        android:layout_alignRight="@+id/Cancel_btn"
+        android:layout_alignEnd="@+id/Cancel_btn"
+        android:layout_alignBottom="@+id/end_city_box" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/end_zipcode_box"
+        android:hint="Zip Code"
+        android:layout_below="@+id/end_state_box"
+        android:layout_toRightOf="@+id/end_state_label"
+        android:layout_alignRight="@+id/end_state_box"
+        android:layout_alignEnd="@+id/end_state_box"
+        android:gravity="center"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="End Zip Code"
+        android:id="@+id/end_zipcode_label"
+        android:gravity="left|center"
+        android:textStyle="bold"
+        android:layout_below="@+id/end_state_label"
+        android:layout_toStartOf="@+id/end_state_box"
+        android:layout_toLeftOf="@+id/end_state_box"
+        android:layout_alignBottom="@+id/end_zipcode_box" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Round Trip"
+        android:id="@+id/roundTrip"
+        android:checked="false"
+        android:layout_below="@+id/end_zipcode_box"
+        android:layout_marginTop="67dp"
+        android:layout_alignRight="@+id/Create_btn"
+        android:layout_alignEnd="@+id/Create_btn"
+        android:layout_alignLeft="@+id/Cancel_btn"
+        android:layout_alignStart="@+id/Cancel_btn" />
+
+</RelativeLayout>

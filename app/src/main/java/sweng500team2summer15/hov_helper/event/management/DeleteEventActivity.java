@@ -1,14 +1,13 @@
 package sweng500team2summer15.hov_helper.event.management;
 
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -24,7 +23,7 @@ import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 
 
-public class DeleteEventActivity extends ActionBarActivity {
+public class DeleteEventActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
     EditText inputLoginId;

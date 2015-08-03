@@ -1,13 +1,12 @@
 package sweng500team2summer15.hov_helper.event.management;
 
-        import android.app.Activity;
         import android.app.ProgressDialog;
         import android.content.Context;
         import android.content.Intent;
         import android.content.SharedPreferences;
         import android.os.AsyncTask;
         import android.os.Bundle;
-        import android.support.v7.app.ActionBarActivity;
+        import android.support.v7.app.AppCompatActivity;
         import android.view.Menu;
         import android.view.MenuInflater;
         import android.view.MenuItem;
@@ -22,7 +21,7 @@ package sweng500team2summer15.hov_helper.event.management;
         import sweng500team2summer15.hov_helper.R;
 
 
-public class ReadEventActivity extends ActionBarActivity {
+public class ReadEventActivity extends AppCompatActivity {
 
     //Progress Dialog
     private ProgressDialog pDialog;

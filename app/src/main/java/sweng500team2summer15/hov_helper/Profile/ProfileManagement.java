@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -39,7 +40,7 @@ import sweng500team2summer15.hov_helper.map.MapsActivity;
 // created by Mike
 // Aims to handle additional screen for profile management buttons
 
-public class ProfileManagement extends ActionBarActivity {
+public class ProfileManagement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
