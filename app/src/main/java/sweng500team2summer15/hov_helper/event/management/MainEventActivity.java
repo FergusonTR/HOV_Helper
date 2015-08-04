@@ -19,6 +19,8 @@ import android.widget.Button;
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
+import sweng500team2summer15.hov_helper.eventdisplay.ListEventsFragment;
+import sweng500team2summer15.hov_helper.map.MapFragment;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
 
@@ -38,8 +40,8 @@ public class MainEventActivity extends AppCompatActivity {
 
         //Buttons
         btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);
-        btnReadEvent = (Button) findViewById(R.id.btnReadEventScrn);
-        btnDeleteEvent = (Button) findViewById(R.id.btnDeleteEventScrn);
+        //btnReadEvent = (Button) findViewById(R.id.btnReadEventScrn);
+        //btnDeleteEvent = (Button) findViewById(R.id.btnDeleteEventScrn);
 
         btnNewEvent.setOnClickListener(new View.OnClickListener(){
 
@@ -51,7 +53,7 @@ public class MainEventActivity extends AppCompatActivity {
             }
         });
 
-        btnReadEvent.setOnClickListener(new View.OnClickListener(){
+        /*btnReadEvent.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
@@ -59,9 +61,9 @@ public class MainEventActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
 
-        btnDeleteEvent.setOnClickListener(new View.OnClickListener(){
+        /*btnDeleteEvent.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
@@ -69,7 +71,7 @@ public class MainEventActivity extends AppCompatActivity {
                 Intent i = new Intent(getApplicationContext(), DeleteEventActivity.class);
                 startActivity(i);
             }
-        });
+        });*/
     }
 
     /**
@@ -85,9 +87,9 @@ public class MainEventActivity extends AppCompatActivity {
         public Fragment getItem(int arg0){
             switch (arg0) {
                 case 0:
-                    return new rideFragment();
+                    return new MapFragment();
                 case 1:
-                    return new driveFragment();
+                    return new ListEventsFragment();
                 default:
                     break;
                           }
@@ -97,9 +99,9 @@ public class MainEventActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             if(position==0) {
-                return "Ride Events";
+                return "Map Events";
             } else {
-                return "Drive Events";
+                return "List Events";
             }
         }
 

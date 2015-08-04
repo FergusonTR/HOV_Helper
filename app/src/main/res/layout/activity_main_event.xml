@@ -26,27 +26,7 @@
         android:text="Create Event"
         android:id="@+id/btnCreateEventScrn"
         android:clickable="true"
-        android:layout_above="@+id/btnReadEventScrn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Retrieve Event (Test)"
-        android:id="@+id/btnReadEventScrn"
-        android:layout_above="@+id/btnDeleteEventScrn"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Delete Event (Test)"
-        android:id="@+id/btnDeleteEventScrn"
-        android:layout_centerVertical="true"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
