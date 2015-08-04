@@ -217,14 +217,14 @@ public class CreateEventDataActivity extends AppCompatActivity {
                             Toast toast = Toast.makeText(getApplicationContext(), "Address not found, try again.", Toast.LENGTH_SHORT);
                             toast.show();
                         }
-                        int tempNumberOfSeats = Integer.parseInt(inputNumberOfSeats_box.getText().toString()) ;
-
+                        int tempNumberOfSeats=0;
                         // Check Number of Seats (Available or Requested)
                         if(TextUtils.isEmpty(inputNumberOfSeats_box.getText())){
                             numberOfSeatsOk = false;
                             Toast toast = Toast.makeText(getApplicationContext(), "Please enter a valid number of available (or requested) seats.", Toast.LENGTH_SHORT);
                                toast.show();
                         } else {
+                            tempNumberOfSeats = Integer.parseInt(inputNumberOfSeats_box.getText().toString()) ;
                             if(tempNumberOfSeats <=0) {numberOfSeatsOk = false;}
                             else {numberOfSeatsOk=true;}}
 

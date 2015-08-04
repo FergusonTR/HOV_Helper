@@ -11,6 +11,13 @@
             android:text="Create A Profile"
             android:id="@+id/btnCreateProfileScrn"
             android:clickable="true"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="42px"
+            android:background="@color/green"
+
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
@@ -21,6 +28,14 @@
             android:layout_height="wrap_content"
             android:text="Delete My Profile"
             android:id="@+id/btnDeleteProfileScrn"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="42px"
+            android:background="@color/green"
+        android:hint="20"
+        android:layout_marginTop="36dp"
         android:layout_below="@+id/btnViewProfileScrn"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -31,9 +46,16 @@
             android:layout_height="wrap_content"
             android:text="View My Profile"
             android:id="@+id/btnViewProfileScrn"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="42px"
+            android:background="@color/green"
+            android:layout_marginTop="38dp"
             android:layout_below="@+id/btnCreateProfileScrn"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
     <Button
             style="?android:attr/buttonStyleSmall"
@@ -41,6 +63,12 @@
             android:layout_height="wrap_content"
             android:text="Sign Out"
             android:id="@+id/btnSignOut"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="42px"
+            android:background="@color/green"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />

@@ -11,7 +11,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/drive_button"
-        android:src="@mipmap/ic_wheel"
+        android:src="@mipmap/ic_launcher"
+        android:background="@color/white"
         android:layout_marginLeft="65dp"
         android:layout_marginStart="65dp"
         android:layout_centerVertical="true"
@@ -24,6 +25,7 @@
         android:id="@+id/ride_button"
         android:src="@mipmap/ic_thumb"
         android:layout_alignTop="@+id/drive_button"
+        android:background="@color/white"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="69dp"
@@ -35,12 +37,9 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Are you driving or looking a ride?"
         android:id="@+id/textView17"
-        android:layout_marginBottom="59dp"
         android:layout_above="@+id/drive_button"
-        android:layout_alignRight="@+id/ride_button"
-        android:layout_alignEnd="@+id/ride_button"
-        android:layout_alignLeft="@+id/drive_button"
-        android:layout_alignStart="@+id/drive_button" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp" />
 
     <TextView
         android:layout_width="wrap_content"

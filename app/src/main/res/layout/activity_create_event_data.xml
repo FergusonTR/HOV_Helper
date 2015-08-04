@@ -6,47 +6,20 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context=".createEventDataActivity">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="Start Date"
-        android:id="@+id/start_date_label"
-        android:layout_alignTop="@+id/start_date_box"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_alignBottom="@+id/start_date_box"
-        android:layout_toLeftOf="@+id/start_date_box"
-        android:layout_toStartOf="@+id/start_date_box"
-        android:textSize="@dimen/abc_text_size_small_material"
-        android:textStyle="bold"
-        android:gravity="left|center" />
-
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:id="@+id/start_date_box"
-        android:hint="Click to Select"
+        android:hint=" Click to Select Start Date"
         android:textSize="14sp"
         android:layout_below="@+id/event_name_box"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:inputType="date|text"
         android:gravity="center"
-        />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:text="Start Time (24 hour)"
-        android:id="@+id/start_time_label"
-        android:textSize="@dimen/abc_text_size_small_material"
-        android:textStyle="bold"
-        android:layout_below="@+id/start_date_label"
-        android:layout_alignBottom="@+id/start_time_box"
-        android:layout_alignRight="@+id/start_date_label"
-        android:layout_alignEnd="@+id/start_date_label"
-        android:gravity="left|center"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -54,41 +27,28 @@
         android:inputType="text|time"
         android:ems="10"
         android:id="@+id/start_time_box"
-        android:hint="Click to Select"
+        android:hint="Click to Select Start Time"
         android:textSize="14sp"
         android:layout_below="@+id/start_date_box"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-         />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Start Street Address"
-        android:id="@+id/start_street_address_label"
-        android:layout_below="@+id/start_time_label"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/start_street_address_box"
-        android:gravity="left|center"
-        android:layout_toLeftOf="@+id/start_time_box"
-        android:layout_toStartOf="@+id/start_time_box"
-        android:textStyle="bold" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/start_street_address_box"
         android:layout_below="@+id/start_time_box"
-        android:hint="Street Address"
+        android:hint="Starting Street Address"
         android:textSize="14sp"
         android:gravity="center"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/start_time_label"
-        android:layout_toEndOf="@+id/start_time_label" />
+        android:layout_toLeftOf="@+id/start_date_box"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -99,23 +59,10 @@
         android:textSize="14sp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/start_street_address_label"
-        android:layout_toEndOf="@+id/start_street_address_label"
-        android:gravity="center" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Start State"
-        android:id="@+id/start_state_label"
-        android:gravity="left|center"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_toLeftOf="@+id/start_time_box"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_toLeftOf="@+id/start_city_box"
-        android:layout_alignBottom="@+id/start_state_box"
-        android:layout_alignTop="@+id/start_state_box" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -126,9 +73,10 @@
         android:layout_below="@+id/start_city_box"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:layout_toRightOf="@+id/start_state_label"
-        android:layout_toEndOf="@+id/start_state_label"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_toLeftOf="@+id/start_city_box"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -136,9 +84,17 @@
         android:layout_height="wrap_content"
         android:text="Next>>"
         android:id="@+id/Next_btn"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/start_state_box"
-        android:layout_alignStart="@+id/start_state_box"/>
+        android:width="150dp"
+        android:height="25dp"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
+        android:layout_alignTop="@+id/Cancel_btn"
+        android:layout_alignRight="@+id/numberSeatsAvailable"
+        android:layout_alignEnd="@+id/numberSeatsAvailable" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -146,9 +102,18 @@
         android:layout_height="wrap_content"
         android:text="Cancel"
         android:id="@+id/Cancel_btn"
-        android:layout_alignTop="@+id/Next_btn"
-        android:layout_alignRight="@+id/start_state_label"
-        android:layout_alignEnd="@+id/start_state_label" />
+        android:width="150dp"
+        android:gravity="center"
+        android:fontFamily="sans-serif"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="42px"
+        android:background="@color/green"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:height="25dp" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -156,41 +121,14 @@
         android:inputType="number"
         android:ems="10"
         android:id="@+id/numberSeatsAvailable"
-        android:hint="Number"
+        android:hint="Number of Seats"
         android:textSize="@dimen/abc_text_size_small_material"
         android:gravity="center"
         android:layout_below="@+id/start_zipcode_box"
-        android:layout_toRightOf="@+id/numberOfSeats"
-        android:layout_toEndOf="@+id/numberOfSeats" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Number of Seats "
-        android:id="@+id/numberOfSeats"
-        android:gravity="left|center"
-        android:textStyle="bold"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/numberSeatsAvailable"
-        android:layout_toLeftOf="@+id/start_state_box"
-        android:layout_alignTop="@+id/numberSeatsAvailable" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Start City"
-        android:id="@+id/start_city_label"
-        android:gravity="left|center"
-        android:textStyle="bold"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/start_city_box"
-        android:layout_alignRight="@+id/Cancel_btn"
-        android:layout_alignEnd="@+id/Cancel_btn"
-        android:layout_alignBottom="@+id/start_city_box" />
+        android:layout_alignRight="@+id/start_state_box"
+        android:layout_alignEnd="@+id/start_state_box" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -198,26 +136,12 @@
         android:id="@+id/event_name_box"
         android:hint="Your Event Name"
         android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/start_date_label"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:gravity="center"
-        android:textSize="14sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Event Name"
-        android:id="@+id/event_name_label"
-        android:layout_alignParentTop="true"
+        android:textSize="14sp"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignBottom="@+id/event_name_box"
-        android:layout_toLeftOf="@+id/event_name_box"
-        android:layout_toStartOf="@+id/event_name_box"
-        android:gravity="left|center"
-        android:textStyle="bold" />
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -225,23 +149,12 @@
         android:id="@+id/start_zipcode_box"
         android:hint="Zip Code"
         android:layout_below="@+id/start_state_box"
-        android:layout_toRightOf="@+id/start_state_label"
         android:layout_alignRight="@+id/start_state_box"
         android:layout_alignEnd="@+id/start_state_box"
         android:gravity="center"
-        android:textSize="14sp" />
-
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Start Zip Code"
-        android:id="@+id/start_zipcode_label"
-        android:gravity="left|center"
-        android:textStyle="bold"
-        android:layout_below="@+id/start_state_label"
-        android:layout_toStartOf="@+id/start_state_box"
-        android:layout_toLeftOf="@+id/start_state_box"
-        android:layout_alignBottom="@+id/start_zipcode_box" />
+        android:textSize="14sp"
+        android:layout_toLeftOf="@+id/start_city_box"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
