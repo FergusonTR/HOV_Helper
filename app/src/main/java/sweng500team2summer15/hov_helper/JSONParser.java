@@ -13,6 +13,7 @@ import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.protocol.HTTP;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,8 +83,10 @@ public class JSONParser implements Serializable{
             } else if (method.equals("GET")) {
                 // request method is GET
                 DefaultHttpClient httpClient = new DefaultHttpClient();
-                String paramString = URLEncodedUtils.format(params, "utf-8");
+                String paramString = URLEncodedUtils.format(params, "utf-8").replaceAll("\\+", "%20");
+                Log.i("JSON Parser", "PARAM STRING: " + paramString);
                 url += "?" + paramString;
+                Log.i("JSON Parser", "URL: " + url);
                 HttpGet httpGet = new HttpGet(url);
 
                 HttpResponse httpResponse = httpClient.execute(httpGet);
