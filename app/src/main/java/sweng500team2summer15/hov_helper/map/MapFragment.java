@@ -1,8 +1,10 @@
 package sweng500team2summer15.hov_helper.map;
 
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,24 +13,30 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
+import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
+import sweng500team2summer15.hov_helper.eventdisplay.EventDetailsActivity;
 
 /**
  * Created by user on 7/18/2015.
  */
-public class MapFragment extends Fragment implements MapController.MapControllerCallback{
+public class MapFragment extends Fragment implements MapController.MapControllerCallback, GoogleMap.OnMarkerClickListener{
     private MapView mMapView;
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
     private MapController mapController;
     private ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
+    private Map<String, Event> markerToEventMap = new HashMap<String, Event>();
 
     public static final String TAG = MapFragment.class.getSimpleName();
 
@@ -59,6 +67,7 @@ public class MapFragment extends Fragment implements MapController.MapController
         mMap = mMapView.getMap();
         mMap.getUiSettings().setZoomControlsEnabled(true);
         mMap.setMyLocationEnabled(true);
+        mMap.setOnMarkerClickListener(this);
 
         for (Event e : this.arrayListOfEvents)
         {
@@ -70,20 +79,27 @@ public class MapFragment extends Fragment implements MapController.MapController
             MarkerOptions marker;
             if (e.eventType == "Ride")
             {
+                BitmapDescriptor rideBitmap = BitmapDescriptorFactory.fromResource(R.drawable.hitchhiking_ride);
                 marker = new MarkerOptions().position(
                         new LatLng(latitude, longitude)).title("Ride");
                 // Changing marker icon
                 marker.icon(BitmapDescriptorFactory
                         .defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+                marker.icon(rideBitmap);
+
             }
             else
             {
+                BitmapDescriptor shareBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher);
                 marker = new MarkerOptions().position(
-                        new LatLng(latitude, longitude)).title("Share");
+                        new LatLng(latitude, longitude)).title("Drive");
+                marker.icon(shareBitmap);
             }
 
             // adding marker
-            mMap.addMarker(marker);
+            Marker addedMarker = mMap.addMarker(marker);
+            markerToEventMap.put(addedMarker.getId(), e);
+            Log.i(TAG, "add marker: " + addedMarker.getId());
         }
 
         // center on search position
@@ -123,5 +139,28 @@ public class MapFragment extends Fragment implements MapController.MapController
     @Override
     public void handleNewLocation(Location location) {
 
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker) { //Called when a marker has been clicked or tapped.
+        Log.i(TAG, "CLICKED EVENT MARKER ID: " + marker.getId());
+        Event clickedEvent =  markerToEventMap.get(marker.getId());
+        if (clickedEvent != null)
+        {
+            displayEventDetailsActivity(clickedEvent);
+            Log.i(TAG, "EVENT FOUND!");
+        }
+        else{
+            Log.i(TAG, "CLICKED EVENT IS NULL!!!!");
+        }
+
+        return false;
+    }
+
+    private void displayEventDetailsActivity(Event event)
+    {
+        Intent intent = new Intent(this.getActivity().getApplicationContext(),EventDetailsActivity.class);
+        intent.putExtra("eventForDetails", event);
+        startActivity(intent);
     }
 }

@@ -39,7 +39,7 @@ public class SearchResultActivity extends ActionBarActivity {
         // create the list view
         ListView listView = (ListView) findViewById(R.id.listView);
         // Attach header to listview
-        listView.addHeaderView(getLayoutInflater().inflate(R.layout.list_header, null, false));
+        listView.addHeaderView(getLayoutInflater().inflate(R.layout.list_events_header, null, false));
         // Attach the adapter to a listview
         listView.setAdapter(adapter);
 

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +15,14 @@ import java.util.ArrayList;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
-import sweng500team2summer15.hov_helper.eventdisplay.EventArrayAdapter;
-import sweng500team2summer15.hov_helper.eventdisplay.EventDetailsActivity;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 
-
+/**
+ * Fragment for list of events
+ * Created by Steve on 6/6/2015.
+ */
 public class ListEventsFragment extends Fragment {
+    public static final String TAG = ListEventsFragment.class.getSimpleName();
     private ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
 
     public void setEvents(ArrayList<Event> arrayListOfEvents)
@@ -44,7 +47,7 @@ public class ListEventsFragment extends Fragment {
         // create the list view
         ListView listView = (ListView)v.findViewById(R.id.listView);
         // Attach header to listview
-        listView.addHeaderView(this.getActivity().getLayoutInflater().inflate(R.layout.list_header, null, false));
+        listView.addHeaderView(this.getActivity().getLayoutInflater().inflate(R.layout.list_events_header, null, false));
         // Attach the adapter to a listview
         listView.setAdapter(adapter);
 
@@ -52,7 +55,7 @@ public class ListEventsFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                System.out.println("SELECTION!!!!!!!!!!!!!!!!!!" + position);
+                Log.i(TAG, "On Item Clicked. Selection postion: " + position);
 
                 if (position != 0)
                 {
@@ -68,12 +71,12 @@ public class ListEventsFragment extends Fragment {
                     }
                     else
                     {
-                        System.out.println("SELECTED EVENT IS NULL");
+                        Log.i(TAG, "SELECTED EVENT IS NULL");
                     }
                 }
                 else
                 {
-                    System.out.println("POSITION IS ZERO. Title Selected. Ignore..");
+                    Log.i(TAG, "POSITION IS ZERO. Title Selected. Ignore..");
                 }
             }
         });
@@ -108,5 +111,4 @@ public class ListEventsFragment extends Fragment {
         intent.putExtra("eventForDetails", event);
         startActivity(intent);
     }
-
 }

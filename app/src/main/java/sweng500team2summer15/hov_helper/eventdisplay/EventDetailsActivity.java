@@ -1,20 +1,38 @@
 package sweng500team2summer15.hov_helper.eventdisplay;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.location.Address;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
+import sweng500team2summer15.hov_helper.event.management.UserInEvent;
+import sweng500team2summer15.hov_helper.map.MapController;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 
-
+/**
+ * Created by Steve on 7/30/2015.
+ */
 public class EventDetailsActivity extends ActionBarActivity {
+    public static final String TAG = EventDetailsActivity.class.getSimpleName();
+    //Progress Dialog
+    private ProgressDialog pDialog;
+    private Event event;
+    public static Map<Integer, Boolean> rideRequested = new HashMap<Integer, Boolean>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,22 +40,60 @@ public class EventDetailsActivity extends ActionBarActivity {
         setContentView(R.layout.activity_event_details);
 
         // get the event passed into this activity
-        final Event event = (Event)getIntent().getSerializableExtra("eventForDetails");
+        event = (Event)getIntent().getParcelableExtra("eventForDetails");
 
+        final Button offerButton = (Button) findViewById(R.id.btnRequestRide);
+
+        if (event.eventType.equals("Ride"))
+        {
+            offerButton.setText("Offer Ride");
+        }
+        else
+        {
+            offerButton.setText("Request Ride");
+        }
 
         // setup widget labels depending on if ride or share event
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(event.eventType + " Event Details");
         final Button mapButton = (Button) findViewById(R.id.btnMapRoute);
-        final Button offerButton = (Button) findViewById(R.id.btnRequestRide);
-        if (event.eventType == "Ride")
+
+        // populate text fields
+        TextView departTime = (TextView) findViewById(R.id.txtDepartTime);
+        departTime.setText(event.start_Time);
+
+        TextView departAddress = (TextView) findViewById(R.id.txtDepartAddress);
+        Address startAddress = MapController.getStreetAddressFromLatLon(this, event.startLatitude, event.startLongitude);
+        if (startAddress != null)
         {
-            offerButton.setText("Request Ride");
+            departAddress.setText(startAddress.getAddressLine(1) + " " + startAddress.getAddressLine(2));
+        }
+
+
+        TextView arrivalTime = (TextView) findViewById(R.id.txtArrivalTime);
+        arrivalTime.setText(event.end_Time);
+
+        TextView arrivalAddress = (TextView) findViewById(R.id.txtArrivalAddress);
+        Address arriveAddress = MapController.getStreetAddressFromLatLon(this, event.endLatitude, event.endLongitude);
+        if (arrivalAddress != null)
+        {
+            arrivalAddress.setText(arriveAddress.getAddressLine(1) + " " + arriveAddress.getAddressLine(2));
+        }
+
+        TextView numberOfSeats = (TextView) findViewById(R.id.txtBoxAvailableSeats);
+        numberOfSeats.setText(String.valueOf(event.numberAvailable));
+
+        // populate picture
+        ImageView imageView = (ImageView) findViewById(R.id.imageView);
+        if (event.eventType.equals("Ride"))
+        {
+            imageView.setImageResource(R.drawable.hitchhiking_ride);
         }
         else
         {
-            offerButton.setText("Offer Ride");
+            imageView.setImageResource(R.drawable.hov_helper_logo);
         }
+
 
 
         // handle the map button click
@@ -51,7 +107,34 @@ public class EventDetailsActivity extends ActionBarActivity {
             }
         });
 
+        Boolean isRideRequested = this.rideRequested.get(event.eventId);
 
+
+        if ((isRideRequested != null) && (isRideRequested.equals(true)))
+        {
+            Log.i(TAG, "Ride has been requested on Event: " + event.eventId + " DISABLE BUTTON");
+            disableOfferButton();
+        }
+
+        offerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                UserInEvent newRideRequest = new UserInEvent();
+                newRideRequest.eventId = event.eventId;
+                newRideRequest.requestedParticipantLoginId = "s@hotmail.com";
+                newRideRequest.requestStatus = "requested";
+                new RequestOrOfferRide().execute(newRideRequest);
+                disableOfferButton();
+            }
+        });
+    }
+
+    private void disableOfferButton()
+    {
+        final Button offerButton = (Button) findViewById(R.id.btnRequestRide);
+        offerButton.setText("Requested");
+        offerButton.setEnabled(false);
+        rideRequested.put(event.eventId, true);
     }
 
     @Override
@@ -85,5 +168,63 @@ public class EventDetailsActivity extends ActionBarActivity {
         intent.putExtra("dropOffLat", endLat);
         intent.putExtra("dropOffLon", endLon);
         startActivity(intent);
+    }
+
+    /**
+     * Background Async Task to Create new event
+     * */
+    class RequestOrOfferRide extends AsyncTask<UserInEvent, String, String> {
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(EventDetailsActivity.this);
+            pDialog.setMessage("Requesting or Offering Ride..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * Creating event
+         */
+        protected String doInBackground(UserInEvent... args) {
+
+            UserInEvent input = args[0];
+
+            if (input != null)
+            {
+                String requestedParticipantLoginId = input.requestedParticipantLoginId;
+                String requestStatus = input.requestStatus;
+                int eventId = input.eventId;
+                Log.i(TAG, "loginId: " + requestedParticipantLoginId + ", status: " + requestStatus + ", eventId: " + eventId);
+
+                int success = input.create(requestedParticipantLoginId,eventId, requestStatus);
+                Log.i(TAG, "SUCCESS: " + success);
+
+            }
+            else
+            {
+                Log.i(TAG, "DO IN BACKGROUND, INPUT IS NULL!!!");
+            }
+
+            return null;
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         * *
+         */
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+            //ToDo Open a new screen showing the Event Data with a button to view the event
+            //   Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+            //   startActivity(i);
+
+        }
     }
 }
