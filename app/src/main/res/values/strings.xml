@@ -28,7 +28,6 @@
     <string name="title_activity_profile_update">Profile Update</string>
     <string name="title_activity_profile_view">My Profile</string>
     <string name="title_activity_profile_create">Create Profile</string>
-    <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="title_activity_search_results">SearchResultsActivity</string>
     <string name="title_activity_test_address">TestAddressActivity</string>
     <string name="CurrentPassword">Current Password</string>
@@ -37,6 +36,7 @@
     <string name="ChangePassword">Change Password</string>
     <string name="NumberOfSeats">Number of Seats (Available or Required)</string>
     <string name="EventType">Event Type (Ride or Share)</string>
+    <string name="title_activity_requested_events">RequestedEventsActivity</string>
 
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
