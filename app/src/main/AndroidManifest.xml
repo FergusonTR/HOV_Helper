@@ -121,13 +121,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".eventdisplay.SearchResultActivity"
-            android:configChanges="orientation"
-            android:icon="@drawable/hov_helper_logo"
-            android:label="@string/title_activity_search_result"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".eventdisplay.SearchResultsActivity"
             android:configChanges="orientation"
             android:icon="@drawable/hov_helper_logo"
@@ -174,6 +167,10 @@
             android:name=".event.management.CreateEventDataEndActivity"
             android:label="@string/title_activity_create_event_data_end"
             android:icon="@drawable/hov_helper_logo">
+        </activity>
+        <activity
+            android:name=".eventdisplay.RequestedEventsActivity"
+            android:label="@string/title_activity_requested_events" >
         </activity>
     </application>
 
