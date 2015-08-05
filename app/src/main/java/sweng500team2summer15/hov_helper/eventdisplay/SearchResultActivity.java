@@ -63,8 +63,8 @@ public class SearchResultActivity extends AppCompatActivity {
         //Swipe pages
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
         SwipableTabAdapter tabAdapter = new SwipableTabAdapter(getSupportFragmentManager());
-        tabAdapter.setListTabTitle("List Events Found");
-        tabAdapter.setMapTabTitle("Map Events Found");
+        tabAdapter.setListTabTitle("List Search Results");
+        tabAdapter.setMapTabTitle("Map Search Results");
         viewPager.setAdapter(tabAdapter);
 
         // get arraylist of events passed in
