@@ -121,13 +121,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".eventdisplay.SearchResultsActivity"
-            android:configChanges="orientation"
-            android:icon="@drawable/hov_helper_logo"
-            android:label="@string/title_activity_search_results"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".eventdisplay.EventDetailsActivity"
             android:configChanges="orientation"
             android:icon="@drawable/hov_helper_logo"
@@ -155,22 +148,26 @@
         </activity>
         <activity
             android:name=".event.management.EventTypeSelection"
-            android:label="@string/title_activity_event_type_selection"
-            android:icon="@drawable/hov_helper_logo">
+            android:icon="@drawable/hov_helper_logo"
+            android:label="@string/title_activity_event_type_selection" >
         </activity>
         <activity
             android:name=".event.management.CreateEventDataActivity"
-            android:label="@string/title_activity_create_event_data"
-            android:icon="@drawable/hov_helper_logo">
+            android:icon="@drawable/hov_helper_logo"
+            android:label="@string/title_activity_create_event_data" >
         </activity>
         <activity
             android:name=".event.management.CreateEventDataEndActivity"
-            android:label="@string/title_activity_create_event_data_end"
-            android:icon="@drawable/hov_helper_logo">
+            android:icon="@drawable/hov_helper_logo"
+            android:label="@string/title_activity_create_event_data_end" >
         </activity>
         <activity
             android:name=".eventdisplay.RequestedEventsActivity"
             android:label="@string/title_activity_requested_events" >
+        </activity>
+        <activity
+            android:name=".eventdisplay.SearchResultActivity"
+            android:label="@string/title_activity_search_result" >
         </activity>
     </application>
 
