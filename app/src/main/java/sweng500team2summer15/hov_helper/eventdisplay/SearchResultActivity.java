@@ -19,7 +19,6 @@ import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 import sweng500team2summer15.hov_helper.event.management.SwipableTabAdapter;
-import sweng500team2summer15.hov_helper.map.MapFragment;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 
 /**
@@ -56,8 +55,7 @@ public class SearchResultActivity extends AppCompatActivity {
         e2.numberAvailable = 2;
         myList.add(e2);
 
-        // TODO: remove below line when search implemented, for testing only.
-        // This is an example of how another activity would pass in an array of events
+        // TODO: remove below line. This is an example of how another activity would pass in an array of events
         getIntent().putExtra("eventList", myList);
 
         //Swipe pages
@@ -67,7 +65,7 @@ public class SearchResultActivity extends AppCompatActivity {
         tabAdapter.setMapTabTitle("Map Search Results");
         viewPager.setAdapter(tabAdapter);
 
-        // get arraylist of events passed in
+        // get arraylist of events passed in to populate tab list and tab map
         this.arrayListOfEvents = (ArrayList<Event>)getIntent().getSerializableExtra("eventList");
         if (this.arrayListOfEvents == null)
         {
