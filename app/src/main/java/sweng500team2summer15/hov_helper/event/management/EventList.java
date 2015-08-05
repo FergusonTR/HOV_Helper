@@ -1,6 +1,6 @@
 package sweng500team2summer15.hov_helper.event.management;
 
-import sweng500team2summer15.hov_helper.event.management.Event;
+//import sweng500team2summer15.hov_helper.event.management.Event;
 
 /**
  * Created by Terry on 6/4/2015.
@@ -19,5 +19,17 @@ public class EventList {
 
         return 0;
 
+    }
+
+    public String searchByDistance(String eventType, double startLatitude, double startLongitude,double endLatitude, double endLongitude, double startDistance, double endDistance){
+        String status = "";
+
+
+
+
+
+
+
+        return status;
     }
 }

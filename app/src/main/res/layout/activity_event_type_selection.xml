@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="sweng500team2summer15.hov_helper.event.management.EventTypeSelection"
+    android:id="@+id/eventTypeSelection">
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/drive_button"
+        android:src="@mipmap/ic_launcher"
+        android:background="@color/white"
+        android:layout_marginLeft="65dp"
+        android:layout_marginStart="65dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ride_button"
+        android:src="@mipmap/ic_thumb"
+        android:layout_alignTop="@+id/drive_button"
+        android:background="@color/white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="69dp"
+        android:layout_marginEnd="69dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Are you driving or looking a ride?"
+        android:id="@+id/textView17"
+        android:layout_above="@+id/drive_button"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="34dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Drive"
+        android:id="@+id/Drive_Label"
+        android:textAlignment="center"
+        android:layout_alignTop="@+id/ride_label"
+        android:layout_alignLeft="@+id/drive_button"
+        android:layout_alignStart="@+id/drive_button"
+        android:layout_alignRight="@+id/drive_button"
+        android:layout_alignEnd="@+id/drive_button"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Ride"
+        android:id="@+id/ride_label"
+        android:layout_below="@+id/ride_button"
+        android:layout_alignLeft="@+id/ride_button"
+        android:layout_alignStart="@+id/ride_button"
+        android:layout_alignRight="@+id/ride_button"
+        android:layout_alignEnd="@+id/ride_button"
+        android:textAlignment="center"
+        android:gravity="center" />
+
+</RelativeLayout>

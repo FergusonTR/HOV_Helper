@@ -1,116 +1,70 @@
 package sweng500team2summer15.hov_helper.event.management;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
-import sweng500team2summer15.hov_helper.eventdisplay.ListEventsFragment;
-import sweng500team2summer15.hov_helper.map.MapFragment;
-import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 
-public class MainEventActivity extends AppCompatActivity {
 
-    Button btnNewEvent;
-    Button btnReadEvent;
-    Button btnDeleteEvent;
+public class EventTypeSelection extends AppCompatActivity {
+
+    ImageButton ride_btn;
+    ImageButton drive_btn;
+
+    Event tempEvent = new Event();
+    private String login,password;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_event);
-        //Swipe pages
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        viewPager.setAdapter(new MyAdapter(getSupportFragmentManager()));
+        setContentView(R.layout.activity_event_type_selection);
+        ride_btn = (ImageButton) findViewById(R.id.ride_button);
+        drive_btn = (ImageButton) findViewById(R.id.drive_button);
 
-        //Buttons
-        btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);
-        //btnReadEvent = (Button) findViewById(R.id.btnReadEventScrn);
-        //btnDeleteEvent = (Button) findViewById(R.id.btnDeleteEventScrn);
-
-        btnNewEvent.setOnClickListener(new View.OnClickListener(){
+        ride_btn.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View view){
-                //Launching create new event activity
-                Intent i = new Intent(getApplicationContext(), EventTypeSelection.class);
+
+                tempEvent.eventType = "Ride";
+                Intent i = new Intent(getApplicationContext(), CreateEventDataActivity.class);
+                i.putExtra("tempEvent", tempEvent);
                 startActivity(i);
-            }
-        });
+            }});
 
-        /*btnReadEvent.setOnClickListener(new View.OnClickListener(){
-
+        drive_btn.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                //Launching read event activity
-                Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
-                startActivity(i);
-            }
-        });*/
 
-        /*btnDeleteEvent.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view){
-                //Launching read event activity
-                Intent i = new Intent(getApplicationContext(), DeleteEventActivity.class);
+                tempEvent.eventType = "Drive";
+                Intent i = new Intent(getApplicationContext(), CreateEventDataActivity.class);
+                i.putExtra("tempEvent", tempEvent);
                 startActivity(i);
-            }
-        });*/
+            }});
     }
+    protected String doInBackground(){
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+        login = pref.getString("LOGIN", "");                                              // key/value, get value for key "LOGIN"
+        password = pref.getString("PASSWORD", "");                                        // key/value, get value for key "PASSWORD" (currently encrypted)
+        //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
+        //String decryptPw = decryption.decryptOrNull(password);                          // get password after decrypting
 
-    /**
-     * This Class allows me to manage multiple swipe pages
-     */
-    public class MyAdapter extends FragmentPagerAdapter{
-
-        public MyAdapter(FragmentManager fm){
-            super(fm);
-
-        }
-        @Override
-        public Fragment getItem(int arg0){
-            switch (arg0) {
-                case 0:
-                    return new MapFragment();
-                case 1:
-                    return new ListEventsFragment();
-                default:
-                    break;
-                          }
-            return null;
-            }
-
-        @Override
-        public CharSequence getPageTitle(int position) {
-            if(position==0) {
-                return "Map Events";
-            } else {
-                return "List Events";
-            }
-        }
-
-        public int getCount() {
-            return 2;
-        }
-
+        return null;
     }
-
     // ACTION BAR ITEMS
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -155,6 +109,3 @@ public class MainEventActivity extends AppCompatActivity {
         }
     }
 }
-
-
-
