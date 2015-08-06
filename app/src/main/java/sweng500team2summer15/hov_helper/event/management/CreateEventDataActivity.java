@@ -5,12 +5,12 @@ import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
 import sweng500team2summer15.hov_helper.map.MapController;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.resource.dialog.DatePickerFragment;
 import sweng500team2summer15.hov_helper.resource.dialog.TimePickerFragment;
 
-import android.app.ActionBar;
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -23,10 +23,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
-import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -276,21 +274,30 @@ public class CreateEventDataActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
+            case R.id.action_notify:
+                Intent notify = new Intent(getApplicationContext(), RequestedEventsActivity.class);
+                startActivity(notify);
+                finish();
+                return true;
             case R.id.action_profile:
                 Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
                 startActivity(profile);
+                finish();
                 return true;
             case R.id.action_event:
                 Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(event);
+                finish();
                 return true;
-            case R.id.action_map:
-                Intent map = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(map);
+            case R.id.action_search:
+                Intent search = new Intent(getApplicationContext(), SearchEventActivity.class);
+                startActivity(search);
+                finish();
                 return true;
             case R.id.action_change_password:
                 Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);
                 startActivity(changePassword);
+                finish();
                 return true;
             case R.id.action_sign_out:
                 // delete credentials file
@@ -301,7 +308,7 @@ public class CreateEventDataActivity extends AppCompatActivity {
 
                 Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(signOut);
-
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

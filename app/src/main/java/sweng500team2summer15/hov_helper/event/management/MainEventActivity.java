@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
+import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
 import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.R;
 
@@ -115,6 +116,10 @@ public class MainEventActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle presses on the action bar items
         switch (item.getItemId()) {
+            case R.id.action_notify:
+                Intent notify = new Intent(getApplicationContext(), RequestedEventsActivity.class);
+                startActivity(notify);
+                return true;
             case R.id.action_profile:
                 Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
                 startActivity(profile);
@@ -123,9 +128,9 @@ public class MainEventActivity extends AppCompatActivity {
                 Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(event);
                 return true;
-            case R.id.action_map:
-                Intent map = new Intent(getApplicationContext(), MapsActivity.class);
-                startActivity(map);
+            case R.id.action_search:
+                Intent search = new Intent(getApplicationContext(), SearchEventActivity.class);
+                startActivity(search);
                 return true;
             case R.id.action_change_password:
                 Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);

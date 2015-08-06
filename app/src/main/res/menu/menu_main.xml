@@ -1,6 +1,10 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" tools:context=".MainActivity">
+    <item android:id="@+id/action_notify"
+        android:icon="@drawable/ic_action_notify"
+        android:title="Notify"
+        app:showAsAction="always" />
     <item android:id="@+id/action_profile"
         android:icon="@drawable/ic_action_profile"
         android:title="Profile"
@@ -9,9 +13,9 @@
         android:icon="@drawable/ic_action_event"
         android:title="Events"
         app:showAsAction="always" />
-    <item android:id="@+id/action_map"
-        android:icon="@drawable/ic_action_map"
-        android:title="Map"
+    <item android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_search"
+        android:title="Search"
         app:showAsAction="always" />
     <item android:id="@+id/action_change_password"
         android:title="Change Password"
