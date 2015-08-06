@@ -1,53 +1,43 @@
 package sweng500team2summer15.hov_helper.eventdisplay;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
+import sweng500team2summer15.hov_helper.Account.SignInActivity;
+import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 import sweng500team2summer15.hov_helper.event.management.UserInEvent;
+import sweng500team2summer15.hov_helper.map.MapsActivity;
 
 /**
  * Created by Steve on 7/30/2015.
  */
-public class RequestedEventsActivity extends ActionBarActivity implements ActionBar.TabListener {
+public class RequestedEventsActivity extends AppCompatActivity {
     public static final String TAG = RequestedEventsActivity.class.getSimpleName();
     //Progress Dialog
     private ProgressDialog pDialog;
+    private EventRequestsTabAdapter mAdapter;
+    private ViewPager viewPager;
 
     private ArrayList<UserInEvent> arrayListOfEventRequests = new ArrayList<UserInEvent>();
-    private ViewPager viewPager;
-    private EventRequestsTabAdapter mAdapter;
-    private ActionBar actionBar;
-
-    // Tab titles
-    private String[] tabs = {"Requested Rides", "Offered Rides"};
-
-    public void updateListViews(ArrayList<UserInEvent> newList)
-    {
-        UserInEvent userInEvent = newList.get(0);
-        Log.i(TAG, "LOGIN ID: " + userInEvent.requestedParticipantLoginId);
-        Log.i(TAG, "EVENT ID: " + userInEvent.eventId);
-        Log.i(TAG, "STATUS: " + userInEvent.requestStatus);
-        arrayListOfEventRequests.clear();
-        arrayListOfEventRequests.addAll(newList);
-        //viewPager.invalidate();
-        //arrayListOfEventRequests.addAll(newList);
-        //mAdapter.setOfferedRidesFromEventArray(arrayListOfEventRequests);
-        //mAdapter.setRequestedRidesFromEventArray(arrayListOfEventRequests);
-        mAdapter.notifyDataSetChanged();
-        //viewPager.refreshDrawableState();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,64 +72,28 @@ public class RequestedEventsActivity extends ActionBarActivity implements Action
 
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
-        actionBar = getSupportActionBar();
+        // set adapter
         mAdapter = new EventRequestsTabAdapter(getSupportFragmentManager());
         mAdapter.setOfferedRidesFromEventArray(arrayListOfEventRequests);
         mAdapter.setRequestedRidesFromEventArray(arrayListOfEventRequests);
-
         viewPager.setAdapter(mAdapter);
-        actionBar.setHomeButtonEnabled(true);
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-
-        // Adding Tabs
-        for (String tab_name : tabs)
-        {
-            actionBar.addTab(actionBar.newTab().setText(tab_name).setTabListener(this));
-        }
-
         new ReadRideRequests().execute("booby tester"); // TODO: Update. The parameter should be the loginId
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_requested_events, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-        viewPager.setCurrentItem(tab.getPosition());
-    }
-
-    @Override
-    public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
-    }
-
-    @Override
-    public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-
     }
 
     public void setUsersInEvents(ArrayList<UserInEvent> arrayListOfEventRequests)
     {
         this.arrayListOfEventRequests = arrayListOfEventRequests;
+    }
+
+    public void updateListViews(ArrayList<UserInEvent> newList)
+    {
+        UserInEvent userInEvent = newList.get(0);
+        Log.i(TAG, "LOGIN ID: " + userInEvent.requestedParticipantLoginId);
+        Log.i(TAG, "EVENT ID: " + userInEvent.eventId);
+        Log.i(TAG, "STATUS: " + userInEvent.requestStatus);
+        arrayListOfEventRequests.clear();
+        arrayListOfEventRequests.addAll(newList);
+        mAdapter.notifyDataSetChanged();
     }
 
     /**
@@ -215,5 +169,49 @@ public class RequestedEventsActivity extends ActionBarActivity implements Action
             pDialog.dismiss();
         }
 
+    }
+
+    // ACTION BAR ITEMS
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_profile:
+                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                startActivity(profile);
+                return true;
+            case R.id.action_event:
+                Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
+                startActivity(event);
+                return true;
+            case R.id.action_map:
+                Intent map = new Intent(getApplicationContext(), MapsActivity.class);
+                startActivity(map);
+                return true;
+            case R.id.action_change_password:
+                Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                startActivity(changePassword);
+                return true;
+            case R.id.action_sign_out:
+                // delete credentials file
+                SharedPreferences pref = this.getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(signOut);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
