@@ -23,13 +23,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/ride_button"
-        android:src="@mipmap/ic_thumb"
-        android:layout_alignTop="@+id/drive_button"
+        android:src="@drawable/hitchhiking_ride"
         android:background="@color/white"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="69dp"
-        android:layout_marginEnd="69dp" />
+        android:layout_marginEnd="69dp"
+        android:layout_below="@+id/textView17" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -62,11 +62,9 @@
         android:text="Ride"
         android:id="@+id/ride_label"
         android:layout_below="@+id/ride_button"
-        android:layout_alignLeft="@+id/ride_button"
-        android:layout_alignStart="@+id/ride_button"
-        android:layout_alignRight="@+id/ride_button"
-        android:layout_alignEnd="@+id/ride_button"
         android:textAlignment="center"
-        android:gravity="center" />
+        android:gravity="center"
+        android:layout_alignRight="@+id/ride_button"
+        android:layout_alignEnd="@+id/ride_button" />
 
 </RelativeLayout>

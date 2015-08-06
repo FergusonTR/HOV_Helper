@@ -168,6 +168,12 @@
         <activity
             android:name=".eventdisplay.SearchResultActivity"
             android:label="@string/title_activity_search_result" >
+            android:icon="@drawable/hov_helper_logo"
+            android:label="@string/title_activity_create_event_data_end" >
+        </activity>
+        <activity
+            android:name=".event.management.SearchEventActivity"
+            android:label="@string/title_activity_search_event" >
         </activity>
     </application>
 

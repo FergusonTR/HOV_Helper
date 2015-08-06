@@ -25,8 +25,9 @@ public class MainEventActivity extends AppCompatActivity {
     private ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
 
     Button btnNewEvent;
-    Button btnReadEvent;
-    Button btnDeleteEvent;
+
+    String login;
+    String password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +36,7 @@ public class MainEventActivity extends AppCompatActivity {
 
         // TODO: Remove Events Below after list of events query implemented. For Testing only
         ArrayList<Event> myList = new ArrayList<Event>();
+
         // populate with dummy data
         Event e1 = new Event();
         e1.eventId = 1;
@@ -44,6 +46,7 @@ public class MainEventActivity extends AppCompatActivity {
         e1.endLatitude = 40.8122837;
         e1.endLongitude = -77.8561126;
         e1.numberAvailable = 4;
+
         myList.add(e1);
         Event e2 = new Event();
         e2.eventId = 2;
@@ -76,8 +79,6 @@ public class MainEventActivity extends AppCompatActivity {
 
         //Buttons
         btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);
-        //btnReadEvent = (Button) findViewById(R.id.btnReadEventScrn);
-        //btnDeleteEvent = (Button) findViewById(R.id.btnDeleteEventScrn);
 
         btnNewEvent.setOnClickListener(new View.OnClickListener(){
 
@@ -86,30 +87,21 @@ public class MainEventActivity extends AppCompatActivity {
                 //Launching create new event activity
                 Intent i = new Intent(getApplicationContext(), EventTypeSelection.class);
                 startActivity(i);
+                finish();
             }
         });
 
-        /*btnReadEvent.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view){
-                //Launching read event activity
-                Intent i = new Intent(getApplicationContext(), ReadEventActivity.class);
-                startActivity(i);
-            }
-        });*/
-
-        /*btnDeleteEvent.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view){
-                //Launching read event activity
-                Intent i = new Intent(getApplicationContext(), DeleteEventActivity.class);
-                startActivity(i);
-            }
-        });*/
     }
 
+    protected String doInBackground(){
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+        login = pref.getString("LOGIN", "");                                              // key/value, get value for key "LOGIN"
+        password = pref.getString("PASSWORD", "");                                        // key/value, get value for key "PASSWORD" (currently encrypted)
+        //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
+        //String decryptPw = decryption.decryptOrNull(password);                          // get password after decrypting
+
+        return null;
+    }
     // ACTION BAR ITEMS
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

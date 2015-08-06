@@ -76,9 +76,11 @@ public class Start extends Activity implements
         switch(v.getId()){
             case R.id.bSignIn:
                 startActivity(new Intent(this, SignInActivity.class));
+                finish();
                 break;
             case R.id.bSignUp:
                 startActivity(new Intent(this, SignUpActivity.class));
+                finish();
                 break;
             case R.id.sign_in_button:
                 onSignInClicked();

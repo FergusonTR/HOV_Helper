@@ -41,4 +41,15 @@
 <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_activity_search_result">Search Results</string>
+    <string name="title_activity_search_event">Search Events</string>
+    <string name="Start_Search_Street_Address">Start Search Street Address</string>
+    <string name="Start_Search_City_Box">Start Search City/Town</string>
+    <string name="Start_Search_State_Box">Start Search State</string>
+    <string name="Start_Search_ZipCode_Box">Start Search Zip Code</string>
+    <string name="Start_Search_Date_Box">Click to Select Date</string>
+    <string name="End_Search_Street_Address">End Search Street Address</string>
+    <string name="End_Search_City_Box">End Search City/Town</string>
+    <string name="End_Search_State_Box">End Search State</string>
+    <string name="End_Search_ZipCode_Box">End Search Zip Code</string>
+    <string name="End_Search_Date_Box">Click to Select Date</string>
 </resources>

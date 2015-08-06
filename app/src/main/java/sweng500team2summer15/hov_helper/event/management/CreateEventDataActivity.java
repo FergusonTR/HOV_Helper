@@ -32,7 +32,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 import java.util.Calendar;
 
-
 public class CreateEventDataActivity extends AppCompatActivity {
 
     EditText inputEvent_name_Box;
@@ -259,6 +258,7 @@ public class CreateEventDataActivity extends AppCompatActivity {
                         //ToDo destroy the Event object created
                         Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                         startActivity(i);
+                        finish();
                     }
                 }
         );
@@ -301,6 +301,7 @@ public class CreateEventDataActivity extends AppCompatActivity {
 
                 Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
                 startActivity(signOut);
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

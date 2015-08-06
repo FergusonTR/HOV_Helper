@@ -76,8 +76,6 @@ public class Profile{
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
         params.add(new BasicNameValuePair("phoneNumber",this.PhoneNumber));
         params.add(new BasicNameValuePair("email", this.EmailAddress));
-        // params.add(new BasicNameValuePair("emergencyContact_ContactNumber", this.EmergencyContactInfo.ContactNumber));
-        //params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
         params.add(new BasicNameValuePair("emergencyContact_ContactNumber", tempContactInfo.ContactNumber));
         params.add(new BasicNameValuePair("emergencyContact_ContactName", tempContactInfo.ContactName));
         params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
