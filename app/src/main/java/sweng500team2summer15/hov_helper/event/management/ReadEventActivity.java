@@ -18,6 +18,7 @@ package sweng500team2summer15.hov_helper.event.management;
         import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
         import sweng500team2summer15.hov_helper.Account.SignInActivity;
         import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
+        import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
         import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
         import sweng500team2summer15.hov_helper.map.MapsActivity;
         import sweng500team2summer15.hov_helper.R;
@@ -297,7 +298,7 @@ public class ReadEventActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_profile:
-                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
                 startActivity(profile);
                 finish();
                 return true;

@@ -195,6 +195,16 @@ public class ProfileManagement extends AppCompatActivity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
+
+            // delete credentials file
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+
+            Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(signOut);
+            finish();
         }
     }
 
@@ -217,7 +227,7 @@ public class ProfileManagement extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_profile:
-                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
                 startActivity(profile);
                 finish();
                 return true;

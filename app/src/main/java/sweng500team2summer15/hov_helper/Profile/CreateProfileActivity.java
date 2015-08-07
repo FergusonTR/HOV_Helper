@@ -64,7 +64,6 @@ public class CreateProfileActivity extends AppCompatActivity{
 
         //Create button
         Button btnConfirmProfile = (Button) findViewById(R.id.btnProfileConfirm);
-        Button btnCancelProfile = (Button) findViewById(R.id.btnProfileCancel);
 
         //button click event
         btnConfirmProfile.setOnClickListener(new View.OnClickListener() {
@@ -101,18 +100,6 @@ public class CreateProfileActivity extends AppCompatActivity{
 
                 // creating a new event in background thread
                 new CreateNewProfile().execute();
-            }
-        });
-
-        //button click event
-        btnCancelProfile.setOnClickListener(new View.OnClickListener(){
-
-            @Override
-            public void onClick(View view)
-            {
-                // Launcing profile mgmt activity
-                Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
-                startActivity(i);
             }
         });
     }
@@ -160,9 +147,10 @@ public class CreateProfileActivity extends AppCompatActivity{
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-               Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
-               startActivity(i);
 
+            Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+            startActivity(i);
+            finish();
         }
     }
 
@@ -185,7 +173,7 @@ public class CreateProfileActivity extends AppCompatActivity{
                 finish();
                 return true;
             case R.id.action_profile:
-                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
                 startActivity(profile);
                 finish();
                 return true;

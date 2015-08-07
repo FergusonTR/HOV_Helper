@@ -53,6 +53,7 @@ public class SignUpActivity extends Activity {
                 switch(v.getId()) {
                     case R.id.tvCancel:
                         startActivity(new Intent(SignUpActivity.this, Start.class));
+                        finish();
                         break;
                 }
             }
@@ -105,6 +106,7 @@ public class SignUpActivity extends Activity {
 
                     Intent i = new Intent(getApplicationContext(), VerificationCodeActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
             else {

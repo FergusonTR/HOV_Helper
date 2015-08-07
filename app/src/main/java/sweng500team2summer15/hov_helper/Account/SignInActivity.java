@@ -57,6 +57,7 @@ public class SignInActivity extends Activity {
                 switch (v.getId()) {
                     case R.id.tvCancel:
                         startActivity(new Intent(SignInActivity.this, Start.class));
+                        finish();
                         break;
                 }
             }
@@ -206,6 +207,7 @@ public class SignInActivity extends Activity {
                 // profile exists. redirect to event mgmt screen
                 Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
                 startActivity(i);
+                finish();
             }
             else if(readsuccess == "false")
             {
@@ -213,6 +215,7 @@ public class SignInActivity extends Activity {
                 Intent i = new Intent(getApplicationContext(), CreateProfileActivity.class);
                 i.putExtra("LoginID", loginID);
                 startActivity(i);
+                finish();
             }
         }
     }

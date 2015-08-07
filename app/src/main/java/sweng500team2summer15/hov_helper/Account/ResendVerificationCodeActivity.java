@@ -86,6 +86,7 @@ public class ResendVerificationCodeActivity extends Activity {
 
                     Intent i = new Intent(getApplicationContext(), VerificationCodeActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
             else {

@@ -15,113 +15,111 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="My Profile"
-        android:id="@+id/textView13"
-        android:layout_gravity="center_horizontal" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="First Name"
-        android:id="@+id/textView14" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Profile Information"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
+        android:hint="First Name"
         android:ems="10"
-        android:id="@+id/txtProfile_FirstName" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Last Name"
-        android:id="@+id/textView15" />
+        android:id="@+id/txtProfile_FirstName"
+        android:layout_gravity="center_horizontal"
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtProfile_LastName" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Phone"
-        android:id="@+id/textView16" />
+        android:inputType="textPersonName"
+        android:hint="Last Name"
+        android:ems="10"
+        android:id="@+id/txtProfile_LastName"
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
         android:ems="10"
-        android:id="@+id/txtProfile_Phone" />
+        android:id="@+id/txtProfile_Phone"
+        android:hint="Phone Number"
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textEmailAddress"
+        android:ems="10"
+        android:id="@+id/txtProfile_Email"
+        android:hint="Email Address"
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Email"
-        android:id="@+id/textView17" />
-
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/txtProfile_Email" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sex"
+        android:id="@+id/textView2"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <RadioGroup
+        android:id="@+id/profileUpdate_sex"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rgSEX">
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Sex:"
-                android:id="@+id/textView2" />
-            <RadioGroup
-                android:id="@+id/profileUpdate_sex"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Female"
-                android:id="@+id/profileUpdate_female"
-                android:checked="false" />
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Male"
-                android:id="@+id/profileUpdate_male"
-                android:checked="true" />
-            </RadioGroup>
-        </LinearLayout>
-    </RadioGroup>
-
-    <RadioGroup
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtProfileUpdate_Smoking">
-
-        <TextView
+        <RadioButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Smoking Preference"
-            android:id="@+id/textView18" />
+            android:text="Female"
+            android:id="@+id/profileUpdate_female"
+            android:checked="false" />
+
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:id="@+id/profileUpdate_male"
+            android:checked="true" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Smoking Preference"
+        android:id="@+id/textView18"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtProfileUpdate_Smoking"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -145,17 +143,23 @@
             android:checked="true" />
     </RadioGroup>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Preferred Contact Method"
+        android:id="@+id/textView19"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
+
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rgUpdate_CONTACT">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceSmall"
-            android:text="Preferred Contact Method"
-            android:id="@+id/textView19" />
+        android:id="@+id/rgUpdate_CONTACT"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -172,40 +176,47 @@
             android:checked="false" />
     </RadioGroup>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Emergency Contact Information"
-        android:id="@+id/textView20" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Emergency Contact Name"
-        android:id="@+id/textView21" />
-
-    <EditText
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:ems="10"
-        android:id="@+id/txtProfileUpdate_ContactName" />
+        android:weightSum="1"
+        android:layout_gravity="center">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Emergency Contact Number"
-        android:id="@+id/textView22" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Emergency Contact Information"
+            android:id="@+id/textView20"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/txtProfileUpdate_ContactNumber" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:hint="Emergency Contact Name"
+            android:ems="10"
+            android:id="@+id/txtProfileUpdate_ContactName"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/txtProfileUpdate_ContactNumber"
+            android:hint="Emergency Contact Phone Number"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+
+    </LinearLayout>
 
     <LinearLayout
         android:orientation="horizontal"
@@ -215,20 +226,42 @@
         android:layout_gravity="center">
 
         <Button
-            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btnProfileUpdate"
+            android:text="Update"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@color/green"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update"
-            android:id="@+id/btnProfileUpdate" />
+            android:layout_margin="10dp"/>
 
         <Button
-            style="?android:attr/buttonStyleSmall"
+            android:id="@+id/btnProfileDelete"
+            android:text="Delete"
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@color/red"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/btnProfileUpdateCancel"/>
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/tvCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:textStyle="bold"
+        android:textAlignment="gravity"
+        android:text="Cancel"
+        android:layout_margin="10dp"/>
 
 </LinearLayout>
     </ScrollView>

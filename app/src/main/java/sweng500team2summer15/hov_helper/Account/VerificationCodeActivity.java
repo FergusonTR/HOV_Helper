@@ -93,6 +93,7 @@ public class VerificationCodeActivity extends Activity {
 
                     Intent i = new Intent(getApplicationContext(), SignInActivity.class);
                     startActivity(i);
+                    finish();
                 }
             }
             else {

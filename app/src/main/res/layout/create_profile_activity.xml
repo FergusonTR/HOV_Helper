@@ -7,16 +7,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ProfileManagement">
 
-    <LinearLayout
+<LinearLayout
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Create Profile"
-        android:id="@+id/textView"
-        android:layout_gravity="center_horizontal" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Profile Information"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -26,7 +28,10 @@
         android:ems="10"
         android:id="@+id/txtFirstName"
         android:layout_gravity="center_horizontal"
-        android:editable="true" />
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -35,7 +40,10 @@
         android:hint="Last Name"
         android:ems="10"
         android:id="@+id/txtLastName"
-        android:editable="true" />
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -44,7 +52,10 @@
         android:ems="10"
         android:id="@+id/txtPhone"
         android:hint="Phone Number"
-        android:editable="true" />
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <EditText
         android:layout_width="fill_parent"
@@ -53,55 +64,61 @@
         android:ems="10"
         android:id="@+id/txtEmailAddress"
         android:hint="Email Address"
-        android:editable="true" />
+        android:editable="true"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Sex"
+        android:id="@+id/textView2"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rgSEX"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Female"
+            android:id="@+id/rbtnsexFemale"
+            android:checked="false" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Sex:"
-                android:id="@+id/textView2" />
-            <RadioGroup
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/rgSEX">
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Female"
-                    android:id="@+id/rbtnsexFemale"
-                    android:checked="false" />
-
-                <RadioButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Male"
-                    android:id="@+id/rbtnsexMale"
-                    android:checked="true" />
-            </RadioGroup>
-
-
-        </LinearLayout>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Male"
+            android:id="@+id/rbtnsexMale"
+            android:checked="true" />
+    </RadioGroup>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Smoking Preference"
-        android:id="@+id/textView4" />
+        android:id="@+id/textView4"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rgSMOKE">
+        android:id="@+id/rgSMOKE"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -130,12 +147,18 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Preferred Contact Method"
-        android:id="@+id/textView3" />
+        android:id="@+id/textView3"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rgCONTACT">
+        android:id="@+id/rgCONTACT"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <RadioButton
             android:layout_width="wrap_content"
@@ -164,7 +187,10 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Emergency Contact Information"
-            android:id="@+id/textView12" />
+            android:id="@+id/textView12"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -173,7 +199,10 @@
             android:hint="Emergency Contact Name"
             android:ems="10"
             android:id="@+id/txtEmergencyName"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
         <EditText
             android:layout_width="match_parent"
@@ -181,7 +210,10 @@
             android:inputType="phone"
             android:ems="10"
             android:id="@+id/txtEmergencyNumber"
-            android:hint="Emergency Contact Phone Number" />
+            android:hint="Emergency Contact Phone Number"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
 
     </LinearLayout>
 
@@ -193,18 +225,17 @@
         android:layout_gravity="center">
 
         <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/btnProfileCancel"/>
-
-        <Button
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/btnProfileConfirm"
             android:text="Confirm"
-            android:id="@+id/btnProfileConfirm" />
+            android:fontFamily="sans-serif"
+            android:textColor="@color/white"
+            android:textAllCaps="false"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:background="@color/green"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"/>
 
     </LinearLayout>
 

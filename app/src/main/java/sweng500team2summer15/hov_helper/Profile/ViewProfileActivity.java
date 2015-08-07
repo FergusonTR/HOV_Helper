@@ -1,7 +1,9 @@
 package sweng500team2summer15.hov_helper.Profile;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -15,9 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
+import sweng500team2summer15.hov_helper.JSONParser;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 import sweng500team2summer15.hov_helper.event.management.SearchEventActivity;
@@ -42,6 +54,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     RadioGroup inputSmokingPref;
     EditText inputEmergencyName;
     EditText inputEmergencyPhone;
+    TextView tvCancel;
 
     private String login;
     private String password;
@@ -57,7 +70,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_profile);
 
         Button btnConfirmUpdate = (Button) findViewById(R.id.btnProfileUpdate);
-        Button btnCancelProfile = (Button) findViewById(R.id.btnProfileUpdateCancel);
+        Button btnDeleteProfile = (Button) findViewById(R.id.btnProfileDelete);
 
         inputFirstName = (EditText) findViewById(R.id.txtProfile_FirstName);
         inputLastName = (EditText) findViewById(R.id.txtProfile_LastName);
@@ -68,6 +81,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         inputSmokingPref = (RadioGroup)findViewById(R.id.txtProfileUpdate_Smoking);
         inputSexMale = (RadioButton) findViewById(R.id.profileUpdate_male);
         inputContactCall = (RadioButton) findViewById(R.id.rbtnUpdate_CALL);
+        tvCancel = (TextView) findViewById(R.id.tvCancel);
 
         // Attempt to get the profile
         new ReadProfile().execute();
@@ -122,15 +136,41 @@ public class ViewProfileActivity extends AppCompatActivity {
             }
         });
 
-        //button click event
-        btnCancelProfile.setOnClickListener(new View.OnClickListener(){
+        btnDeleteProfile.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view)
-            {
+            public void onClick(View view) {
+                // Display an alert to ensure the user really wants to delete their profile
+                AlertDialog.Builder builder = new AlertDialog.Builder(ViewProfileActivity.this);
+                builder.setMessage("Are you sure you want to delete your profile?");
+                builder.setCancelable(true);
+                builder.setTitle("Confirm");
+                builder.setMessage("Are you sure you wish to delete your profile? Doing so will sign you out of the application.");
+                builder.setPositiveButton("Yes, delete my profile", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        new DeleteProfile().execute(login);
+                    }
+                });
+                builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing. dialog is dismissed
+                    }
+                });
+
+                AlertDialog alert = builder.create();
+                alert.show();
+            }
+        });
+
+        //button click event
+        tvCancel.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
                 // cancel
-                Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
-                startActivity(i);
+                finish();
             }
         });
     }
@@ -272,6 +312,90 @@ public class ViewProfileActivity extends AppCompatActivity {
         }
     }
 
+    class DeleteProfile extends AsyncTask<String, String, String> {
+
+        private ProgressDialog pDialog;
+
+        /**
+         * Before starting background thread Show Progress Dialog
+         */
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(ViewProfileActivity.this);
+            pDialog.setMessage("Deleting Profile..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+
+        /**
+         * deleting event
+         */
+        protected String doInBackground(String... args) {
+
+            String loginID = args[0];
+
+            JSONParser jsonParser = new JSONParser();
+
+            // url to create new product
+            String url_delete_profile = "http://www.hovhelper.com/delete_profile.php";
+
+            String TAG_SUCCESS = "success";
+            String TAG_MESSAGE = "message";
+
+            List<NameValuePair> params = new ArrayList<NameValuePair>();
+            params.add(new BasicNameValuePair("loginID", loginID));
+
+            // failedReason captures the feedback from the delete_profile.php
+            String failedReason = "something went wrong";
+
+            // deleting event by making HTTP request
+            JSONObject json = jsonParser.makeHttpRequest(url_delete_profile, "POST", params);
+
+            try {
+                int success = json.getInt(TAG_SUCCESS);
+                if (success == 1) {
+                    // successfully deleted profile
+                    failedReason = json.getString(TAG_MESSAGE);
+
+                } else {
+                    // failed to create profile, capture reason
+                    failedReason = json.getString(TAG_MESSAGE);
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            publishProgress(failedReason);
+
+            return failedReason;
+        }
+
+        protected void onProgressUpdate(String...values){
+            super.onProgressUpdate(values);
+        }
+
+        /**
+         * After completing background task Dismiss the progress dialog
+         */
+        protected void onPostExecute(String file_url) {
+            // dismiss the dialog once done
+            pDialog.dismiss();
+
+            // delete credentials file
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.clear();
+            editor.commit();
+
+            Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
+            startActivity(signOut);
+            finish();
+        }
+    }
+
     class UpdateProfile extends AsyncTask<String, String, String> {
 
          /**
@@ -313,8 +437,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-            Intent i = new Intent(getApplicationContext(), ProfileManagement.class);
-            startActivity(i);
+            finish();
         }
     }
 
@@ -337,7 +460,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                 finish();
                 return true;
             case R.id.action_profile:
-                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
                 startActivity(profile);
                 finish();
                 return true;

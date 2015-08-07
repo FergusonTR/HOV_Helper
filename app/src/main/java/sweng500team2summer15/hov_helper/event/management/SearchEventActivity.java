@@ -31,6 +31,7 @@ import java.util.List;
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
+import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
 import sweng500team2summer15.hov_helper.eventdisplay.SearchResultActivity;
@@ -312,7 +313,7 @@ class searchEvent extends AsyncTask<String, String, String> {
                 finish();
                 return true;
             case R.id.action_profile:
-                Intent profile = new Intent(getApplicationContext(), ProfileManagement.class);
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
                 startActivity(profile);
                 finish();
                 return true;
