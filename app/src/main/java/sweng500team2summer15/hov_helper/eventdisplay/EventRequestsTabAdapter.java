@@ -48,7 +48,7 @@ public class EventRequestsTabAdapter extends FragmentPagerAdapter {
         if(position==0) {
             return "Requested Rides";
         } else {
-            return "Requested Rides";
+            return "Offered Rides";
         }
     }
 
