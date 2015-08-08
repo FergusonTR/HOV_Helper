@@ -1,8 +1,11 @@
 <resources>
+    <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
     <color name="green">#32733A</color>
     <color name="red">#733232</color>
-    <string name="app_name">HOV_Helper</string>
+    <color name="yellow">#F7D417</color>
+    <string name="app_name">HOV Helper</string>
+    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Login</string>
