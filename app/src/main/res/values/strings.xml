@@ -3,7 +3,6 @@
     <color name="green">#32733A</color>
     <color name="red">#733232</color>
     <string name="app_name">HOV_Helper</string>
-    <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_maps">Map</string>
     <string name="title_activity_login">Login</string>

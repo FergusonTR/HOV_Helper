@@ -56,12 +56,16 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         // get the start address from the lat/lon
         Address startAddress = MapController.getStreetAddressFromLatLon(this.context, event.startLatitude, event.startLongitude);
         Address endAddress = MapController.getStreetAddressFromLatLon(this.context, event.endLatitude, event.endLongitude);
-        startLocationView.setText(startAddress.getAddressLine(1) + " " + startAddress.getAddressLine(2));
+        startLocationView.setText(startAddress.getAddressLine(0) + " " + startAddress.getAddressLine(1) + " " + startAddress.getAddressLine(2));
         endLocationView.setText(endAddress.getAddressLine(0) + " " + endAddress.getAddressLine(1) + " " + endAddress.getAddressLine(2));
 
         // date
         String date = event.start_Time;
-        timeView.setText(date);
+        date = date.substring(0,10);
+        String year = date.substring(0,4);
+        String monthDay = date.substring(6,10);
+
+        timeView.setText(year +"\n" + monthDay);
 
         return convertView;
     }

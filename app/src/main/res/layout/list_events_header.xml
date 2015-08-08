@@ -6,28 +6,33 @@
         android:layout_width="20dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Type">
+        android:text="Type"
+        android:textSize="12sp">
     </TextView>
 
     <TextView
         android:layout_width="90dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Pickup Address">
+        android:text="Pickup Address"
+        android:textSize="12sp">
     </TextView>
 
     <TextView
         android:layout_width="90dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Dropoff">
+        android:text="Dropoff"
+        android:textSize="12sp">
     </TextView>
 
     <TextView
         android:layout_width="20dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Time">
+        android:text="Time"
+        android:textSize="12sp"
+        android:gravity="center">
     </TextView>
 
 </LinearLayout>

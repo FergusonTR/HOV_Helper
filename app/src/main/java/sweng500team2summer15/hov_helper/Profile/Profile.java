@@ -53,8 +53,7 @@ public class Profile{
     }
 
     // Submit a profile to the database
-    public Boolean SubmitProfile(String loginID, String password)
-    {
+    public Boolean SubmitProfile(String loginID, String password) {
         //This code was borrowed from http://www.androidhive.info/2012/05/how-to-connect-android-with-php-mysql/
         JSONParser jsonParser = new JSONParser();
 
@@ -215,13 +214,15 @@ public class Profile{
 
         JSONParser jsonParser = new JSONParser();
 
-        // url to update new product
+        // url to update the profile
         String url_update_profile = "http://www.hovhelper.com/update_profile.php";
 
         // JSON Node names
         String TAG_SUCCESS = "success";
         String TAG_MESSAGE = "message";
         String updateResult = "";
+
+        EmergencyContactInfo tempContactInfo = this.EmergencyContactInfo;
 
         // Building Parameters
         //ToDo remove deprecated approach and use URLBuilder instead
@@ -231,8 +232,8 @@ public class Profile{
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
         params.add(new BasicNameValuePair("phoneNumber", this.PhoneNumber));
         params.add(new BasicNameValuePair("email", this.EmailAddress));
-        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", this.EmergencyContactInfo.ContactNumber));
-        params.add(new BasicNameValuePair("emergencyContact_ContactName", this.EmergencyContactInfo.ContactName));
+        params.add(new BasicNameValuePair("emergencyContact_ContactNumber", tempContactInfo.ContactNumber));
+        params.add(new BasicNameValuePair("emergencyContact_ContactName", tempContactInfo.ContactName));
         params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
         params.add(new BasicNameValuePair("preferredContactMethod", this.UserPreferredContactMethod.toString()));
         params.add(new BasicNameValuePair("smokingPreference", this.UserSmokingPreference.toString()));
@@ -240,6 +241,7 @@ public class Profile{
         // getting JSON Object
         // Note that update event url accepts POST method
         JSONObject json = jsonParser.makeHttpRequest(url_update_profile,"POST", params);
+        Log.d("profile",json.toString());
 
         // check for success tag
         try {

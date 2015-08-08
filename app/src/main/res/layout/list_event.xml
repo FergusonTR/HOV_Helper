@@ -20,7 +20,9 @@
         android:layout_width="20dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@+id/eventType">
+        android:text="@+id/eventType"
+        android:adjustViewBounds="false"
+        android:layout_gravity="left">
     </ImageView>
 
     <TextView
@@ -28,7 +30,9 @@
         android:layout_width="90dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@+id/startLocation">
+        android:text="@+id/startLocation"
+        android:textSize="12sp"
+        android:gravity="left">
     </TextView>
 
     <TextView
@@ -36,7 +40,9 @@
         android:layout_width="90dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@+id/endLocation">
+        android:text="@+id/endLocation"
+        android:textSize="12sp"
+        android:gravity="left">
     </TextView>
 
     <TextView
@@ -44,7 +50,9 @@
         android:layout_width="20dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="@+id/eventTime">
+        android:text="@+id/eventTime"
+        android:textSize="12dp"
+        android:gravity="center">
     </TextView>
 
 </LinearLayout>

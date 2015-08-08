@@ -20,10 +20,9 @@ import android.util.Log;
 import sweng500team2summer15.hov_helper.*;
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
-import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
 import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
-import sweng500team2summer15.hov_helper.map.MapsActivity;
+
 
 
 public class DeleteEventActivity extends AppCompatActivity {

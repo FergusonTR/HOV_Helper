@@ -14,14 +14,13 @@ import java.util.ArrayList;
 
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
-import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.event.management.Event;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 import sweng500team2summer15.hov_helper.event.management.SearchEventActivity;
 import sweng500team2summer15.hov_helper.event.management.SwipableTabAdapter;
-import sweng500team2summer15.hov_helper.map.MapsActivity;
+
 
 /**
  * Created by Steve on 6/30/2015.
@@ -36,9 +35,9 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
         // TODO: Remove Events Below after search result implemented. For Testing only
-        ArrayList<Event> myList = new ArrayList<Event>();
+       // ArrayList<Event> myList = new ArrayList<Event>();
         // populate with dummy data
-        Event e1 = new Event();
+        /*Event e1 = new Event();
         e1.eventId = 1;
         e1.eventType = "Ride";
         e1.startLatitude = 40.82;
@@ -55,10 +54,11 @@ public class SearchResultActivity extends AppCompatActivity {
         e2.endLatitude = 40.8122837;
         e2.endLongitude = -77.8561126;
         e2.numberAvailable = 2;
-        myList.add(e2);
+        myList.add(e2);*/
 
         // TODO: remove below line. This is an example of how another activity would pass in an array of events
-        getIntent().putExtra("eventList", myList);
+        //getIntent().putExtra("eventList", myList);
+        this.arrayListOfEvents =  getIntent().getParcelableArrayListExtra("eventList");
 
         //Swipe pages
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -68,7 +68,8 @@ public class SearchResultActivity extends AppCompatActivity {
         viewPager.setAdapter(tabAdapter);
 
         // get arraylist of events passed in to populate tab list and tab map
-        this.arrayListOfEvents = (ArrayList<Event>)getIntent().getSerializableExtra("eventList");
+        //this.arrayListOfEvents = (ArrayList<Event>)getIntent().getSerializableExtra("eventList");
+
         if (this.arrayListOfEvents == null)
         {
             // create empty list

@@ -104,7 +104,8 @@ public class MapFragment extends Fragment implements MapController.MapController
 
         // center on search position
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(40.82, -77.8561126)).zoom(12).build();
+                  .target(new LatLng(40.82, -77.8561126)).zoom(12).build();
+
         mMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
 
