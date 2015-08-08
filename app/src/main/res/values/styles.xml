@@ -11,6 +11,7 @@
         <item name="colorControlNormal">@android:color/background_dark</item>
         <item name="colorControlActivated">@color/green</item>
         <item name="colorControlHighlight">#ffcb6345</item>
+
     </style>
 
 </resources>

@@ -4,14 +4,14 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Address;
 import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
+//import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,7 +27,7 @@ import sweng500team2summer15.hov_helper.map.MapsActivity;
 /**
  * Created by Steve on 7/30/2015.
  */
-public class EventDetailsActivity extends ActionBarActivity {
+public class EventDetailsActivity extends AppCompatActivity {
     public static final String TAG = EventDetailsActivity.class.getSimpleName();
     //Progress Dialog
     private ProgressDialog pDialog;

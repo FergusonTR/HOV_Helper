@@ -2,9 +2,11 @@ package sweng500team2summer15.hov_helper;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +28,7 @@ import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Account.SignUpActivity;
 import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
+import sweng500team2summer15.hov_helper.resource.Encryption;
 
 public class Start extends Activity implements
         GoogleApiClient.ConnectionCallbacks,
@@ -69,6 +72,18 @@ public class Start extends Activity implements
         bSignUp.setOnClickListener(this);
 
         setGooglePlusButtonText(signInButton, "Sign In with Google");
+
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+        String login = pref.getString("LOGIN", "");
+        String password = pref.getString("PASSWORD", "");
+
+        // if private file already contains a user's login and password,
+        // s/he is still logged in! redirect to main event screen
+        if (!login.isEmpty() && !password.isEmpty()) {
+            Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 
     @Override

@@ -3,15 +3,12 @@ package sweng500team2summer15.hov_helper.event.management;
 import com.google.android.gms.maps.model.LatLng;
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
-import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
 import sweng500team2summer15.hov_helper.map.MapController;
-import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.resource.dialog.DatePickerFragment;
 import sweng500team2summer15.hov_helper.resource.dialog.TimePickerFragment;
-
 import android.app.TimePickerDialog;
 import android.app.DatePickerDialog;
 import android.content.Context;

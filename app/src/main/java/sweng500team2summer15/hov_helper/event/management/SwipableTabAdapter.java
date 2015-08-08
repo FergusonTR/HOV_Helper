@@ -18,8 +18,6 @@ public class SwipableTabAdapter extends FragmentPagerAdapter {
     MapFragment mapFragment = new MapFragment();
     public String LIST_TAB_TITLE = "List Events";
     public String MAP_TAB_TITLE = "Map Events";
-
-
     public SwipableTabAdapter(FragmentManager fm){
         super(fm);
     }
@@ -35,7 +33,6 @@ public class SwipableTabAdapter extends FragmentPagerAdapter {
         }
         return null;
     }
-
     @Override
     public CharSequence getPageTitle(int position) {
         if(position==0) {
@@ -44,22 +41,18 @@ public class SwipableTabAdapter extends FragmentPagerAdapter {
             return LIST_TAB_TITLE;
         }
     }
-
     public int getCount() {
         return 2;
     }
-
     public void setEvents(ArrayList<Event> arrayListOfEvents)
     {
         listFragment.setEvents(arrayListOfEvents);
         mapFragment.setEvents(arrayListOfEvents);
     }
-
     public void setListTabTitle(String title)
     {
         this.LIST_TAB_TITLE = title;
     }
-
     public void setMapTabTitle(String title)
     {
         this.MAP_TAB_TITLE = title;

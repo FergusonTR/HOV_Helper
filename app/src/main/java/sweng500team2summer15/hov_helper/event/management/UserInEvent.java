@@ -25,7 +25,7 @@ public class UserInEvent extends Event {
         //Test Value
         this.eventId = 0;
 
-        // url to create new product
+        // url to create new user in event entry
         String url_create_event = "http://www.hovhelper.com/create_users_in_event.php";
 
         // JSON Node names

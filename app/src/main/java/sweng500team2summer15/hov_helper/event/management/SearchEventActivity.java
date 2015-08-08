@@ -16,27 +16,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
-
 import com.google.android.gms.maps.model.LatLng;
-
 import sweng500team2summer15.hov_helper.JSONParser;
-import org.apache.http.NameValuePair;
-import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONException;
-import org.json.JSONObject;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
-
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
-import sweng500team2summer15.hov_helper.Profile.ProfileManagement;
 import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
 import sweng500team2summer15.hov_helper.eventdisplay.SearchResultActivity;
 import sweng500team2summer15.hov_helper.map.MapController;
-import sweng500team2summer15.hov_helper.map.MapsActivity;
 import sweng500team2summer15.hov_helper.resource.CheckNetwork;
 import sweng500team2summer15.hov_helper.resource.Encryption;
 import sweng500team2summer15.hov_helper.resource.dialog.DatePickerFragment;
@@ -70,9 +59,11 @@ public class SearchEventActivity extends AppCompatActivity {
 
     String inputEventType="";
     int SearchResult;
-    final JSONParser jsonParser = new JSONParser();
 
+    final JSONParser jsonParser = new JSONParser();
     private int start_year, start_month, start_day;
+    EventList myEventList = new EventList();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +74,7 @@ public class SearchEventActivity extends AppCompatActivity {
         inputStartSearchCity =(EditText)findViewById(R.id.Start_Search_City_Box);
         inputStartSearchState = (EditText) findViewById(R.id.Start_Search_State_Box);
         inputStartSearchZipCode = (EditText) findViewById(R.id.Start_Search_ZipCode_Box);
-        inputStartSearchDistance = (EditText) findViewById(R.id.Start_Search_Date_Box);
+        inputStartSearchDistance = (EditText) findViewById(R.id.StartSearchDistance);
         inputStartSearchDate = (EditText) findViewById(R.id.Start_Search_Date_Box);
         inputEndSearchAddress = (EditText)findViewById(R.id.End_Search_Street_Box);
         inputEndSearchCity = (EditText) findViewById (R.id.End_Search_City_Box);
@@ -143,7 +134,7 @@ public class SearchEventActivity extends AppCompatActivity {
                 startSearchCity = inputStartSearchCity.getText().toString();
                 startSearchState = inputStartSearchState.getText().toString();
                 startSearchZipCode = inputStartSearchZipCode.getText().toString();
-                searchDate = inputStartSearchState.getText().toString();
+                searchDate = inputStartSearchDate.getText().toString();
                 endSearchAddress = inputEndSearchAddress.getText().toString();
                 endSearchCity = inputEndSearchCity.getText().toString();
                 endSearchState = inputEndSearchState.getText().toString();
@@ -230,60 +221,25 @@ class searchEvent extends AsyncTask<String, String, String> {
         Double endLatitude = endResults.latitude;
         Double endLongitude = endResults.longitude;
 
-        String start_time = searchDate + " 00:00:00";
-        String end_time = searchDate + " 23:59:59";
+        //EventList myEventList = new EventList();
 
+         myEventList.arrayListOfEvents = myEventList.searchByDistance(searchDate, startLatitude,
+                startLongitude,endLatitude,endLongitude,startSearchDistance,endSearchDistance,inputEventType);
 
-        // url to search events
-        String url_create_event = "http://www.hovhelper.com/search_event.php";
+        SearchResult = myEventList.arrayListOfEvents.size();
 
-        // JSON Node names
-        String TAG_SUCCESS = "success";
-
-        // Building Parameters
-        //ToDo remove deprecated approach and use URLBuilder instead
-        List<NameValuePair> JSONparams = new ArrayList<NameValuePair>();
-        JSONparams.add(new BasicNameValuePair("startTime", start_time));
-        JSONparams.add(new BasicNameValuePair("endTime", end_time));
-        JSONparams.add(new BasicNameValuePair("startLatitude", startLatitude.toString()));
-        JSONparams.add(new BasicNameValuePair("startLongitude", startLongitude.toString()));
-        JSONparams.add(new BasicNameValuePair("endLatitude", endLatitude.toString()));
-        JSONparams.add(new BasicNameValuePair("endLongitude", endLongitude.toString()));
-        JSONparams.add(new BasicNameValuePair("startDistance", startSearchDistance.toString()));
-        JSONparams.add(new BasicNameValuePair("endDistance", endSearchDistance.toString()));
-        JSONparams.add(new BasicNameValuePair("eventType", inputEventType));
-
-        // getting JSON Object
-        // Note that create event url accepts POST method
-        JSONObject json = jsonParser.makeHttpRequest(url_create_event, "POST", JSONparams);
-
-        // check for success tag
-        try {
-            int success = json.getInt(TAG_SUCCESS);
-
-            if (success == 1) {
-                // successfully found events
-                //this.eventId = json.getInt("event");
-                SearchResult = 1;
-
-
-            } else {
-                // failed to create event
-                SearchResult = 0;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-
-            return null;
+        return null;
         }
-    return null;}
+
+
 
     protected void onPostExecute(String file_url){
         pDialog.dismiss();
-        if (SearchResult != 0) {
+        if (SearchResult > 0) {
             Toast toast = Toast.makeText(getApplicationContext(), "Results Found.", Toast.LENGTH_SHORT);
             toast.show();
             Intent i = new Intent(getApplicationContext(), SearchResultActivity.class);
+            i.putParcelableArrayListExtra("eventList",myEventList.arrayListOfEvents);
             startActivity(i);
         } else {
             Toast toast = Toast.makeText(getApplicationContext(), "No Events found, please try searching again", Toast.LENGTH_SHORT);

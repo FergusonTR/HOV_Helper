@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import sweng500team2summer15.hov_helper.R;
 import sweng500team2summer15.hov_helper.Start;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
 
 public class SignUpActivity extends Activity {
 
@@ -58,6 +59,18 @@ public class SignUpActivity extends Activity {
                 }
             }
         });
+
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+        String login = pref.getString("LOGIN", "");
+        String password = pref.getString("PASSWORD", "");
+
+        // if private file already contains a user's login and password,
+        // s/he is still logged in! redirect to main event screen
+        if (!login.isEmpty() && !password.isEmpty()) {
+            Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 
     // Background Async Task to sign up a new user

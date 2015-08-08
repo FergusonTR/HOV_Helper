@@ -36,6 +36,8 @@ public class Event implements Parcelable{
     public String event_interval = "weekly";
     public String returnTrip = "no";
     public String daysofweek ="Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday";
+    public Double startSearchDistance = 0.0;
+    public Double endSearchDistance = 0.0;
 
     DateFormat dateformat =  new SimpleDateFormat ("yyyy-MM-dd HH:mm:ss");
 
@@ -68,6 +70,8 @@ public class Event implements Parcelable{
         setEnd_Time(in.readString());
         setCreateTimeStamp(in.readString());
         setEventName(in.readString());
+        setStartSearchDistance(in.readDouble());
+        setEndSearchDistance(in.readDouble());
     }
     public void setCreateResult(int createResult){
         this.createResult = createResult;
@@ -123,6 +127,12 @@ public class Event implements Parcelable{
     public void setEventName (String eventName){
         this.eventName = eventName;
     }
+    public void setStartSearchDistance (Double startSearchDistance){
+        this.startSearchDistance = startSearchDistance;
+    }
+    public void setEndSearchDistance (Double endSearchDistance) {
+        this.endSearchDistance = endSearchDistance;
+    }
     public int getCreateResult(){
         return createResult;
     }
@@ -177,6 +187,12 @@ public class Event implements Parcelable{
     public String getEventName(){
         return eventName;
     }
+    public Double getStartSearchDistance(){
+        return startSearchDistance;
+    }
+    public Double getEndSearchDistance(){
+        return endSearchDistance;
+    }
     @Override
     public int describeContents(){
         return 0;
@@ -201,6 +217,8 @@ public class Event implements Parcelable{
         in.writeString(getEnd_Time());
         in.writeString(getCreateTimeStamp());
         in.writeString(getEventName());
+        in.writeDouble(getStartSearchDistance());
+        in.writeDouble(getEndSearchDistance());
     }
     public int create(String loginId, String password) {
         //This would add the event to the mySQL database.

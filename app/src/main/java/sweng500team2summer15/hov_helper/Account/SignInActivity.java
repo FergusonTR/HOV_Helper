@@ -85,6 +85,18 @@ public class SignInActivity extends Activity {
                 }
             }
         });
+
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+        String login = pref.getString("LOGIN", "");
+        String password = pref.getString("PASSWORD", "");
+
+        // if private file already contains a user's login and password,
+        // s/he is still logged in! redirect to main event screen
+        if (!login.isEmpty() && !password.isEmpty()) {
+            Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
+            startActivity(i);
+            finish();
+        }
     }
 
     // Background Async Task to sign in the user

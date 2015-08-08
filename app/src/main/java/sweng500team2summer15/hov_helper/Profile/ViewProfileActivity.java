@@ -18,6 +18,7 @@ import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -43,7 +44,7 @@ import sweng500team2summer15.hov_helper.resource.Encryption;
 public class ViewProfileActivity extends AppCompatActivity {
 
     String readSuccess = "false";
-
+    String updateSuccess = "false";
 
     EditText inputFirstName;
     EditText inputLastName;
@@ -98,11 +99,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                 String LoginID = thisIntent.getStringExtra("LoginID");
 
 
-
-                //Mike I didn't touch this however I would move this block of code to the onCreate or an onClick activity and pull it out of the AsyncTask
-                //I would then just execute your upDateProfile in the AsyncTask doInbackground review my CreateEventDataEndActivity.class for an example.
-
-                Profile newProfile = new Profile();
+               //Profile newProfile = new Profile();
                 newProfile.UserFirstName = inputFirstName.getText().toString();
                 newProfile.UserLastName = inputLastName.getText().toString();
                 newProfile.PhoneNumber = inputPhoneNumber.getText().toString();
@@ -133,6 +130,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                 newProfile.EmergencyContactInfo = new EmergencyContactInfo(emergencyContactName, emergencyContactNumber);
 
                 new UpdateProfile().execute();
+
             }
         });
 
@@ -422,13 +420,10 @@ public class ViewProfileActivity extends AppCompatActivity {
             //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
             //String decryptPw = decryption.decryptOrNull(password);                          // get password after decrypting
 
-
             // Handles submission of the Profile to the database
-            newProfile.UpdateProfile(login);
-
+            updateSuccess = newProfile.UpdateProfile(login);
             return null;
         }
-
 
         /**
          * After completing background task Dismiss the progress dialog
@@ -437,7 +432,10 @@ public class ViewProfileActivity extends AppCompatActivity {
         protected void onPostExecute(String file_url) {
             // dismiss the dialog once done
             pDialog.dismiss();
-            finish();
+
+            Toast toast = Toast.makeText(getApplicationContext(), updateSuccess, Toast.LENGTH_SHORT);
+            toast.show();
+
         }
     }
 

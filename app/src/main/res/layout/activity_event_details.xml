@@ -124,24 +124,34 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ROUTE MAP"
+        android:text="Route Map"
+        android:textColor="@color/black"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@color/yellow"
         android:id="@+id/btnMapRoute"
-        android:backgroundTint="#ffffd623"
         android:layout_alignTop="@+id/btnRequestRide"
         android:layout_toRightOf="@+id/btnRequestRide"
         android:layout_toEndOf="@+id/btnRequestRide"
         android:layout_marginLeft="52dp"
-        android:layout_marginStart="52dp" />
+        android:layout_marginStart="52dp"
+        android:padding="10dp"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Request Ride"
         android:id="@+id/btnRequestRide"
-        android:backgroundTint="#ff37ff00"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:background="@color/green"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/txtBoxAvailableSeats"
-        android:layout_alignEnd="@+id/txtBoxAvailableSeats" />
+        android:layout_alignEnd="@+id/txtBoxAvailableSeats"
+        android:padding="10dp"/>
 
     <ImageView
         android:layout_width="wrap_content"
