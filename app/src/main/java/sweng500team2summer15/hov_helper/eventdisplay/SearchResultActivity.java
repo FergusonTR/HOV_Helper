@@ -28,6 +28,7 @@ import sweng500team2summer15.hov_helper.event.management.SwipableTabAdapter;
 public class SearchResultActivity extends AppCompatActivity {
     public static final String TAG = SearchResultActivity.class.getSimpleName();
     private ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
+    SwipableTabAdapter tabAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,23 +60,40 @@ public class SearchResultActivity extends AppCompatActivity {
         // TODO: remove below line. This is an example of how another activity would pass in an array of events
         //getIntent().putExtra("eventList", myList);
         this.arrayListOfEvents =  getIntent().getParcelableArrayListExtra("eventList");
-
-        //Swipe pages
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        SwipableTabAdapter tabAdapter = new SwipableTabAdapter(getSupportFragmentManager());
-        tabAdapter.setListTabTitle("List Search Results");
-        tabAdapter.setMapTabTitle("Map Search Results");
-        viewPager.setAdapter(tabAdapter);
-
-        // get arraylist of events passed in to populate tab list and tab map
-        //this.arrayListOfEvents = (ArrayList<Event>)getIntent().getSerializableExtra("eventList");
-
         if (this.arrayListOfEvents == null)
         {
             // create empty list
             this.arrayListOfEvents = new ArrayList<Event>();
         }
-        tabAdapter.setEvents(this.arrayListOfEvents);
+
+        System.out.println("NUMBER OF EVENTS FOUND: " + this.arrayListOfEvents.size());
+
+        //Swipe pages
+        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
+        if (tabAdapter == null)
+        {
+            tabAdapter = new SwipableTabAdapter(getSupportFragmentManager());
+            tabAdapter.setListTabTitle("List Search Results");
+            tabAdapter.setMapTabTitle("Map Search Results");
+            tabAdapter.setEvents(this.arrayListOfEvents);
+        }
+        else
+        {
+            System.out.println("USE EXISTING TAB ADATER!!!!!");
+            updateSearchResults(this.arrayListOfEvents);
+        }
+
+        viewPager.setAdapter(tabAdapter);
+
+        // get arraylist of events passed in to populate tab list and tab map
+        //this.arrayListOfEvents = (ArrayList<Event>)getIntent().getSerializableExtra("eventList");
+    }
+
+    public void updateSearchResults(ArrayList<Event> updatedEventList)
+    {
+        arrayListOfEvents.clear();
+        arrayListOfEvents.addAll(updatedEventList);
+        tabAdapter.notifyDataSetChanged();
     }
 
     // ACTION BAR ITEMS
