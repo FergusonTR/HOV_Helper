@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 
 import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
 import sweng500team2summer15.hov_helper.Account.SignInActivity;
@@ -35,7 +36,7 @@ public class CreateProfileActivity extends AppCompatActivity{
     EditText inputFirstName;
     EditText inputLastName;
     EditText inputPhoneNumber;
-    EditText inputEmailAddress;
+    TextView inputEmailAddress;
     RadioButton inputSexMale;
     RadioButton inputContactCall;
     RadioGroup inputSmokingPref;
@@ -55,12 +56,16 @@ public class CreateProfileActivity extends AppCompatActivity{
         inputFirstName = (EditText) findViewById(R.id.txtFirstName);
         inputLastName = (EditText) findViewById(R.id.txtLastName);
         inputPhoneNumber = (EditText) findViewById(R.id.txtPhone);
-        inputEmailAddress = (EditText) findViewById(R.id.txtEmailAddress);
+        inputEmailAddress = (TextView) findViewById(R.id.txtEmailAddress);
         inputEmergencyName = (EditText) findViewById(R.id.txtEmergencyName);
         inputEmergencyPhone = (EditText) findViewById(R.id.txtEmergencyNumber);
         inputSmokingPref = (RadioGroup)findViewById(R.id.rgSMOKE);
         inputSexMale = (RadioButton) findViewById(R.id.rbtnsexMale);
         inputContactCall = (RadioButton) findViewById(R.id.rbtnCALL);
+
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+        login = pref.getString("LOGIN", "");
+        inputEmailAddress.setText("Email: " + login);
 
         //Create button
         Button btnConfirmProfile = (Button) findViewById(R.id.btnProfileConfirm);
@@ -74,7 +79,7 @@ public class CreateProfileActivity extends AppCompatActivity{
                 newProfile.UserFirstName = inputFirstName.getText().toString();
                 newProfile.UserLastName = inputLastName.getText().toString();
                 newProfile.PhoneNumber = inputPhoneNumber.getText().toString();
-                newProfile.EmailAddress = inputEmailAddress.getText().toString();
+                newProfile.EmailAddress = inputEmailAddress.getText().toString(); // This will be overwritten in the SubmitProfile call
                 newProfile.UserSex = inputSexMale.isChecked() ? Profile.Sex.MALE : Profile.Sex.FEMALE;
                 newProfile.UserPreferredContactMethod = inputContactCall.isChecked() ? Profile.PreferredContactMethod.CALL : Profile.PreferredContactMethod.TEXT;
 
@@ -91,8 +96,6 @@ public class CreateProfileActivity extends AppCompatActivity{
                         newProfile.UserSmokingPreference = Profile.SmokingPreference.NOPREF;
                         break;
                 }
-
-                //TODO - error handling for phone numbers when they aren't integers
 
                 String emergencyContactNumber = inputEmergencyPhone.getText().toString();
                 String emergencyContactName = inputEmergencyName.getText().toString();

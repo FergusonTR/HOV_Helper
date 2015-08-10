@@ -57,9 +57,10 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"/>
 
-    <EditText
+    <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
         android:inputType="textEmailAddress"
         android:ems="10"
         android:id="@+id/txtEmailAddress"

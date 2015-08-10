@@ -4,19 +4,27 @@
     android:id="@+id/scrollView"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:paddingLeft="@dimen/activity_horizontal_margin"
+        <LinearLayout
+            android:orientation="vertical"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
             android:paddingRight="@dimen/activity_horizontal_margin"
             android:paddingTop="@dimen/activity_vertical_margin"
             android:paddingBottom="@dimen/activity_vertical_margin"
-            android:orientation="vertical"
+            tools:context="sweng500team2summer15.hov_helper.event.management.SearchEventActivity">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Start Location"
+                android:layout_marginBottom="10dp" />
 
-            tools:context="sweng500team2summer15.hov_helper.event.management.SearchEventActivity"
-            android:weightSum="1">
             <EditText
-                android:layout_width="346dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/Start_Search_Street_Box"
                 android:inputType="textPostalAddress"
@@ -80,7 +88,7 @@
                 android:text="2015-08-07" />
 
             <SeekBar
-                android:layout_width="218dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/StartSearchDistanceBar" />
 
@@ -89,22 +97,31 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:text="Small Text"
-                android:id="@+id/textView25" />
+                android:layout_gravity="center"
+                android:id="@+id/textView25"
+                android:layout_marginBottom="10dp" />
 
             <EditText
-                android:layout_width="330dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/StartSearchDistance"
-                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:hint="Start Search Distance"
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp"
                 android:textSize="15sp"
-                android:text="2000" />
+                android:text="2000"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="End Location"
+                android:layout_marginBottom="10dp" />
 
             <EditText
-                android:layout_width="346dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/End_Search_Street_Box"
                 android:inputType="textPostalAddress"
@@ -154,7 +171,7 @@
                 android:text="06360" />
 
             <SeekBar
-                android:layout_width="210dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/EndSearchDistanceBar" />
 
@@ -162,41 +179,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceSmall"
+                android:layout_gravity="center"
                 android:text="Small Text"
-                android:id="@+id/textView26" />
+                android:id="@+id/textView26"
+                android:layout_marginBottom="10dp" />
 
             <EditText
-                android:layout_width="343dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/EndSearchDistance"
-                android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:hint="End Search Distance"
                 android:paddingTop="5dp"
                 android:paddingBottom="10dp"
                 android:textSize="15sp"
-                android:text="2000" />
+                android:text="2000"
+                android:layout_marginBottom="10dp" />
 
             <TextView
-                android:layout_width="358dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Search For Drivers"
                 android:id="@+id/textView23"
                 android:layout_weight="1.42"
-                android:layout_gravity="right"
                 android:gravity="center" />
 
             <ImageButton
-                android:layout_width="371dp"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/Drive_Search_btn"
                 android:src="@mipmap/ic_launcher"
-                android:background="@color/white"
-                android:layout_gravity="right" />
+                android:background="@color/white" />
 
             <TextView
-                android:layout_width="344dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Search for Riders"
@@ -204,12 +221,11 @@
                 android:gravity="center" />
 
             <ImageButton
-                android:layout_width="337dp"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/Ride_search_btn"
                 android:src="@mipmap/ic_thumb"
-                android:background="@color/white"
-                android:layout_weight="1.92" />
+                android:background="@color/white" />
 
         </LinearLayout>
 
