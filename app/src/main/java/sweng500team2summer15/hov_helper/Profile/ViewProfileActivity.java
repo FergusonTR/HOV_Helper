@@ -49,7 +49,7 @@ public class ViewProfileActivity extends AppCompatActivity {
     EditText inputFirstName;
     EditText inputLastName;
     EditText inputPhoneNumber;
-    EditText inputEmailAddress;
+    TextView inputEmailAddress;
     RadioButton inputSexMale;
     RadioButton inputContactCall;
     RadioGroup inputSmokingPref;
@@ -76,7 +76,7 @@ public class ViewProfileActivity extends AppCompatActivity {
         inputFirstName = (EditText) findViewById(R.id.txtProfile_FirstName);
         inputLastName = (EditText) findViewById(R.id.txtProfile_LastName);
         inputPhoneNumber = (EditText) findViewById(R.id.txtProfile_Phone);
-        inputEmailAddress = (EditText) findViewById(R.id.txtProfile_Email);
+        inputEmailAddress = (TextView) findViewById(R.id.txtProfile_Email);
         inputEmergencyName = (EditText) findViewById(R.id.txtProfileUpdate_ContactName);
         inputEmergencyPhone = (EditText) findViewById(R.id.txtProfileUpdate_ContactNumber);
         inputSmokingPref = (RadioGroup)findViewById(R.id.txtProfileUpdate_Smoking);
@@ -186,8 +186,8 @@ public class ViewProfileActivity extends AppCompatActivity {
         editText.setText(phone);
     }
     public void displayEmail (String email){
-        EditText editText = (EditText) findViewById(R.id.txtProfile_Email);
-        editText.setText(email);
+        TextView editText = (TextView) findViewById(R.id.txtProfile_Email);
+        editText.setText("Email: " + email);
     }
     public void displaySex (String sex) {
         RadioGroup rgSex = (RadioGroup) findViewById(R.id.profileUpdate_sex);
@@ -266,7 +266,7 @@ public class ViewProfileActivity extends AppCompatActivity {
                 publishProgress(newProfile.UserFirstName,
                         newProfile.UserLastName,
                         newProfile.PhoneNumber,
-                        newProfile.EmailAddress,
+                        newProfile.LoginID,
                         String.valueOf(newProfile.UserSex),
                         String.valueOf(newProfile.UserSmokingPreference),
                         String.valueOf(newProfile.UserPreferredContactMethod),

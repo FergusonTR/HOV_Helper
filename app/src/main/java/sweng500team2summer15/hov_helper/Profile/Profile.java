@@ -47,7 +47,7 @@ public class Profile{
         this.UserSex = sex;
         this.PhoneNumber = phoneNumber;
         this.UserPreferredContactMethod = preferredContactMethod;
-        this.EmailAddress = email;
+        this.EmailAddress = loginID;
         this.EmergencyContactInfo = emergencyContactInfo;
         this.UserSmokingPreference = smokingPreference;
     }
@@ -74,7 +74,7 @@ public class Profile{
         params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
         params.add(new BasicNameValuePair("phoneNumber",this.PhoneNumber));
-        params.add(new BasicNameValuePair("email", this.EmailAddress));
+        params.add(new BasicNameValuePair("email", loginID));
         params.add(new BasicNameValuePair("emergencyContact_ContactNumber", tempContactInfo.ContactNumber));
         params.add(new BasicNameValuePair("emergencyContact_ContactName", tempContactInfo.ContactName));
         params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
@@ -231,7 +231,7 @@ public class Profile{
         params.add(new BasicNameValuePair("userFirstName", this.UserFirstName));
         params.add(new BasicNameValuePair("userLastName", this.UserLastName));
         params.add(new BasicNameValuePair("phoneNumber", this.PhoneNumber));
-        params.add(new BasicNameValuePair("email", this.EmailAddress));
+        params.add(new BasicNameValuePair("email", loginID));
         params.add(new BasicNameValuePair("emergencyContact_ContactNumber", tempContactInfo.ContactNumber));
         params.add(new BasicNameValuePair("emergencyContact_ContactName", tempContactInfo.ContactName));
         params.add(new BasicNameValuePair("sex", this.UserSex.toString()));
