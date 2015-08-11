@@ -1,0 +1,81 @@
+package sweng500team2summer15.hov_helper.eventdisplay;
+
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+
+import sweng500team2summer15.hov_helper.Account.ChangePasswordActivity;
+import sweng500team2summer15.hov_helper.Account.SignInActivity;
+import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
+import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.event.management.MainEventActivity;
+import sweng500team2summer15.hov_helper.event.management.SearchEventActivity;
+
+public class RequestDetailsActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_request_details);
+    }
+
+    // ACTION BAR ITEMS
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_notify:
+                Intent notify = new Intent(getApplicationContext(), RequestedEventsActivity.class);
+                startActivity(notify);
+                finish();
+                return true;
+            case R.id.action_profile:
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
+                startActivity(profile);
+                finish();
+                return true;
+            case R.id.action_event:
+                Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
+                startActivity(event);
+                finish();
+                return true;
+            case R.id.action_search:
+                Intent search = new Intent(getApplicationContext(), SearchEventActivity.class);
+                startActivity(search);
+                finish();
+                return true;
+            case R.id.action_change_password:
+                Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                startActivity(changePassword);
+                finish();
+                return true;
+            case R.id.action_sign_out:
+                // delete credentials file
+                SharedPreferences pref = this.getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(signOut);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+}
