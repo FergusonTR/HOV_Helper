@@ -93,6 +93,14 @@ public class ListRequestsFragment extends Fragment{
     {
         Intent intent = new Intent(this.getActivity().getApplicationContext(),RequestDetailsActivity.class);
         //intent.putExtra("eventForDetails", event);
-        startActivity(intent);
+        if (intent != null)
+        {
+            startActivity(intent);
+        }
+        else
+        {
+            Log.i(TAG, "INTENT IS NULL!!!!");
+        }
+
     }
 }

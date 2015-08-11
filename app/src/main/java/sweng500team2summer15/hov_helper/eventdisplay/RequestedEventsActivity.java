@@ -147,7 +147,7 @@ public class RequestedEventsActivity extends AppCompatActivity {
             Log.i(TAG, "INPUT: " + input);
             int i = 3;
             // Get the list of requests I submitted
-            List<UserInEvent> myUserInEventList = userInEvent.getMyRequestedRides(input);
+            List<UserInEvent> myUserInEventList = userInEvent.getMyRequestedRides("\""+input+"\"");
             // Determine if the request I made was for a ride or drive event and put in appropriate list
             List<UserInEvent> rideEventRequestList = new ArrayList<UserInEvent>();
             List<UserInEvent> driveEventRequestList = new ArrayList<UserInEvent>();
