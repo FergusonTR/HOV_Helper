@@ -175,6 +175,10 @@
             android:name=".event.management.SearchEventActivity"
             android:label="@string/title_activity_search_event" >
         </activity>
+        <activity
+            android:name=".eventdisplay.RequestDetailsActivity"
+            android:label="@string/title_activity_request_details" >
+        </activity>
     </application>
 
 </manifest>
