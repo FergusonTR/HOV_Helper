@@ -30,7 +30,7 @@
         android:layout_width="20dip"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Time"
+        android:text="Date"
         android:textSize="12sp"
         android:gravity="center">
     </TextView>
