@@ -36,7 +36,8 @@ public class RequestedEventsActivity extends AppCompatActivity {
     private EventRequestsTabAdapter mAdapter;
     private ViewPager viewPager;
 
-    private ArrayList<UserInEvent> arrayListOfEventRequests = new ArrayList<UserInEvent>();
+    private ArrayList<UserInEvent> arrayListOfRequestedRides = new ArrayList<UserInEvent>();
+    private ArrayList<UserInEvent> arrayListOfOfferedRides = new ArrayList<UserInEvent>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,33 +67,48 @@ public class RequestedEventsActivity extends AppCompatActivity {
         e2.endLatitude = 40.8122837;
         e2.endLongitude = -77.8561126;
         myList.add(e2);
-        arrayListOfEventRequests = myList;
+        //arrayListOfEventRequests = myList;
         // ************* TEST ABOVE
 
         // Initialization
         viewPager = (ViewPager) findViewById(R.id.pager);
         // set adapter
         mAdapter = new EventRequestsTabAdapter(getSupportFragmentManager());
-        mAdapter.setOfferedRidesFromEventArray(arrayListOfEventRequests);
-        mAdapter.setRequestedRidesFromEventArray(arrayListOfEventRequests);
+        mAdapter.setOfferedRidesFromEventArray(arrayListOfOfferedRides);
+        mAdapter.setRequestedRidesFromEventArray(arrayListOfRequestedRides);
         viewPager.setAdapter(mAdapter);
         new ReadRideRequests().execute("booby tester"); // TODO: Update. The parameter should be the loginId
     }
 
-    public void setUsersInEvents(ArrayList<UserInEvent> arrayListOfEventRequests)
+    public void updateRequestedRidesListViews(ArrayList<UserInEvent> newList)
     {
-        this.arrayListOfEventRequests = arrayListOfEventRequests;
+        // Ride Requests
+        if (!newList.isEmpty())
+        {
+            UserInEvent userInEvent = newList.get(0);
+            Log.i(TAG, "LOGIN ID: " + userInEvent.requestedParticipantLoginId);
+            Log.i(TAG, "EVENT ID: " + userInEvent.eventId);
+            Log.i(TAG, "STATUS: " + userInEvent.requestStatus);
+        }
+
+        arrayListOfRequestedRides.clear();
+        arrayListOfRequestedRides.addAll(newList);
+        mAdapter.setRequestedRidesFromEventArray(arrayListOfRequestedRides);
     }
 
-    public void updateListViews(ArrayList<UserInEvent> newList)
+    public void updateOfferedRidesListViews(ArrayList<UserInEvent> newList)
     {
-        UserInEvent userInEvent = newList.get(0);
-        Log.i(TAG, "LOGIN ID: " + userInEvent.requestedParticipantLoginId);
-        Log.i(TAG, "EVENT ID: " + userInEvent.eventId);
-        Log.i(TAG, "STATUS: " + userInEvent.requestStatus);
-        arrayListOfEventRequests.clear();
-        arrayListOfEventRequests.addAll(newList);
-        mAdapter.notifyDataSetChanged();
+        // Drive Requests
+        if (!newList.isEmpty())
+        {
+            UserInEvent userInEvent = newList.get(0);
+            Log.i(TAG, "LOGIN ID: " + userInEvent.requestedParticipantLoginId);
+            Log.i(TAG, "EVENT ID: " + userInEvent.eventId);
+            Log.i(TAG, "STATUS: " + userInEvent.requestStatus);
+        }
+        arrayListOfOfferedRides.clear();
+        arrayListOfOfferedRides.addAll(newList);
+        mAdapter.setOfferedRidesFromEventArray(arrayListOfOfferedRides);
     }
 
     /**
@@ -117,44 +133,103 @@ public class RequestedEventsActivity extends AppCompatActivity {
          * retrieving event
          */
         protected ArrayList<UserInEvent> doInBackground(String... args) {
-
+            // get the login Id
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+            String login = pref.getString("LOGIN", "");                                       // key/value, get value for key "LOGIN"
+            Log.i(TAG, "MY LOGIN ID: " + login);
+            //password = pref.getString("PASSWORD", "");                                      // key/value, get value for key "PASSWORD" (currently encrypted)
+            //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
+            //String decryptPw = decryption.decryptOrNull(password);                          // get password after decrypting
 
             // get the list of rides
             UserInEvent userInEvent = new UserInEvent();
-            String input = "\"booby tester\""; //TODO: Update. the parameter should be args[0]
+            String input = login;//"\"booby tester\""; //TODO: Update. the parameter should be args[0]
             Log.i(TAG, "INPUT: " + input);
+            int i = 3;
+            // Get the list of requests I submitted
+            List<UserInEvent> myUserInEventList = userInEvent.getMyRequestedRides(input);
+            // Determine if the request I made was for a ride or drive event and put in appropriate list
+            List<UserInEvent> rideEventRequestList = new ArrayList<UserInEvent>();
+            List<UserInEvent> driveEventRequestList = new ArrayList<UserInEvent>();
+            for (UserInEvent event:myUserInEventList)
+            {
+                // The type of event is the event you were responding to
+                if (event.eventType.equals("Ride"))
+                {
+                    // if you were responding to a ride event, you are offering to drive
+                    driveEventRequestList.add(event);
+                }
+                else
+                {
+                    // if you were responding to a drive event, you were requesting to ride
+                    rideEventRequestList.add(event);
+                }
+            }
+
+            // Get the list of requests from other people requesting my event
             List<UserInEvent> userInEventList = userInEvent.getRequestedRides(input);
+            List<UserInEvent> filterMeOutUserInEventList = userInEvent.getRequestedRides(input);
+
+            for (UserInEvent event:userInEventList)
+            {
+                if (event.loginId.equals(login))
+                {
+                    filterMeOutUserInEventList.add(event);
+                }
+            }
+
+            for (UserInEvent event:userInEventList)
+            {
+                // The type of event is the event they were responding to
+                if (event.eventType.equals("Ride"))
+                {
+                    // if they were responding to your ride event, they were requesting a ride
+                    rideEventRequestList.add(event);
+                }
+                else
+                {
+                    // if they were responding to a drive event, they were requesting to drive
+                    driveEventRequestList.add(event);
+                }
+            }
+
+            Log.i(TAG, "MyUsersInEventList Size: " + myUserInEventList.size());
             Log.i(TAG, "UserInEventList Size: " + userInEventList.size());
 
-            if (!userInEventList.isEmpty())
-            {
-                publishProgress(new ArrayList(userInEventList));
-            }
-            else{
-                Log.i(TAG, "User Event List is NULL!!!");
-            }
+                // TODO: determine if we want to go with different tab view below for showing 'Ride Requests (ours and theirs) and Drive Requests (ours and theirs)
+                // instead of current implentation of 'My Ride Requests' and 'Offered Ride Requests'
+                // publishProgress(new ArrayList<UserInEvent>(rideEventRequestList), new ArrayList<UserInEvent>(driveEventRequestList));
+                publishProgress(new ArrayList<UserInEvent>(myUserInEventList), new ArrayList<UserInEvent>(filterMeOutUserInEventList));
+
 
             return null;
         }
 
-
         @Override
         protected void onProgressUpdate( ArrayList<UserInEvent>... update){
             super.onProgressUpdate(update);
-            ArrayList<UserInEvent> listOfEvents = update[0];
-            if (listOfEvents != null)
+            ArrayList<UserInEvent> listOfMyRideRequests = update[0];
+            ArrayList<UserInEvent> listOfRidesOffered = update[1];
+            if (listOfMyRideRequests != null)
             {
-                Log.i(TAG, "ON PROGRESS UPDATE. LIST SIZE: " + listOfEvents.size());
-                updateListViews(update[0]);
-                UserInEvent userInEvent = listOfEvents.get(0);
-                Log.i(TAG, "LOGIN ID: " + userInEvent.requestedParticipantLoginId);
-                Log.i(TAG, "EVENT ID: " + userInEvent.eventId);
-                Log.i(TAG, "STATUS: " + userInEvent.requestStatus);
+                Log.i(TAG, "ON PROGRESS UPDATE. LIST SIZE: " + listOfMyRideRequests.size());
+                updateRequestedRidesListViews(update[0]);
             }
             else
             {
                 Log.i(TAG, "update[0] IS N U L L");
             }
+
+            if (listOfRidesOffered != null)
+            {
+                Log.i(TAG, "ON PROGRESS UPDATE. LIST SIZE: " + listOfRidesOffered.size());
+                updateOfferedRidesListViews(update[1]);
+            }
+            else
+            {
+                Log.i(TAG, "update[1] IS N U L L");
+            }
+
 
         }
 

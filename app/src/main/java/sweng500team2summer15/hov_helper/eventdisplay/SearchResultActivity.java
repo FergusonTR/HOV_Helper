@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -66,7 +67,15 @@ public class SearchResultActivity extends AppCompatActivity {
             this.arrayListOfEvents = new ArrayList<Event>();
         }
 
-        System.out.println("NUMBER OF EVENTS FOUND: " + this.arrayListOfEvents.size());
+        Log.i(TAG, "NUMBER OF EVENTS FOUND: " + this.arrayListOfEvents.size());
+        for (int i = 0; i < this.arrayListOfEvents.size(); i++)
+        {
+            Event event = this.arrayListOfEvents.get(i);
+            System.out.println("[" + i +"]"+"START LAT: " + event.startLatitude);
+            System.out.println("[" + i +"]"+"END LON: " + event.startLatitude);
+            System.out.println("[" + i +"]"+"END LAT: " + event.endLatitude);
+            System.out.println("[" + i +"]"+"END LON: " + event.endLatitude);
+        }
 
         //Swipe pages
         ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
@@ -79,7 +88,7 @@ public class SearchResultActivity extends AppCompatActivity {
         }
         else
         {
-            System.out.println("USE EXISTING TAB ADATER!!!!!");
+            Log.i(TAG, "USE EXISTING TAB ADAPTER!!!!!");
             updateSearchResults(this.arrayListOfEvents);
         }
 

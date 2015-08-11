@@ -91,6 +91,7 @@ public class EventList extends ArrayList{
                     JSONObject c = events.getJSONObject(i);
 
                      //store each json item in an event
+                    tempEvent = new Event();
                     tempEvent.eventId =c.getInt(TAG_EVENTID);
                     tempEvent.loginId =c.getString(TAG_LOGINID);
                     tempEvent.numberSeats = c.getInt(TAG_NUMBERSEATS);

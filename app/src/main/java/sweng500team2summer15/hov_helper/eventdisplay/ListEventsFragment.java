@@ -24,10 +24,15 @@ import sweng500team2summer15.hov_helper.map.MapsActivity;
 public class ListEventsFragment extends Fragment {
     public static final String TAG = ListEventsFragment.class.getSimpleName();
     private ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
+    EventArrayAdapter adapter;
 
     public void setEvents(ArrayList<Event> arrayListOfEvents)
     {
         this.arrayListOfEvents = arrayListOfEvents;
+        if (adapter != null)
+        {
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
@@ -42,7 +47,7 @@ public class ListEventsFragment extends Fragment {
         View v =  inflater.inflate(R.layout.fragment_list_events, container, false);
 
         // Adapter for event list
-        final EventArrayAdapter adapter = new EventArrayAdapter(this.getActivity(), this.arrayListOfEvents);
+        adapter = new EventArrayAdapter(this.getActivity(), this.arrayListOfEvents);
 
         // create the list view
         ListView listView = (ListView)v.findViewById(R.id.listView);

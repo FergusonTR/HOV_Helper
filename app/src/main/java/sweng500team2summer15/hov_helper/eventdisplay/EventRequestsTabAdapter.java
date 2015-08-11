@@ -22,13 +22,11 @@ public class EventRequestsTabAdapter extends FragmentPagerAdapter {
     public void setRequestedRidesFromEventArray(ArrayList<UserInEvent> arrayList)
     {
         requestedRidesFragment.setListOfUsersInEvent(arrayList);
-        notifyDataSetChanged();
     }
 
     public void setOfferedRidesFromEventArray(ArrayList<UserInEvent> arrayList)
     {
         offeredRidesFragment.setListOfUsersInEvent(arrayList);
-        notifyDataSetChanged();
     }
 
     @Override

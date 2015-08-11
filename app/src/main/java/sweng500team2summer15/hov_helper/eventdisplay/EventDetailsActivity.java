@@ -41,6 +41,7 @@ public class EventDetailsActivity extends AppCompatActivity {
     private ProgressDialog pDialog;
     private Event event;
     public static Map<Integer, Boolean> rideRequested = new HashMap<Integer, Boolean>();
+    String loginId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +128,16 @@ public class EventDetailsActivity extends AppCompatActivity {
         offerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // get the login Id
+                SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+                String login = pref.getString("LOGIN", "");                                       // key/value, get value for key "LOGIN"
+                Log.i(TAG, "MY LOGIN ID: " + login);
+                //password = pref.getString("PASSWORD", "");                                      // key/value, get value for key "PASSWORD" (currently encrypted)
+                //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
+                //String decryptPw = decryption.decryptOrNull(password);
                 UserInEvent newRideRequest = new UserInEvent();
                 newRideRequest.eventId = event.eventId;
-                newRideRequest.requestedParticipantLoginId = "s@hotmail.com";
+                newRideRequest.requestedParticipantLoginId = login;
                 newRideRequest.requestStatus = "requested";
                 new RequestOrOfferRide().execute(newRideRequest);
                 disableOfferButton();
@@ -140,62 +148,18 @@ public class EventDetailsActivity extends AppCompatActivity {
     private void disableOfferButton()
     {
         final Button offerButton = (Button) findViewById(R.id.btnRequestRide);
-        offerButton.setText("Requested");
+        String buttonType = offerButton.getText().toString();
+        if (buttonType.equals("Offer Ride"))
+        {
+            offerButton.setText("Offered");
+        }
+        else
+        {
+            offerButton.setText("Requested");
+        }
+
         offerButton.setEnabled(false);
         rideRequested.put(event.eventId, true);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu items for use in the action bar
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle presses on the action bar items
-        switch (item.getItemId()) {
-            case R.id.action_notify:
-                Intent notify = new Intent(getApplicationContext(), RequestedEventsActivity.class);
-                startActivity(notify);
-                finish();
-                return true;
-            case R.id.action_profile:
-                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
-                startActivity(profile);
-                finish();
-                return true;
-            case R.id.action_event:
-                Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
-                startActivity(event);
-                finish();
-                return true;
-            case R.id.action_search:
-                Intent search = new Intent(getApplicationContext(), SearchEventActivity.class);
-                startActivity(search);
-                finish();
-                return true;
-            case R.id.action_change_password:
-                Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);
-                startActivity(changePassword);
-                finish();
-                return true;
-            case R.id.action_sign_out:
-                // delete credentials file
-                SharedPreferences pref = this.getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.clear();
-                editor.commit();
-
-                Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
-                startActivity(signOut);
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
     }
 
     private void showRouteOnMapActivity(double startLat, double startLon, double endLat, double endLon)
@@ -264,6 +228,60 @@ public class EventDetailsActivity extends AppCompatActivity {
             //   Intent i = new Intent(getApplicationContext(), MainEventActivity.class);
             //   startActivity(i);
 
+        }
+    }
+
+    // ACTION BAR ITEMS
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu items for use in the action bar
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.action_notify:
+                Intent notify = new Intent(getApplicationContext(), RequestedEventsActivity.class);
+                startActivity(notify);
+                finish();
+                return true;
+            case R.id.action_profile:
+                Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
+                startActivity(profile);
+                finish();
+                return true;
+            case R.id.action_event:
+                Intent event = new Intent(getApplicationContext(), MainEventActivity.class);
+                startActivity(event);
+                finish();
+                return true;
+            case R.id.action_search:
+                Intent search = new Intent(getApplicationContext(), SearchEventActivity.class);
+                startActivity(search);
+                finish();
+                return true;
+            case R.id.action_change_password:
+                Intent changePassword = new Intent(getApplicationContext(), ChangePasswordActivity.class);
+                startActivity(changePassword);
+                finish();
+                return true;
+            case R.id.action_sign_out:
+                // delete credentials file
+                SharedPreferences pref = this.getSharedPreferences("hovhelper", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = pref.edit();
+                editor.clear();
+                editor.commit();
+
+                Intent signOut = new Intent(getApplicationContext(), SignInActivity.class);
+                startActivity(signOut);
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }
