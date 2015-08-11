@@ -65,6 +65,11 @@ public class ResendVerificationCodeActivity extends Activity {
             AccountManagement resendUserVCode = new AccountManagement();
             String result = resendUserVCode.resendVerificationCode(etLogin.getText().toString());
 
+            if (etLogin.getText().toString().isEmpty())
+            {
+                return "Error: Please enter your email address.";
+            }
+
             return result;
         }
 
