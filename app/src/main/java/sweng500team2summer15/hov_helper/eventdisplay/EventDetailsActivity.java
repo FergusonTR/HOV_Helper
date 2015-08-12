@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -101,6 +102,23 @@ public class EventDetailsActivity extends AppCompatActivity {
             arrivalAddress.setText(arriveAddress.getAddressLine(1) + " " + arriveAddress.getAddressLine(2));
         }
 
+        // Distance
+        TextView distance = (TextView) findViewById(R.id.textViewDistance);
+        // convert to two decimals
+        Double inDistance = event.endSearchDistance;
+        if (inDistance > 0.0)
+        {
+            DecimalFormat df = new DecimalFormat("#.00");
+            String formattedDistance = df.format(inDistance);
+            String distanceString = String.valueOf(formattedDistance);
+            distance.setText("Distance: " + distanceString);
+        }
+        else
+        {
+            distance.setText("");
+        }
+
+        // Number of seats
         TextView numberOfSeats = (TextView) findViewById(R.id.txtBoxAvailableSeats);
         numberOfSeats.setText(String.valueOf(event.numberAvailable));
 

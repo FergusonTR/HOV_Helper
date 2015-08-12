@@ -1,5 +1,7 @@
 package sweng500team2summer15.hov_helper.event.management;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 
 import org.apache.http.NameValuePair;
@@ -14,11 +16,24 @@ import java.util.List;
 /**
  * Created by Steve on 7/30/2015.
  */
-public class UserInEvent extends Event {
+public class UserInEvent extends Event implements Parcelable{
     public static final String TAG = UserInEvent.class.getSimpleName();
     public int uniqueId;
     public String requestedParticipantLoginId;
     public String requestStatus;
+
+    public UserInEvent()
+    {
+
+    }
+
+    public UserInEvent(Parcel in)
+    {
+        super(in);
+        setRequestStatus(in.readString());
+        setRequestedParticipantLoginId(in.readString());
+        setUniqueId(in.readInt());
+    }
 
     public int create(String requestedParticipantLoginId, int eventId, String requestStatus) {
         //This would add the event to the mySQL database.
@@ -240,4 +255,57 @@ public class UserInEvent extends Event {
 
         return offeredRides;
     }
+
+    public void setRequestStatus(String requestStatus)
+    {
+        this.requestStatus = requestStatus;
+    }
+
+    public void setRequestedParticipantLoginId(String requestedParticipantLoginId)
+    {
+        this.requestedParticipantLoginId = requestedParticipantLoginId;
+    }
+
+    public void setUniqueId(int uniqueId)
+    {
+        this.uniqueId = uniqueId;
+    }
+
+    public String getRequestStatus()
+    {
+        return requestStatus;
+    }
+
+    public String getRequestedParticipantLoginId()
+    {
+        return requestedParticipantLoginId;
+    }
+
+
+    public int getUniqueId()
+    {
+        return uniqueId;
+    }
+
+    @Override
+    public void writeToParcel(Parcel in, int arg1){
+        super.writeToParcel(in, arg1);
+        in.writeString(getRequestStatus());
+        in.writeString(getRequestedParticipantLoginId());
+        in.writeInt(getUniqueId());
+    }
+
+    public static final Parcelable.Creator<UserInEvent> CREATOR = new Parcelable.Creator<UserInEvent>(){
+
+        @Override
+        public UserInEvent createFromParcel(Parcel in) {
+            return new UserInEvent(in);
+
+        }
+
+        @Override
+        public UserInEvent[] newArray(int size){
+            return new UserInEvent[size];
+        }
+    };
 }

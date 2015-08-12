@@ -31,8 +31,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtRequestFrom"
         android:layout_below="@+id/textView12"
-        android:layout_alignRight="@+id/textView12"
-        android:layout_alignEnd="@+id/textView12" />
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_alignRight="@+id/btnDecline"
+        android:layout_alignEnd="@+id/btnDecline" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -51,8 +52,8 @@
         android:layout_below="@+id/textView13"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignRight="@+id/btnMapRoute"
-        android:layout_alignEnd="@+id/btnMapRoute" />
+        android:layout_alignRight="@+id/btnDecline"
+        android:layout_alignEnd="@+id/btnDecline" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -143,7 +144,7 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:background="@color/red"
-        android:id="@+id/btnMapRoute"
+        android:id="@+id/btnDecline"
         android:layout_alignTop="@+id/btnRequestRide"
         android:layout_toRightOf="@+id/btnRequestRide"
         android:layout_toEndOf="@+id/btnRequestRide"

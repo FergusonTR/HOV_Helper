@@ -37,9 +37,9 @@ public class SearchResultActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search_result);
 
         // TODO: Remove Events Below after search result implemented. For Testing only
-       // ArrayList<Event> myList = new ArrayList<Event>();
+        ArrayList<Event> myList = new ArrayList<Event>();
         // populate with dummy data
-        /*Event e1 = new Event();
+        Event e1 = new Event();
         e1.eventId = 1;
         e1.eventType = "Ride";
         e1.startLatitude = 40.82;
@@ -56,10 +56,10 @@ public class SearchResultActivity extends AppCompatActivity {
         e2.endLatitude = 40.8122837;
         e2.endLongitude = -77.8561126;
         e2.numberAvailable = 2;
-        myList.add(e2);*/
+        myList.add(e2);
 
         // TODO: remove below line. This is an example of how another activity would pass in an array of events
-        //getIntent().putExtra("eventList", myList);
+        getIntent().putExtra("eventList", myList);
         this.arrayListOfEvents =  getIntent().getParcelableArrayListExtra("eventList");
         if (this.arrayListOfEvents == null)
         {

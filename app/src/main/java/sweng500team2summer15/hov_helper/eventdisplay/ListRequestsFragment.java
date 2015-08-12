@@ -63,7 +63,7 @@ public class ListRequestsFragment extends Fragment{
 
                 if (position != 0)
                 {
-                    Event selectedEvent = adapter.getItem(position-1);
+                    UserInEvent selectedEvent = adapter.getItem(position-1);
                     if (selectedEvent != null)
                     {
                         double startLat = selectedEvent.startLatitude;
@@ -71,7 +71,7 @@ public class ListRequestsFragment extends Fragment{
                         double endLat = selectedEvent.endLatitude;
                         double endLon = selectedEvent.endLongitude;
                         //showRouteOnMapActivity(startLat, startLon, endLat, endLon);
-                        displayRequestDetailsActivity();
+                        displayRequestDetailsActivity(selectedEvent);
                     }
                     else
                     {
@@ -89,12 +89,13 @@ public class ListRequestsFragment extends Fragment{
         return v;
     }
 
-    private void displayRequestDetailsActivity()
+    private void displayRequestDetailsActivity(UserInEvent userInEvent)
     {
         Intent intent = new Intent(this.getActivity().getApplicationContext(),RequestDetailsActivity.class);
-        //intent.putExtra("eventForDetails", event);
+
         if (intent != null)
         {
+            intent.putExtra("eventRequestForDetails", userInEvent);
             startActivity(intent);
         }
         else
