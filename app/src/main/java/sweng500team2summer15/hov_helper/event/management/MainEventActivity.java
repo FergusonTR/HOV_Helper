@@ -55,7 +55,7 @@ public class MainEventActivity extends AppCompatActivity {
         tabAdapter = new SwipableTabAdapter(getSupportFragmentManager());
         tabAdapter.setListTabTitle("List My Events");
         tabAdapter.setMapTabTitle("Map My Events");
-        viewPager.setAdapter(tabAdapter);
+
 
         //Buttons
         btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);
@@ -76,15 +76,15 @@ public class MainEventActivity extends AppCompatActivity {
             toast = Toast.makeText(getApplicationContext(), "No network Connectivity.", Toast.LENGTH_SHORT);
             toast.show();
         }
-
     }
 
     public void updateMyEventListViews (ArrayList<Event> newList)
     {
-        arrayListOfEvents.clear();
-        arrayListOfEvents=newList;
+        this.arrayListOfEvents.clear();
+        this.arrayListOfEvents=newList;
 
-        tabAdapter.setEvents(arrayListOfEvents);
+        tabAdapter.setEvents(this.arrayListOfEvents);
+        viewPager.setAdapter(tabAdapter);
 
     }
 
