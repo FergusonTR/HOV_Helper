@@ -63,6 +63,14 @@ public class EventDetailsActivity extends AppCompatActivity {
             offerButton.setText("Request Ride");
         }
 
+        // disable request buttons if using this activity for viewing event details
+        Intent thisIntent = getIntent();
+        String readOnlyTrueorFalse = thisIntent.getStringExtra("IsReadOnly");
+        if (readOnlyTrueorFalse != null)
+        {
+            offerButton.setVisibility(Button.INVISIBLE);
+        }
+
         // setup widget labels depending on if ride or share event
         TextView title = (TextView) findViewById(R.id.title);
         title.setText(event.eventType + " Event Details");

@@ -104,6 +104,7 @@ public class RequestDetailsActivity extends AppCompatActivity {
                 {
                     Intent intent = new Intent(RequestDetailsActivity.this.getApplicationContext(),EventDetailsActivity.class);
                     intent.putExtra("eventForDetails", userInEvent);
+                    intent.putExtra("IsReadOnly", "True");
                     startActivity(intent);
                 }
             };
@@ -117,6 +118,7 @@ public class RequestDetailsActivity extends AppCompatActivity {
             declineButton.setText("Cancel");
 
             final Button acceptButton = (Button) findViewById(R.id.btnRequestRide);
+            acceptButton.setText("Sent Request");
             acceptButton.setEnabled(false);
 
 
