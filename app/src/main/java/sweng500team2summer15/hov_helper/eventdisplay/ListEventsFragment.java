@@ -67,10 +67,10 @@ public class ListEventsFragment extends Fragment {
                     Event selectedEvent = adapter.getItem(position-1);
                     if (selectedEvent != null)
                     {
-                        double startLat = selectedEvent.startLatitude;
-                        double startLon = selectedEvent.startLongitude;
-                        double endLat = selectedEvent.endLatitude;
-                        double endLon = selectedEvent.endLongitude;
+                        Double startLat = selectedEvent.startLatitude;
+                        Double startLon = selectedEvent.startLongitude;
+                        Double endLat = selectedEvent.endLatitude;
+                        Double endLon = selectedEvent.endLongitude;
                         //showRouteOnMapActivity(startLat, startLon, endLat, endLon);
                         displayEventDetailsActivity(selectedEvent);
                     }

@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,6 +16,9 @@ import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.maps.model.LatLng;
 import sweng500team2summer15.hov_helper.JSONParser;
@@ -33,6 +37,14 @@ import sweng500team2summer15.hov_helper.resource.dialog.DatePickerFragment;
 public class SearchEventActivity extends AppCompatActivity {
 
     private ProgressDialog pDialog;
+
+    SeekBar startSeekBar;
+    SeekBar endSeekBar;
+
+    TextView startProgressText;
+    TextView endProgressText;
+    TextView startTrackingText;
+    TextView endTrackingText;
 
     EditText inputStartSearchAddress;
     EditText inputStartSearchCity;
@@ -57,8 +69,11 @@ public class SearchEventActivity extends AppCompatActivity {
     Double startSearchDistance, endSearchDistance;
     String searchDate;
 
+    boolean DateOk, startStreetOk, startCityOk,startStateOk, startzipcodeOK;
+    boolean endStreetOk, endCityOk,endStateOk, endzipcodeOK;
     String inputEventType="";
     int SearchResult;
+    Toast toast;
 
     final JSONParser jsonParser = new JSONParser();
     private int start_year, start_month, start_day;
@@ -74,17 +89,56 @@ public class SearchEventActivity extends AppCompatActivity {
         inputStartSearchCity =(EditText)findViewById(R.id.Start_Search_City_Box);
         inputStartSearchState = (EditText) findViewById(R.id.Start_Search_State_Box);
         inputStartSearchZipCode = (EditText) findViewById(R.id.Start_Search_ZipCode_Box);
-        inputStartSearchDistance = (EditText) findViewById(R.id.StartSearchDistance);
+        //inputStartSearchDistance = (EditText) findViewById(R.id.StartSearchDistance);
         inputStartSearchDate = (EditText) findViewById(R.id.Start_Search_Date_Box);
         inputEndSearchAddress = (EditText)findViewById(R.id.End_Search_Street_Box);
         inputEndSearchCity = (EditText) findViewById (R.id.End_Search_City_Box);
         inputEndSearchState = (EditText) findViewById(R.id.End_Search_State_Box);
         inputEndSearchZipCode = (EditText) findViewById (R.id.End_Search_ZipCode_Box);
-        inputEndSearchDistance = (EditText) findViewById(R.id.EndSearchDistance);
+        //inputEndSearchDistance = (EditText) findViewById(R.id.EndSearchDistance);
 
         //Setup buttons
         RideSearchBtn = (ImageButton) findViewById(R.id.Ride_search_btn);
         DriveSearchBtn = (ImageButton) findViewById(R.id.Drive_Search_btn);
+
+        //Start and End Distance Seekbars
+        startSeekBar = (SeekBar)findViewById(R.id.StartSearchDistanceBar);
+        endSeekBar =(SeekBar)findViewById(R.id.EndSearchDistanceBar);
+        startProgressText = (TextView)findViewById(R.id.startProgressText);
+        endProgressText =(TextView) findViewById(R.id.EndProgressText);
+
+        startSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                startProgressText.setText(progress + " " + getString(R.string.miles_from_start));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        endSeekBar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                endProgressText.setText(progress + " " + getString(R.string.miles_from_end));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         // Assign a click listener for the start date entry box
         findViewById(R.id.Start_Search_Date_Box).setOnClickListener(new View.OnClickListener() {
@@ -96,10 +150,12 @@ public class SearchEventActivity extends AppCompatActivity {
         });
 
 
-        RideSearchBtn.setOnClickListener(new View.OnClickListener(){
+
+
+        RideSearchBtn.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 //Capturing status
                 startSearchAddress = inputStartSearchAddress.getText().toString();
                 startSearchCity = inputStartSearchCity.getText().toString();
@@ -110,25 +166,105 @@ public class SearchEventActivity extends AppCompatActivity {
                 endSearchCity = inputEndSearchCity.getText().toString();
                 endSearchState = inputEndSearchState.getText().toString();
                 endSearchZipCode = inputEndSearchZipCode.getText().toString();
-                startSearchDistance = Double.parseDouble(inputStartSearchDistance.getText().toString());
-                endSearchDistance = Double.parseDouble(inputEndSearchDistance.getText().toString());
+                Double SDistance = (double) startSeekBar.getProgress();
+                Double EDistance = (double) endSeekBar.getProgress();
+                startSearchDistance = Double.parseDouble(SDistance.toString());
+                endSearchDistance = Double.parseDouble(EDistance.toString());
 
-
-                //Check network status
-                if (CheckNetwork.isNetworkAvailable(SearchEventActivity.this)){
-                    inputEventType = "Ride";
-                    //Check that fields are complete
-                    new searchEvent().execute();
-                    //grab results
-                    //forward as an arrayList to the next screen
+                if (TextUtils.isEmpty(inputStartSearchDate.getText())) {
+                    DateOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start date.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    DateOk = true;
                 }
 
-            }});
+                if (TextUtils.isEmpty((inputStartSearchAddress.getText()))) {
+                    startStreetOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start address.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startStreetOk = true;
+                }
+                if (TextUtils.isEmpty(inputStartSearchCity.getText())) {
+                    startCityOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start city.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startCityOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputStartSearchState.getText())) {
+                    startStateOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start state.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startStateOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputStartSearchZipCode.getText())) {
+                    startzipcodeOK = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start zipcode.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startzipcodeOK = true;
+                }
+
+                if (TextUtils.isEmpty((inputEndSearchAddress.getText()))) {
+                    endStreetOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide an end address.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endStreetOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputEndSearchCity.getText())) {
+                    endCityOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide an end city.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endCityOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputEndSearchState.getText())) {
+                    endStateOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide an end state.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endStateOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputEndSearchZipCode.getText())) {
+                    endzipcodeOK = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a end zipcode.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endzipcodeOK = true;
+                }
+
+                if (startStreetOk && startCityOk && startStateOk && startzipcodeOK && endStreetOk && endStateOk && endzipcodeOK && DateOk) {
+
+                    //Check network status
+                    if (CheckNetwork.isNetworkAvailable(SearchEventActivity.this)) {
+                        inputEventType = "Drive";
+                        //Check that fields are complete
+                        new searchEvent().execute();
+                        //grab results
+                        //forward as an arrayList to the next screen
+                    } else
+                        toast = Toast.makeText(getApplicationContext(), "Network unavailable.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    toast = Toast.makeText(getApplicationContext(), "Ensure all search fields are complete.", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });
 
         DriveSearchBtn.setOnClickListener(new View.OnClickListener(){
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 //Capturing status
                 startSearchAddress = inputStartSearchAddress.getText().toString();
                 startSearchCity = inputStartSearchCity.getText().toString();
@@ -139,25 +275,105 @@ public class SearchEventActivity extends AppCompatActivity {
                 endSearchCity = inputEndSearchCity.getText().toString();
                 endSearchState = inputEndSearchState.getText().toString();
                 endSearchZipCode = inputEndSearchZipCode.getText().toString();
-                startSearchDistance = Double.parseDouble(inputStartSearchDistance.getText().toString());
-                endSearchDistance = Double.parseDouble(inputEndSearchDistance.getText().toString());
+                Double SDistance = (double)startSeekBar.getProgress();
+                Double EDistance = (double)endSeekBar.getProgress();
+                startSearchDistance = Double.parseDouble(SDistance.toString());
+                endSearchDistance = Double.parseDouble(EDistance.toString());
 
-                //Check network status
-                if (CheckNetwork.isNetworkAvailable(SearchEventActivity.this)) {
-                    inputEventType = "Drive";
-                    //Check that fields are complete
-                    new searchEvent().execute();
-                    //grab results
-                    //forward as an arrayList to the next screen
+
+                if (TextUtils.isEmpty(inputStartSearchDate.getText())) {
+                    DateOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start date.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else { DateOk = true; }
+
+                if (TextUtils.isEmpty((inputStartSearchAddress.getText()))) {
+                    startStreetOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start address.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startStreetOk = true;
                 }
-            }});
-    }
+                if (TextUtils.isEmpty(inputStartSearchCity.getText())) {
+                    startCityOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start city.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startCityOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputStartSearchState.getText())) {
+                    startStateOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start state.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startStateOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputStartSearchZipCode.getText())) {
+                    startzipcodeOK = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a start zipcode.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    startzipcodeOK = true;
+                }
+
+                if (TextUtils.isEmpty((inputEndSearchAddress.getText()))) {
+                    endStreetOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide an end address.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endStreetOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputEndSearchCity.getText())) {
+                    endCityOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide an end city.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endCityOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputEndSearchState.getText())) {
+                    endStateOk = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide an end state.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endStateOk = true;
+                }
+
+                if (TextUtils.isEmpty(inputEndSearchZipCode.getText())) {
+                    endzipcodeOK = false;
+                    toast = Toast.makeText(getApplicationContext(), "Please provide a end zipcode.", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else {
+                    endzipcodeOK = true;
+                }
+
+                if (startStreetOk && startCityOk && startStateOk && startzipcodeOK && endStreetOk && endStateOk && endzipcodeOK && DateOk) {
+
+                    //Check network status
+                    if (CheckNetwork.isNetworkAvailable(SearchEventActivity.this)) {
+                        inputEventType = "Ride";
+                        //Check that fields are complete
+                        new searchEvent().execute();
+                        //grab results
+                        //forward as an arrayList to the next screen
+                    } else{
+                    toast = Toast.makeText(getApplicationContext(), "Network unavailable.", Toast.LENGTH_SHORT);
+                    toast.show();}
+                } else {
+                    toast = Toast.makeText(getApplicationContext(), "Ensure all search fields are complete.", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
+            }
+        });}
     private void showDatePicker(){
         DatePickerFragment date = new DatePickerFragment();
         /**
          * Set Up Current Date Into Dialog
          */
-        //ToDo prevent going backward in time
+
         Calendar calendar = Calendar.getInstance();
         Bundle args = new Bundle();
         args.putInt("year", calendar.get(Calendar.YEAR));
@@ -202,8 +418,8 @@ class searchEvent extends AsyncTask<String, String, String> {
         SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
         login = pref.getString("LOGIN", "");                                              // key/value, get value for key "LOGIN"
         password = pref.getString("PASSWORD", "");                                        // key/value, get value for key "PASSWORD" (currently encrypted)
-        Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);       // class to encrypt/decrypt strings, see NOTE
-        String decryptPw = decryption.decryptOrNull(password);                            // get password after decrypting
+        //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);       // class to encrypt/decrypt strings, see NOTE
+        //String decryptPw = decryption.decryptOrNull(password);                            // get password after decrypting
 
         String startLocation;
         String endLocation;
@@ -221,8 +437,6 @@ class searchEvent extends AsyncTask<String, String, String> {
         Double endLatitude = endResults.latitude;
         Double endLongitude = endResults.longitude;
 
-        //EventList myEventList = new EventList();
-
          myEventList.arrayListOfEvents = myEventList.searchByDistance(searchDate, startLatitude,
                 startLongitude,endLatitude,endLongitude,startSearchDistance,endSearchDistance,inputEventType);
 
@@ -230,8 +444,6 @@ class searchEvent extends AsyncTask<String, String, String> {
 
         return null;
         }
-
-
 
     protected void onPostExecute(String file_url){
         pDialog.dismiss();

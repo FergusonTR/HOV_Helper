@@ -1,9 +1,12 @@
 package sweng500team2summer15.hov_helper.event.management;
 
 
+//import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -20,76 +24,67 @@ import sweng500team2summer15.hov_helper.Account.SignInActivity;
 import sweng500team2summer15.hov_helper.Profile.ViewProfileActivity;
 import sweng500team2summer15.hov_helper.eventdisplay.RequestedEventsActivity;
 import sweng500team2summer15.hov_helper.R;
+import sweng500team2summer15.hov_helper.eventdisplay.SearchResultActivity;
+import sweng500team2summer15.hov_helper.resource.CheckNetwork;
 
 public class MainEventActivity extends AppCompatActivity {
+
     private ArrayList<Event> arrayListOfEvents = new ArrayList<Event>();
+    private ViewPager viewPager;
+    private SwipableTabAdapter tabAdapter;
 
     Button btnNewEvent;
+    private ProgressDialog pDialog;
 
     String login;
     String password;
+    Toast toast;
+
+    int SearchResult = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main_event);
 
-        // TODO: Remove Events Below after list of events query implemented. For Testing only
-        ArrayList<Event> myList = new ArrayList<Event>();
-
-        // populate with dummy data
-        Event e1 = new Event();
-        e1.eventId = 1;
-        e1.eventType = "Ride";
-        e1.startLatitude = 40.82;
-        e1.startLongitude = -77.8561126;
-        e1.endLatitude = 40.8122837;
-        e1.endLongitude = -77.8561126;
-        e1.numberAvailable = 4;
-
-        myList.add(e1);
-        Event e2 = new Event();
-        e2.eventId = 2;
-        e2.eventType = "Drive";
-        e2.startLatitude = 40.83;
-        e2.startLongitude = -77.8561126;
-        e2.endLatitude = 40.8122837;
-        e2.endLongitude = -77.8561126;
-        e2.numberAvailable = 2;
-        myList.add(e2);
-
-        // TODO: remove below line. This is an example of how another activity would pass in an array of events
-        getIntent().putExtra("eventList", myList);
-
-        //Swipe pages
-        ViewPager viewPager = (ViewPager) findViewById(R.id.pager);
-        SwipableTabAdapter tabAdapter = new SwipableTabAdapter(getSupportFragmentManager());
+        //Initialization
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        //set adapter
+        tabAdapter = new SwipableTabAdapter(getSupportFragmentManager());
         tabAdapter.setListTabTitle("List My Events");
         tabAdapter.setMapTabTitle("Map My Events");
         viewPager.setAdapter(tabAdapter);
 
-        // get arraylist of events passed in to populate tab list and tab map (Note: If populating list in this activity, remove below line)
-        this.arrayListOfEvents = (ArrayList<Event>)getIntent().getSerializableExtra("eventList");
-        if (this.arrayListOfEvents == null)
-        {
-            // create empty list
-            this.arrayListOfEvents = new ArrayList<Event>();
-        }
-        tabAdapter.setEvents(this.arrayListOfEvents);
-
         //Buttons
         btnNewEvent = (Button) findViewById(R.id.btnCreateEventScrn);
-
-        btnNewEvent.setOnClickListener(new View.OnClickListener(){
+        btnNewEvent.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view){
+            public void onClick(View view) {
                 //Launching create new event activity
                 Intent i = new Intent(getApplicationContext(), EventTypeSelection.class);
                 startActivity(i);
                 finish();
             }
         });
+        if (CheckNetwork.isNetworkAvailable(MainEventActivity.this)) {
+        //Execute a search for items to populate the list and map fragments
+        new EventSearch().execute();}
+        else {
+            toast = Toast.makeText(getApplicationContext(), "No network Connectivity.", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+
+    }
+
+    public void updateMyEventListViews (ArrayList<Event> newList)
+    {
+        arrayListOfEvents.clear();
+        arrayListOfEvents=newList;
+
+        tabAdapter.setEvents(arrayListOfEvents);
 
     }
 
@@ -102,6 +97,7 @@ public class MainEventActivity extends AppCompatActivity {
 
         return null;
     }
+
     // ACTION BAR ITEMS
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -110,6 +106,65 @@ public class MainEventActivity extends AppCompatActivity {
         inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
+    class EventSearch extends AsyncTask<String, ArrayList<Event>,ArrayList<Event>> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            pDialog = new ProgressDialog(MainEventActivity.this);
+            pDialog.setMessage("Searching for Events..");
+            pDialog.setIndeterminate(false);
+            pDialog.setCancelable(true);
+            pDialog.show();
+        }
+        @Override
+        protected ArrayList<Event> doInBackground(String... args) {
+
+            SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+            login = pref.getString("LOGIN", "");                                              // key/value, get value for key "LOGIN"
+            password = pref.getString("PASSWORD", "");                                        // key/value, get value for key "PASSWORD" (currently encrypted)
+            //Encryption decryption = Encryption.getDefault("Key", "Salt", new byte[16]);     // class to encrypt/decrypt strings, see NOTE
+            //String decryptPw = decryption.decryptOrNull(password);                          // get password after decrypting
+
+            EventList newEventList = new EventList();
+
+                // check if the user has a login
+                if (login != null) {
+                   newEventList.arrayListOfEvents = newEventList.searchByUser(login);
+                    SearchResult = newEventList.arrayListOfEvents.size();
+
+                    if (SearchResult > 0) {
+                        publishProgress(new ArrayList<Event>(newEventList.arrayListOfEvents));}
+                    else{
+                        newEventList.arrayListOfEvents = new ArrayList<Event>();
+                    }
+                }
+
+        return null;
+
+        }
+
+        @Override
+        protected void onProgressUpdate(ArrayList<Event>... update) {
+            super.onProgressUpdate(update);
+            //ArrayList<Event> myEventList = update[0];
+            updateMyEventListViews(update[0]);
+
+         }
+
+        @Override
+        protected void onPostExecute(ArrayList<Event> result) {
+
+            pDialog.dismiss();
+            if (SearchResult > 0){
+                toast = Toast.makeText(getApplicationContext(), "Results Found.", Toast.LENGTH_SHORT);
+                toast.show();
+            } else {
+                toast = Toast.makeText(getApplicationContext(), "No Events Found, create some!", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+    }}
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -150,6 +205,7 @@ public class MainEventActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
 }
 
 

@@ -55,6 +55,8 @@
     <string name="End_Search_State_Box">End Search State</string>
     <string name="End_Search_ZipCode_Box">End Search Zip Code</string>
     <string name="End_Search_Date_Box">Click to Select Date</string>
+    <string name="miles_from_end">miles from end</string>
+    <string name="miles_from_start">miles from start</string>
     <string name="title_activity_request_details">RequestDetails</string>
     <string name="title_activity_view_user">User Profile</string>
 </resources>

@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ public class ResendVerificationCodeActivity extends Activity {
 
     Button bResend;
     EditText etLogin;
+    String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +39,12 @@ public class ResendVerificationCodeActivity extends Activity {
             @Override
             public void onClick(View view) {
                 // sign up a new user in background thread
-                new ResendVerificationCode().execute();
+                 if (TextUtils.isEmpty(etLogin.getText())){
+                     Toast toast = Toast.makeText(getApplicationContext(), "Please enter your email address. ", Toast.LENGTH_SHORT);
+                     toast.show();
+                 }else {
+                     login = etLogin.getText().toString();
+                  new ResendVerificationCode().execute();}
             }
         });
     }
@@ -59,16 +66,11 @@ public class ResendVerificationCodeActivity extends Activity {
         // verify a new user
         protected String doInBackground(String... args) {
 
-            etLogin = (EditText) findViewById(R.id.etLogin);
-            bResend = (Button) findViewById(R.id.bResend);
+            //etLogin = (EditText) findViewById(R.id.etLogin);
+            //bResend = (Button) findViewById(R.id.bResend);
 
             AccountManagement resendUserVCode = new AccountManagement();
-            String result = resendUserVCode.resendVerificationCode(etLogin.getText().toString());
-
-            if (etLogin.getText().toString().isEmpty())
-            {
-                return "Error: Please enter your email address.";
-            }
+            String result = resendUserVCode.resendVerificationCode(login);
 
             return result;
         }

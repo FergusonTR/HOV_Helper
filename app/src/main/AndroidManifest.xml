@@ -143,10 +143,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".TestAddressActivity"
-            android:label="@string/title_activity_test_address" >
-        </activity>
-        <activity
             android:name=".event.management.EventTypeSelection"
             android:icon="@drawable/hov_helper_logo"
             android:label="@string/title_activity_event_type_selection" >
