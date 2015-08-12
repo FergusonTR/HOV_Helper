@@ -79,7 +79,7 @@ public class MapFragment extends Fragment implements MapController.MapController
             MarkerOptions marker;
             if (e.eventType == "Ride")
             {
-                BitmapDescriptor rideBitmap = BitmapDescriptorFactory.fromResource(R.drawable.hitchhiking_ride);
+                BitmapDescriptor rideBitmap = BitmapDescriptorFactory.fromResource(R.mipmap.ic_thumb);
                 marker = new MarkerOptions().position(
                         new LatLng(latitude, longitude)).title("Ride");
                 // Changing marker icon

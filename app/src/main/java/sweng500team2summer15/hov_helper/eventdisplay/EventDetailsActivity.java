@@ -68,8 +68,16 @@ public class EventDetailsActivity extends AppCompatActivity {
         final Button mapButton = (Button) findViewById(R.id.btnMapRoute);
 
         // populate text fields
+
+        // Convert Date
+        // date
+        String date = event.start_Time;
+        date = date.substring(0,16);
+        String year = date.substring(0,4);
+        String monthDay = date.substring(6,10);
+
         TextView departTime = (TextView) findViewById(R.id.txtDepartTime);
-        departTime.setText(event.start_Time);
+        departTime.setText(date);
 
         TextView departAddress = (TextView) findViewById(R.id.txtDepartAddress);
         Address startAddress = MapController.getStreetAddressFromLatLon(this, event.startLatitude, event.startLongitude);
@@ -78,9 +86,13 @@ public class EventDetailsActivity extends AppCompatActivity {
             departAddress.setText(startAddress.getAddressLine(1) + " " + startAddress.getAddressLine(2));
         }
 
+        String arriveTime = event.start_Time;
+        arriveTime = arriveTime.substring(0,16);
+        String arriveUear = arriveTime.substring(0,4);
+        String arriveMonthDay = arriveTime.substring(6, 10);
 
         TextView arrivalTime = (TextView) findViewById(R.id.txtArrivalTime);
-        arrivalTime.setText(event.end_Time);
+        arrivalTime.setText(arriveTime);
 
         TextView arrivalAddress = (TextView) findViewById(R.id.txtArrivalAddress);
         Address arriveAddress = MapController.getStreetAddressFromLatLon(this, event.endLatitude, event.endLongitude);
