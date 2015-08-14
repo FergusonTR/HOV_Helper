@@ -43,25 +43,40 @@ public class EventDetailsActivity extends AppCompatActivity {
     private Event event;
     public static Map<Integer, Boolean> rideRequested = new HashMap<Integer, Boolean>();
     String loginId;
+    String login;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_details);
+        SharedPreferences pref = getSharedPreferences("hovhelper", Context.MODE_PRIVATE); // specify SharedPreferences for a private file named "hovhelper"
+        String login = pref.getString("LOGIN", "");                                       // key/value, get value for key "LOGIN"
 
         // get the event passed into this activity
         event = (Event)getIntent().getParcelableExtra("eventForDetails");
 
         final Button offerButton = (Button) findViewById(R.id.btnRequestRide);
+        final Button deleteButton = (Button) findViewById(R.id.btnDeleteEvent);
 
-        if (event.eventType.equals("Ride"))
-        {
-            offerButton.setText("Offer Ride");
+        if (event.loginId.equals(login)){
+            offerButton.setText("Update Event");
+            deleteButton.setVisibility(View.VISIBLE);
+            offerButton.setClickable(false);
+        } else {
+
+            if (event.eventType.equals("Ride")) {
+                offerButton.setText("Offer Ride");
+                deleteButton.setVisibility(View.INVISIBLE);
+                offerButton.setClickable(true);
+            } else
+             {
+                offerButton.setText("Request Ride");
+                deleteButton.setVisibility(View.INVISIBLE);
+                 offerButton.setClickable(true);
+            }
         }
-        else
-        {
-            offerButton.setText("Request Ride");
-        }
+        Log.i(TAG, "MY LOGIN ID: " + login);
+        Log.i(TAG, "Event LOGIN ID"+ event.loginId);
 
         // disable request buttons if using this activity for viewing event details
         Intent thisIntent = getIntent();
@@ -92,7 +107,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         Address startAddress = MapController.getStreetAddressFromLatLon(this, event.startLatitude, event.startLongitude);
         if (startAddress != null)
         {
-            departAddress.setText(startAddress.getAddressLine(1) + " " + startAddress.getAddressLine(2));
+            departAddress.setText(startAddress.getAddressLine(0)+ startAddress.getAddressLine(1) + " " + startAddress.getAddressLine(2));
         }
 
         String arriveTime = event.start_Time;
@@ -107,7 +122,7 @@ public class EventDetailsActivity extends AppCompatActivity {
         Address arriveAddress = MapController.getStreetAddressFromLatLon(this, event.endLatitude, event.endLongitude);
         if (arrivalAddress != null)
         {
-            arrivalAddress.setText(arriveAddress.getAddressLine(1) + " " + arriveAddress.getAddressLine(2));
+            arrivalAddress.setText(arriveAddress.getAddressLine (0) +" "+ arriveAddress.getAddressLine(1) + " " + arriveAddress.getAddressLine(2));
         }
 
         // Distance
@@ -119,7 +134,7 @@ public class EventDetailsActivity extends AppCompatActivity {
             DecimalFormat df = new DecimalFormat("#.00");
             String formattedDistance = df.format(inDistance);
             String distanceString = String.valueOf(formattedDistance);
-            distance.setText("Distance: " + distanceString);
+            distance.setText("Distance: " + distanceString + " Miles");
         }
         else
         {
@@ -202,7 +217,7 @@ public class EventDetailsActivity extends AppCompatActivity {
 
     private void showRouteOnMapActivity(double startLat, double startLon, double endLat, double endLon)
     {
-        Intent intent = new Intent(getApplicationContext(),MapsActivity.class);
+        Intent intent = new Intent(getApplicationContext(), MapsActivity.class);
 
         intent.putExtra("pickupLat", startLat);
         intent.putExtra("pickupLon", startLon);

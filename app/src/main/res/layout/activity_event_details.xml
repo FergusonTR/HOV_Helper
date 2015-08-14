@@ -140,15 +140,13 @@
         android:textColor="@color/black"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:background="@color/yellow"
         android:id="@+id/btnMapRoute"
-        android:layout_alignTop="@+id/btnRequestRide"
-        android:layout_toRightOf="@+id/btnRequestRide"
-        android:layout_toEndOf="@+id/btnRequestRide"
-        android:layout_marginLeft="52dp"
-        android:layout_marginStart="52dp"
-        android:padding="10dp"/>
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
@@ -158,12 +156,26 @@
         android:textColor="@color/white"
         android:textAllCaps="false"
         android:textStyle="bold"
-        android:textSize="20sp"
+        android:textSize="12sp"
         android:background="@color/green"
+        android:padding="10dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/txtBoxAvailableSeats"
-        android:layout_alignEnd="@+id/txtBoxAvailableSeats"
-        android:padding="10dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete Event"
+        android:id="@+id/btnDeleteEvent"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textSize="12sp"
+        android:background="@color/red"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="wrap_content"

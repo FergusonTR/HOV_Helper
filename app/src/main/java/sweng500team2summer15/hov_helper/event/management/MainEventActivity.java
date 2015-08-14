@@ -114,8 +114,8 @@ public class MainEventActivity extends AppCompatActivity {
             super.onPreExecute();
             pDialog = new ProgressDialog(MainEventActivity.this);
             pDialog.setMessage("Searching for Events..");
-            pDialog.setIndeterminate(false);
-            pDialog.setCancelable(true);
+            pDialog.setIndeterminate(true);
+            pDialog.setCancelable(false);
             pDialog.show();
         }
         @Override

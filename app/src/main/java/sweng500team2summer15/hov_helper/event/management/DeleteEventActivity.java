@@ -112,6 +112,8 @@ public class DeleteEventActivity extends AppCompatActivity {
                  * *
                  */
                 protected void onPostExecute(String file_url) {
+
+
                     // dismiss the dialog once done
                     pDialog.dismiss();
 

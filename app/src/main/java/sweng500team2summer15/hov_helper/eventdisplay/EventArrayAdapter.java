@@ -46,7 +46,6 @@ public class EventArrayAdapter extends ArrayAdapter<Event> {
         if (event.eventType == "Ride")
         {
             typeView.setImageResource(R.drawable.hitchhiking_ride);
-
         }
         else
         {

@@ -246,7 +246,7 @@ public class SearchEventActivity extends AppCompatActivity {
 
                     //Check network status
                     if (CheckNetwork.isNetworkAvailable(SearchEventActivity.this)) {
-                        inputEventType = "Drive";
+                        inputEventType = "Ride";
                         //Check that fields are complete
                         new searchEvent().execute();
                         //grab results
@@ -354,7 +354,7 @@ public class SearchEventActivity extends AppCompatActivity {
 
                     //Check network status
                     if (CheckNetwork.isNetworkAvailable(SearchEventActivity.this)) {
-                        inputEventType = "Ride";
+                        inputEventType = "Drive";
                         //Check that fields are complete
                         new searchEvent().execute();
                         //grab results
